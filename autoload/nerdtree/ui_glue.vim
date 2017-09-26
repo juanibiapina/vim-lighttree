@@ -99,7 +99,7 @@ endfunction
 "FUNCTION: s:activateFileNode() {{{1
 "handle the user activating a tree node
 function! s:activateFileNode(node)
-    call a:node.activate({'reuse': 'all', 'where': 'p'})
+    call a:node.activate({'where': 'p'})
 endfunction
 
 "FUNCTION: s:activateBookmark() {{{1
@@ -326,7 +326,7 @@ function! s:handleLeftClick()
                 if currentNode.path.isDirectory
                     call currentNode.activate()
                 else
-                    call currentNode.activate({'reuse': 'all', 'where': 'p'})
+                    call currentNode.activate({'where': 'p'})
                 endif
                 return
             endif

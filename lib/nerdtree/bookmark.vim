@@ -242,7 +242,6 @@ endfunction
 "  'where': Specifies whether the node should be opened in new split/tab or in
 "           the previous window. Can be either 'v' (vertical split), 'h'
 "           (horizontal split), 't' (new tab) or 'p' (previous window).
-"  'reuse': if a window is displaying the file then jump the cursor there
 "  'keepopen': dont close the tree window
 "  'stay': open the file, but keep the cursor in the tree win
 "

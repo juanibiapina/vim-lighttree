@@ -136,8 +136,6 @@ endfunction
 "   'where': Specifies whether the node should be opened in new split/tab or in
 "            the previous window. Can be either 'v' or 'h' or 't' (for open in
 "            new tab)
-"   'reuse': if a window is displaying the file then jump the cursor there. Can
-"            'all', 'currenttab' or empty to not reuse.
 "   'keepopen': dont close the tree window
 "   'stay': open the file, but keep the cursor in the tree win
 function! s:Opener.New(path, opts)
@@ -145,12 +143,6 @@ function! s:Opener.New(path, opts)
 
     let newObj._path = a:path
     let newObj._stay = nerdtree#has_opt(a:opts, 'stay')
-
-    if has_key(a:opts, 'reuse')
-        let newObj._reuse = a:opts['reuse']
-    else
-        let newObj._reuse = ''
-    endif
 
     let newObj._keepopen = nerdtree#has_opt(a:opts, 'keepopen')
     let newObj._where = has_key(a:opts, 'where') ? a:opts['where'] : ''
@@ -251,10 +243,6 @@ endfunction
 
 " FUNCTION: Opener._openFile() {{{1
 function! s:Opener._openFile()
-    if self._reuseWindow()
-        return
-    endif
-
     call self._gotoTargetWin()
     call self._path.edit()
     if self._stay
@@ -307,40 +295,6 @@ endfunction
 function! s:Opener._restoreCursorPos()
     call nerdtree#exec('normal ' . self._tabnr . 'gt')
     call nerdtree#exec(bufwinnr(self._bufnr) . 'wincmd w')
-endfunction
-
-" FUNCTION: Opener._reuseWindow() {{{1
-" put the cursor in the first window we find for this file
-"
-" return 1 if we were successful
-function! s:Opener._reuseWindow()
-    if empty(self._reuse)
-        return 0
-    endif
-
-    "check the current tab for the window
-    let winnr = bufwinnr('^' . self._path.str() . '$')
-    if winnr != -1
-        call nerdtree#exec(winnr . "wincmd w")
-        call self._checkToCloseTree(0)
-        return 1
-    endif
-
-    if self._reuse == 'currenttab'
-        return 0
-    endif
-
-    "check other tabs
-    let tabnr = self._path.tabnr()
-    if tabnr
-        call self._checkToCloseTree(1)
-        call nerdtree#exec('normal! ' . tabnr . 'gt')
-        let winnr = bufwinnr('^' . self._path.str() . '$')
-        call nerdtree#exec(winnr . "wincmd w")
-        return 1
-    endif
-
-    return 0
 endfunction
 
 " FUNCTION: Opener._saveCursorPos() {{{1
