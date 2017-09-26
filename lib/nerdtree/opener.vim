@@ -32,12 +32,6 @@ function! s:Opener._bufInWindows(bnum)
     return cnt
 endfunction
 
-function! s:Opener._checkToCloseTree()
-    if self._keepopen
-        return
-    endif
-endfunction
-
 " FUNCTION: s:Opener._firstUsableWindow() {{{1
 " find the window number of the first normal window
 function! s:Opener._firstUsableWindow()
@@ -71,8 +65,6 @@ function! s:Opener._gotoTargetWin()
         elseif self._where == 'p'
             call self._previousWindow()
         endif
-
-        call self._checkToCloseTree(0)
     endif
 endfunction
 
@@ -117,7 +109,6 @@ endfunction
 " A dictionary containing the following keys (all optional):
 "   'where': Specifies whether the node should be opened in new split or in
 "            the previous window. Can be either 'v' or 'h'
-"   'keepopen': dont close the tree window
 "   'stay': open the file, but keep the cursor in the tree win
 function! s:Opener.New(path, opts)
     let newObj = copy(self)
@@ -125,7 +116,6 @@ function! s:Opener.New(path, opts)
     let newObj._path = a:path
     let newObj._stay = nerdtree#has_opt(a:opts, 'stay')
 
-    let newObj._keepopen = nerdtree#has_opt(a:opts, 'keepopen')
     let newObj._where = has_key(a:opts, 'where') ? a:opts['where'] : ''
     let newObj._nerdtree = b:NERDTree
     call newObj._saveCursorPos()

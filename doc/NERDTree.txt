@@ -210,11 +210,8 @@ Default  Description~                                             help-tag~
 Key~
 
 o.......Open files, directories and bookmarks....................|NERDTree-o|
-go......Open selected file, but leave cursor in the NERDTree.....|NERDTree-go|
 i.......Open selected file in a split window.....................|NERDTree-i|
-gi......Same as i, but leave the cursor on the NERDTree..........|NERDTree-gi|
 s.......Open selected file in a new vsplit.......................|NERDTree-s|
-gs......Same as s, but leave the cursor on the NERDTree..........|NERDTree-gs|
 O.......Recursively open the selected directory..................|NERDTree-O|
 x.......Close the current nodes parent...........................|NERDTree-x|
 X.......Recursively close all children of the current node.......|NERDTree-X|
@@ -270,18 +267,6 @@ If a bookmark that links to a file is selected then that file is opened in the
 previous window.
 
 ------------------------------------------------------------------------------
-                                                                 *NERDTree-go*
-Default key: go
-Map option: NERDTreeMapPreview
-Applies to: files.
-
-If a file node is selected, it is opened in the previous window, but the
-cursor does not move.
-
-The default key combo for this mapping is "g" + NERDTreeMapActivateNode (see
-|NERDTree-o|).
-
-------------------------------------------------------------------------------
                                                                   *NERDTree-i*
 Default key: i
 Map option: NERDTreeMapOpenSplit
@@ -291,17 +276,6 @@ Opens the selected file in a new split window and puts the cursor in the new
 window.
 
 ------------------------------------------------------------------------------
-                                                                 *NERDTree-gi*
-Default key: gi
-Map option: NERDTreeMapPreviewSplit
-Applies to: files.
-
-The same as |NERDTree-i| except that the cursor is not moved.
-
-The default key combo for this mapping is "g" + NERDTreeMapOpenSplit (see
-|NERDTree-i|).
-
-------------------------------------------------------------------------------
                                                                   *NERDTree-s*
 Default key: s
 Map option: NERDTreeMapOpenVSplit
@@ -309,17 +283,6 @@ Applies to: files.
 
 Opens the selected file in a new vertically split window and puts the cursor in
 the new window.
-
-------------------------------------------------------------------------------
-                                                                 *NERDTree-gs*
-Default key: gs
-Map option: NERDTreeMapPreviewVSplit
-Applies to: files.
-
-The same as |NERDTree-s| except that the cursor is not moved.
-
-The default key combo for this mapping is "g" + NERDTreeMapOpenVSplit (see
-|NERDTree-s|).
 
 ------------------------------------------------------------------------------
                                                                   *NERDTree-O*

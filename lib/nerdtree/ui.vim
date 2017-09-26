@@ -31,14 +31,9 @@ function! s:UI._dumpHelp()
         else
             let help .= "\" ". g:NERDTreeMapActivateNode .": open in current window\n"
         endif
-        if self.nerdtree.isTabTree()
-            let help .= "\" ". g:NERDTreeMapPreview .": preview\n"
-        endif
         let help .= "\" middle-click,\n"
         let help .= "\" ". g:NERDTreeMapOpenSplit .": open split\n"
-        let help .= "\" ". g:NERDTreeMapPreviewSplit .": preview split\n"
         let help .= "\" ". g:NERDTreeMapOpenVSplit .": open vsplit\n"
-        let help .= "\" ". g:NERDTreeMapPreviewVSplit .": preview vsplit\n"
 
         let help .= "\"\n\" ----------------------------\n"
         let help .= "\" Directory node mappings~\n"
