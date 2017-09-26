@@ -32,14 +32,10 @@ function! s:Opener._bufInWindows(bnum)
     return cnt
 endfunction
 
-" Check the class options and global options (i.e. NERDTreeQuitOnOpen) to see
-" if the tree should be closed now.
 function! s:Opener._checkToCloseTree()
     if self._keepopen
         return
     endif
-
-    call g:NERDTree.CloseIfQuitOnOpen()
 endfunction
 
 " FUNCTION: s:Opener._firstUsableWindow() {{{1

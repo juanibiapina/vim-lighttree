@@ -615,8 +615,6 @@ NERD tree. These options should be set in your vimrc.
 
 |'NERDTreeMouseMode'|           Manage the interpretation of mouse clicks.
 
-|'NERDTreeQuitOnOpen'|          Closes the tree window after opening a file.
-
 |'NERDTreeShowBookmarks'|       Tells the NERD tree whether to display the
                                 bookmarks table on startup.
 
@@ -870,15 +868,6 @@ itself. For example, if you have the following node: >
 <
 then (to single click activate it) you must click somewhere in
 'application.rb'.
-
-------------------------------------------------------------------------------
-                                                        *'NERDTreeQuitOnOpen'*
-
-Values: 0 or 1.
-Default: 0
-
-If set to 1, the NERD tree window will close after opening a file with the
-|NERDTree-o|, |NERDTree-i|, |NERDTree-t| and |NERDTree-T| mappings.
 
 ------------------------------------------------------------------------------
                                                      *'NERDTreeShowBookmarks'*
