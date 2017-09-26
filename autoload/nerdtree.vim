@@ -92,21 +92,6 @@ function! nerdtree#compareNodesBySortKey(n1, n2)
     endif
 endfunction
 
-" FUNCTION: nerdtree#deprecated(func, [msg]) {{{2
-" Issue a deprecation warning for a:func. If a second arg is given, use this
-" as the deprecation message
-function! nerdtree#deprecated(func, ...)
-    let msg = a:0 ? a:func . ' ' . a:1 : a:func . ' is deprecated'
-
-    if !exists('s:deprecationWarnings')
-        let s:deprecationWarnings = {}
-    endif
-    if !has_key(s:deprecationWarnings, a:func)
-        let s:deprecationWarnings[a:func] = 1
-        echomsg msg
-    endif
-endfunction
-
 " FUNCTION: nerdtree#exec(cmd) {{{2
 " Same as :exec cmd but with eventignore set for the duration
 " to disable the autocommands used by NERDTree (BufEnter,
