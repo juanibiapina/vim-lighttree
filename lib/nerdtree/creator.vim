@@ -22,9 +22,8 @@ function! s:Creator._bindMappings()
     command! -buffer -nargs=0 WriteBookmarks call g:NERDTreeBookmark.Write()
 endfunction
 
-"FUNCTION: s:Creator._broadcastInitEvent() {{{1
 function! s:Creator._broadcastInitEvent()
-    silent doautocmd User NERDTreeInit
+    silent doautocmd User LightTreeInit
 endfunction
 
 " FUNCTION: s:Creator.BufNamePrefix() {{{2
