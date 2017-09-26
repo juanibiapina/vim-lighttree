@@ -144,8 +144,7 @@ For example, you could use bookmarks to tag all of your project directories.
 
 If the bookmark table is active (see |NERDTree-B| and
 |'NERDTreeShowBookmarks'|), it will be rendered above the tree. You can double
-click bookmarks or use the |NERDTree-o| mapping to activate them. See also,
-|NERDTree-t| and |NERDTree-T|
+click bookmarks or use the |NERDTree-o| mapping to activate them.
 
 ------------------------------------------------------------------------------
 2.2.2. Bookmark commands                            *NERDTreeBookmarkCommands*
@@ -212,8 +211,6 @@ Key~
 
 o.......Open files, directories and bookmarks....................|NERDTree-o|
 go......Open selected file, but leave cursor in the NERDTree.....|NERDTree-go|
-t.......Open selected node/bookmark in a new tab.................|NERDTree-t|
-T.......Same as 't' but keep the focus on the current tab........|NERDTree-T|
 i.......Open selected file in a split window.....................|NERDTree-i|
 gi......Same as i, but leave the cursor on the NERDTree..........|NERDTree-gi|
 s.......Open selected file in a new vsplit.......................|NERDTree-s|
@@ -283,27 +280,6 @@ cursor does not move.
 
 The default key combo for this mapping is "g" + NERDTreeMapActivateNode (see
 |NERDTree-o|).
-
-------------------------------------------------------------------------------
-                                                                  *NERDTree-t*
-Default key: t
-Map option: NERDTreeMapOpenInTab
-Applies to: files and directories.
-
-Opens the selected file in a new tab. If a directory is selected, a fresh
-NERD Tree for that directory is opened in a new tab.
-
-If a bookmark which points to a directory is selected, open a NERD tree for
-that directory in a new tab. If the bookmark points to a file, open that file
-in a new tab.
-
-------------------------------------------------------------------------------
-                                                                  *NERDTree-T*
-Default key: T
-Map option: NERDTreeMapOpenInTabSilent
-Applies to: files and directories.
-
-The same as |NERDTree-t| except that the focus is kept in the current tab.
 
 ------------------------------------------------------------------------------
                                                                   *NERDTree-i*

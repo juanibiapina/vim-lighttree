@@ -256,13 +256,6 @@ function! s:Bookmark.open(nerdtree, ...)
     endif
 endfunction
 
-" FUNCTION: Bookmark.openInNewTab(options) {{{1
-" Create a new bookmark object with the given name and path object
-function! s:Bookmark.openInNewTab(options)
-    call nerdtree#deprecated('Bookmark.openInNewTab', 'is deprecated, use open() instead')
-    call self.open(a:options)
-endfunction
-
 " FUNCTION: Bookmark.setPath(path) {{{1
 " makes this bookmark point to the given path
 function! s:Bookmark.setPath(path)

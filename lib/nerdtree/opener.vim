@@ -32,22 +32,14 @@ function! s:Opener._bufInWindows(bnum)
     return cnt
 endfunction
 
-" FUNCTION: Opener._checkToCloseTree(newtab) {{{1
 " Check the class options and global options (i.e. NERDTreeQuitOnOpen) to see
 " if the tree should be closed now.
-"
-" Args:
-" a:newtab - boolean. If set, only close the tree now if we are opening the
-" target in a new tab. This is needed because we have to close tree before we
-" leave the tab
-function! s:Opener._checkToCloseTree(newtab)
+function! s:Opener._checkToCloseTree()
     if self._keepopen
         return
     endif
 
-    if (a:newtab && self._where == 't') || !a:newtab
-        call g:NERDTree.CloseIfQuitOnOpen()
-    endif
+    call g:NERDTree.CloseIfQuitOnOpen()
 endfunction
 
 " FUNCTION: s:Opener._firstUsableWindow() {{{1
@@ -74,18 +66,12 @@ function! s:Opener._gotoTargetWin()
             vsplit
         elseif self._where == 'h'
             split
-        elseif self._where == 't'
-            tabnew
         endif
     else
-        call self._checkToCloseTree(1)
-
         if self._where == 'v'
             call self._newVSplit()
         elseif self._where == 'h'
             call self._newSplit()
-        elseif self._where == 't'
-            tabnew
         elseif self._where == 'p'
             call self._previousWindow()
         endif
@@ -133,9 +119,8 @@ endfunction
 " a:opts:
 "
 " A dictionary containing the following keys (all optional):
-"   'where': Specifies whether the node should be opened in new split/tab or in
-"            the previous window. Can be either 'v' or 'h' or 't' (for open in
-"            new tab)
+"   'where': Specifies whether the node should be opened in new split or in
+"            the previous window. Can be either 'v' or 'h'
 "   'keepopen': dont close the tree window
 "   'stay': open the file, but keep the cursor in the tree win
 function! s:Opener.New(path, opts)
@@ -259,8 +244,6 @@ function! s:Opener._openDirectory(node)
         call self._gotoTargetWin()
         if empty(self._where)
             call b:NERDTree.changeRoot(a:node)
-        elseif self._where == 't'
-            call g:NERDTreeCreator.CreateTabTree(a:node.path.str())
         else
             call g:NERDTreeCreator.CreateWindowTree(a:node.path.str())
         endif

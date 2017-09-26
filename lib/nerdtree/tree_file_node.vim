@@ -261,12 +261,6 @@ function! s:TreeFileNode.openVSplit()
     call self.open({'where': 'v'})
 endfunction
 
-"FUNCTION: TreeFileNode.openInNewTab(options) {{{1
-function! s:TreeFileNode.openInNewTab(options)
-    echomsg 'TreeFileNode.openInNewTab is deprecated'
-    call self.open(extend({'where': 't'}, a:options))
-endfunction
-
 "FUNCTION: TreeFileNode.putCursorHere(isJump, recurseUpward){{{1
 "Places the cursor on the line number this node is rendered on
 "

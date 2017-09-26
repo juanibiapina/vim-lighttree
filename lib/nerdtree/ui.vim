@@ -34,8 +34,6 @@ function! s:UI._dumpHelp()
         if self.nerdtree.isTabTree()
             let help .= "\" ". g:NERDTreeMapPreview .": preview\n"
         endif
-        let help .= "\" ". g:NERDTreeMapOpenInTab.": open in new tab\n"
-        let help .= "\" ". g:NERDTreeMapOpenInTabSilent .": open in new tab silently\n"
         let help .= "\" middle-click,\n"
         let help .= "\" ". g:NERDTreeMapOpenSplit .": open split\n"
         let help .= "\" ". g:NERDTreeMapPreviewSplit .": preview split\n"
@@ -57,8 +55,6 @@ function! s:UI._dumpHelp()
         let help .= "\" Bookmark table mappings~\n"
         let help .= "\" double-click,\n"
         let help .= "\" ". g:NERDTreeMapActivateNode .": open bookmark\n"
-        let help .= "\" ". g:NERDTreeMapOpenInTab.": open in new tab\n"
-        let help .= "\" ". g:NERDTreeMapOpenInTabSilent .": open in new tab silently\n"
         let help .= "\" ". g:NERDTreeMapDeleteBookmark .": delete bookmark\n"
 
         let help .= "\"\n\" ----------------------------\n"
