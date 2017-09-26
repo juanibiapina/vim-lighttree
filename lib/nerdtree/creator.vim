@@ -1,5 +1,5 @@
 "CLASS: Creator
-"Creates tab/window/mirror nerdtree windows. Sets up all the window and
+"Creates tab/window nerdtree windows. Sets up all the window and
 "buffer options and key mappings etc.
 "============================================================
 let s:Creator = {}
@@ -116,65 +116,6 @@ function! s:Creator._createNERDTree(path, type)
     let b:NERDTreeRoot = b:NERDTree.root
 
     call b:NERDTree.root.open()
-endfunction
-
-" FUNCTION: s:Creator.CreateMirror() {{{1
-function! s:Creator.CreateMirror()
-    let creator = s:Creator.New()
-    call creator.createMirror()
-endfunction
-
-" FUNCTION: s:Creator.createMirror() {{{1
-function! s:Creator.createMirror()
-    "get the names off all the nerd tree buffers
-    let treeBufNames = []
-    for i in range(1, tabpagenr("$"))
-        let nextName = self._tabpagevar(i, 'NERDTreeBufName')
-        if nextName != -1 && (!exists("t:NERDTreeBufName") || nextName != t:NERDTreeBufName)
-            call add(treeBufNames, nextName)
-        endif
-    endfor
-    let treeBufNames = self._uniq(treeBufNames)
-
-    "map the option names (that the user will be prompted with) to the nerd
-    "tree buffer names
-    let options = {}
-    let i = 0
-    while i < len(treeBufNames)
-        let bufName = treeBufNames[i]
-        let treeRoot = getbufvar(bufName, "NERDTree").root
-        let options[i+1 . '. ' . treeRoot.path.str() . '  (buf name: ' . bufName . ')'] = bufName
-        let i = i + 1
-    endwhile
-
-    "work out which tree to mirror, if there is more than 1 then ask the user
-    let bufferName = ''
-    if len(keys(options)) > 1
-        let choices = ["Choose a tree to mirror"]
-        let choices = extend(choices, sort(keys(options)))
-        let choice = inputlist(choices)
-        if choice < 1 || choice > len(options) || choice ==# ''
-            return
-        endif
-
-        let bufferName = options[sort(keys(options))[choice-1]]
-    elseif len(keys(options)) ==# 1
-        let bufferName = values(options)[0]
-    else
-        call nerdtree#echo("No trees to mirror")
-        return
-    endif
-
-    if g:NERDTree.ExistsForTab() && g:NERDTree.IsOpen()
-        call g:NERDTree.Close()
-    endif
-
-    let t:NERDTreeBufName = bufferName
-    call self._createTreeWin()
-    exec 'buffer ' .  bufferName
-    if !&hidden
-        call b:NERDTree.render()
-    endif
 endfunction
 
 "FUNCTION: s:Creator._createTreeWin() {{{1

@@ -121,14 +121,6 @@ The following features and functionality are provided by the NERD tree:
     Opens (or reopens) the NERD Tree if it is not currently visible;
     otherwise, the cursor is moved to the already-open NERD Tree.
 
-:NERDTreeMirror                                              *:NERDTreeMirror*
-    Shares an existing NERD tree, from another tab, in the current tab.
-    Changes made to one tree are reflected in both as they are actually the
-    same buffer.
-
-    If only one other NERD tree exists, that tree is automatically mirrored. If
-    more than one exists, the script will ask which tree to mirror.
-
 :NERDTreeClose                                                *:NERDTreeClose*
     Close the NERD tree in this tab.
 
