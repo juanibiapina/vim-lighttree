@@ -1,14 +1,10 @@
-"CLASS: NERDTree
-"============================================================
 let s:NERDTree = {}
 let g:NERDTree = s:NERDTree
 
-"FUNCTION: s:NERDTree.AddPathFilter() {{{1
 function! s:NERDTree.AddPathFilter(callback)
     call add(s:NERDTree.PathFilters(), a:callback)
 endfunction
 
-"FUNCTION: s:NERDTree.changeRoot(node) {{{1
 function! s:NERDTree.changeRoot(node)
     if a:node.path.isDirectory
         let self.root = a:node
@@ -30,7 +26,6 @@ function! s:NERDTree.changeRoot(node)
     silent doautocmd User LightTreeNewRoot
 endfunction
 
-"FUNCTION: s:NERDTree.Close() {{{1
 "Closes the tab tree window for this tab
 function! s:NERDTree.Close()
     if !s:NERDTree.IsOpen()
@@ -54,7 +49,6 @@ function! s:NERDTree.Close()
     endif
 endfunction
 
-"FUNCTION: s:NERDTree.CursorToTreeWin(){{{1
 "Places the cursor in the nerd tree window
 function! s:NERDTree.CursorToTreeWin()
     call g:NERDTree.MustBeOpen()
@@ -86,7 +80,6 @@ function! s:NERDTree.ForCurrentBuf()
     endif
 endfunction
 
-"FUNCTION: s:NERDTree.ForCurrentTab() {{{1
 function! s:NERDTree.ForCurrentTab()
     if !s:NERDTree.ExistsForTab()
         return
@@ -96,12 +89,10 @@ function! s:NERDTree.ForCurrentTab()
     return getbufvar(bufnr, "NERDTree")
 endfunction
 
-"FUNCTION: s:NERDTree.getRoot() {{{1
 function! s:NERDTree.getRoot()
     return self.root
 endfunction
 
-"FUNCTION: s:NERDTree.GetWinNum() {{{1
 "gets the nerd tree window number for this tab
 function! s:NERDTree.GetWinNum()
     if exists("t:NERDTreeBufName")
@@ -111,29 +102,24 @@ function! s:NERDTree.GetWinNum()
     return -1
 endfunction
 
-"FUNCTION: s:NERDTree.IsOpen() {{{1
 function! s:NERDTree.IsOpen()
     return s:NERDTree.GetWinNum() != -1
 endfunction
 
-"FUNCTION: s:NERDTree.isTabTree() {{{1
 function! s:NERDTree.isTabTree()
     return self._type == "tab"
 endfunction
 
-"FUNCTION: s:NERDTree.isWinTree() {{{1
 function! s:NERDTree.isWinTree()
     return self._type == "window"
 endfunction
 
-"FUNCTION: s:NERDTree.MustBeOpen() {{{1
 function! s:NERDTree.MustBeOpen()
     if !s:NERDTree.IsOpen()
         throw "NERDTree.TreeNotOpen"
     endif
 endfunction
 
-"FUNCTION: s:NERDTree.New() {{{1
 function! s:NERDTree.New(path, type)
     let newObj = copy(self)
     let newObj.ui = g:NERDTreeUI.New(newObj)
@@ -142,7 +128,6 @@ function! s:NERDTree.New(path, type)
     return newObj
 endfunction
 
-"FUNCTION: s:NERDTree.PathFilters() {{{1
 function! s:NERDTree.PathFilters()
     if !exists('s:NERDTree._PathFilters')
         let s:NERDTree._PathFilters = []
@@ -150,7 +135,6 @@ function! s:NERDTree.PathFilters()
     return s:NERDTree._PathFilters
 endfunction
 
-"FUNCTION: s:NERDTree.previousBuf() {{{1
 function! s:NERDTree.previousBuf()
     return self._previousBuf
 endfunction
@@ -159,7 +143,6 @@ function! s:NERDTree.setPreviousBuf(bnum)
     let self._previousBuf = a:bnum
 endfunction
 
-"FUNCTION: s:NERDTree.render() {{{1
 "A convenience function - since this is called often
 function! s:NERDTree.render()
     call self.ui.render()

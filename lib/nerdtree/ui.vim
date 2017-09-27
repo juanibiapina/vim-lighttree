@@ -1,9 +1,6 @@
-"CLASS: UI
-"============================================================
 let s:UI = {}
 let g:NERDTreeUI = s:UI
 
-"FUNCTION: s:UI.centerView() {{{2
 "centers the nerd tree window around the cursor (provided the nerd tree
 "options permit)
 function! s:UI.centerView()
@@ -17,7 +14,6 @@ function! s:UI.centerView()
     endif
 endfunction
 
-"FUNCTION: s:UI._dumpHelp  {{{1
 "prints out the quick help
 function! s:UI._dumpHelp()
     if self.getShowHelp()
@@ -89,7 +85,6 @@ function! s:UI._dumpHelp()
 endfunction
 
 
-"FUNCTION: s:UI.new(nerdtree) {{{1
 function! s:UI.New(nerdtree)
     let newObj = copy(self)
     let newObj.nerdtree = a:nerdtree
@@ -101,7 +96,6 @@ function! s:UI.New(nerdtree)
     return newObj
 endfunction
 
-"FUNCTION: s:UI.getPath(ln) {{{1
 "Gets the full path to the node that is rendered on the given line number
 "
 "Args:
@@ -163,7 +157,6 @@ function! s:UI.getPath(ln)
     return toReturn
 endfunction
 
-"FUNCTION: s:UI.getLineNum(file_node){{{1
 "returns the line number this node is rendered on, or -1 if it isnt rendered
 function! s:UI.getLineNum(file_node)
     "if the node is the root then return the root line no.
@@ -211,7 +204,6 @@ function! s:UI.getLineNum(file_node)
     return -1
 endfunction
 
-"FUNCTION: s:UI.getRootLineNum(){{{1
 "gets the line number of the root node
 function! s:UI.getRootLineNum()
     let rootLine = 1
@@ -221,22 +213,18 @@ function! s:UI.getRootLineNum()
     return rootLine
 endfunction
 
-"FUNCTION: s:UI.getShowFiles() {{{1
 function! s:UI.getShowFiles()
     return self._showFiles
 endfunction
 
-"FUNCTION: s:UI.getShowHelp() {{{1
 function! s:UI.getShowHelp()
     return self._showHelp
 endfunction
 
-"FUNCTION: s:UI.getShowHidden() {{{1
 function! s:UI.getShowHidden()
     return self._showHidden
 endfunction
 
-"FUNCTION: s:UI._indentLevelFor(line) {{{1
 function! s:UI._indentLevelFor(line)
     "have to do this work around because match() returns bytes, not chars
     let numLeadBytes = match(a:line, '\M\[^ '.g:NERDTreeDirArrowExpandable.g:NERDTreeDirArrowCollapsible.']')
@@ -246,22 +234,18 @@ function! s:UI._indentLevelFor(line)
     return leadChars / s:UI.IndentWid()
 endfunction
 
-"FUNCTION: s:UI.IndentWid() {{{1
 function! s:UI.IndentWid()
     return 2
 endfunction
 
-"FUNCTION: s:UI.isIgnoreFilterEnabled() {{{1
 function! s:UI.isIgnoreFilterEnabled()
     return self._ignoreEnabled == 1
 endfunction
 
-"FUNCTION: s:UI.MarkupReg() {{{1
 function! s:UI.MarkupReg()
     return '^\(['.g:NERDTreeDirArrowExpandable.g:NERDTreeDirArrowCollapsible.'] \| \+['.g:NERDTreeDirArrowExpandable.g:NERDTreeDirArrowCollapsible.'] \| \+\)'
 endfunction
 
-"FUNCTION: s:UI.restoreScreenState() {{{1
 "
 "Sets the screen state back to what it was when nerdtree#saveScreenState was last
 "called.
@@ -281,7 +265,6 @@ function! s:UI.restoreScreenState()
     let &scrolloff=old_scrolloff
 endfunction
 
-"FUNCTION: s:UI.saveScreenState() {{{1
 "Saves the current cursor position in the current buffer and the window
 "scroll position
 function! s:UI.saveScreenState()
@@ -294,12 +277,10 @@ function! s:UI.saveScreenState()
     call nerdtree#exec(win . "wincmd w")
 endfunction
 
-"FUNCTION: s:UI.setShowHidden(val) {{{1
 function! s:UI.setShowHidden(val)
     let self._showHidden = a:val
 endfunction
 
-"FUNCTION: s:UI._stripMarkup(line, removeLeadingSpaces){{{1
 "returns the given line with all the tree parts stripped off
 "
 "Args:
@@ -336,7 +317,6 @@ function! s:UI._stripMarkup(line, removeLeadingSpaces)
     return line
 endfunction
 
-"FUNCTION: s:UI.render() {{{1
 function! s:UI.render()
     setlocal modifiable
 
@@ -374,7 +354,6 @@ function! s:UI.render()
 endfunction
 
 
-"FUNCTION: UI.renderViewSavingPosition {{{1
 "Renders the tree and ensures the cursor stays on the current node or the
 "current nodes parent if it is no longer available upon re-rendering
 function! s:UI.renderViewSavingPosition()
@@ -393,12 +372,10 @@ function! s:UI.renderViewSavingPosition()
     endif
 endfunction
 
-"FUNCTION: s:UI.toggleHelp() {{{1
 function! s:UI.toggleHelp()
     let self._showHelp = !self._showHelp
 endfunction
 
-" FUNCTION: s:UI.toggleIgnoreFilter() {{{1
 " toggles the use of the NERDTreeIgnore option
 function! s:UI.toggleIgnoreFilter()
     let self._ignoreEnabled = !self._ignoreEnabled
@@ -406,7 +383,6 @@ function! s:UI.toggleIgnoreFilter()
     call self.centerView()
 endfunction
 
-" FUNCTION: s:UI.toggleShowFiles() {{{1
 " toggles the display of hidden files
 function! s:UI.toggleShowFiles()
     let self._showFiles = !self._showFiles
@@ -414,7 +390,6 @@ function! s:UI.toggleShowFiles()
     call self.centerView()
 endfunction
 
-" FUNCTION: s:UI.toggleShowHidden() {{{1
 " toggles the display of hidden files
 function! s:UI.toggleShowHidden()
     let self._showHidden = !self._showHidden
@@ -422,7 +397,6 @@ function! s:UI.toggleShowHidden()
     call self.centerView()
 endfunction
 
-" FUNCTION: s:UI.toggleZoom() {{{1
 " zoom (maximize/minimize) the NERDTree window
 function! s:UI.toggleZoom()
     if exists("b:NERDTreeZoomed") && b:NERDTreeZoomed
@@ -435,7 +409,6 @@ function! s:UI.toggleZoom()
     endif
 endfunction
 
-"FUNCTION: s:UI.UpDirLine() {{{1
 function! s:UI.UpDirLine()
     return '.. (up a dir)'
 endfunction

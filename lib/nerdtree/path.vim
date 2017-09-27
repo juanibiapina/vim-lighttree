@@ -1,20 +1,9 @@
-" ============================================================================
-" CLASS: Path
-"
-" The Path class provides an abstracted representation of a file system
-" pathname.  Various operations on pathnames are provided and a number of
-" representations of a given path name can be accessed here.
-" ============================================================================
-
-
-" This constant is used throughout this script for sorting purposes.
 let s:NERDTreeSortStarIndex = index(g:NERDTreeSortOrder, '*')
 lockvar s:NERDTreeSortStarIndex
 
 let s:Path = {}
 let g:NERDTreePath = s:Path
 
-" FUNCTION: Path.AbsolutePathFor(str) {{{1
 function! s:Path.AbsolutePathFor(str)
     let prependCWD = 0
     if nerdtree#runningWindows()
@@ -31,7 +20,6 @@ function! s:Path.AbsolutePathFor(str)
     return toReturn
 endfunction
 
-" FUNCTION: Path.cacheDisplayString() {{{1
 function! s:Path.cacheDisplayString() abort
     let self.cachedDisplayString = self.getLastPathComponent(1)
 
@@ -48,7 +36,6 @@ function! s:Path.cacheDisplayString() abort
     endif
 endfunction
 
-" FUNCTION: Path.changeToDir() {{{1
 function! s:Path.changeToDir()
     let dir = self.str({'format': 'Cd'})
     if self.isDirectory ==# 0
@@ -63,7 +50,6 @@ function! s:Path.changeToDir()
     endtry
 endfunction
 
-" FUNCTION: Path.compareTo() {{{1
 "
 " Compares this Path to the given path and returns 0 if they are equal, -1 if
 " this Path is "less than" the given path, or 1 if it is "greater".
@@ -107,8 +93,6 @@ function! s:Path.compareTo(path)
     endif
 endfunction
 
-" FUNCTION: Path.Create(fullpath) {{{1
-"
 " Factory method.
 "
 " Creates a path object with the given path. The path is also created on the
@@ -144,8 +128,6 @@ function! s:Path.Create(fullpath)
     return s:Path.New(a:fullpath)
 endfunction
 
-" FUNCTION: Path.copy(dest) {{{1
-"
 " Copies the file/dir represented by this Path to the given location
 "
 " Args:
@@ -170,15 +152,11 @@ function! s:Path.copy(dest)
     endif
 endfunction
 
-" FUNCTION: Path.CopyingSupported() {{{1
-"
 " returns 1 if copying is supported for this OS
 function! s:Path.CopyingSupported()
     return exists('g:NERDTreeCopyCmd') || (exists('g:NERDTreeCopyDirCmd') && exists('g:NERDTreeCopyFileCmd'))
 endfunction
 
-" FUNCTION: Path.copyingWillOverwrite(dest) {{{1
-"
 " returns 1 if copy this path to the given location will cause files to
 " overwritten
 "
@@ -197,8 +175,6 @@ function! s:Path.copyingWillOverwrite(dest)
     endif
 endfunction
 
-" FUNCTION: Path.createParentDirectories(path) {{{1
-"
 " create parent directories for this path if needed
 " without throwing any errors if those directories already exist
 "
@@ -211,8 +187,6 @@ function! s:Path.createParentDirectories(path)
     endif
 endfunction
 
-" FUNCTION: Path.delete() {{{1
-"
 " Deletes the file or directory represented by this path.
 "
 " Throws NERDTree.Path.Deletion exceptions
@@ -233,8 +207,6 @@ function! s:Path.delete()
     endif
 endfunction
 
-" FUNCTION: Path.displayString() {{{1
-"
 " Returns a string that specifies how the path should be represented as a
 " string
 function! s:Path.displayString()
@@ -245,13 +217,10 @@ function! s:Path.displayString()
     return self.cachedDisplayString
 endfunction
 
-" FUNCTION: Path.edit() {{{1
 function! s:Path.edit()
     exec "edit " . self.str({'format': 'Edit'})
 endfunction
 
-" FUNCTION: Path.extractDriveLetter(fullpath) {{{1
-"
 " If running windows, cache the drive letter for this path
 function! s:Path.extractDriveLetter(fullpath)
     if nerdtree#runningWindows()
@@ -268,14 +237,12 @@ function! s:Path.extractDriveLetter(fullpath)
 
 endfunction
 
-" FUNCTION: Path.exists() {{{1
 " return 1 if this path points to a location that is readable or is a directory
 function! s:Path.exists()
     let p = self.str()
     return filereadable(p) || isdirectory(p)
 endfunction
 
-" FUNCTION: Path._escChars() {{{1
 function! s:Path._escChars()
     if nerdtree#runningWindows()
         return " `\|\"#%&,?()\*^<>$"
@@ -284,8 +251,6 @@ function! s:Path._escChars()
     return " \\`\|\"#%&,?()\*^<>[]$"
 endfunction
 
-" FUNCTION: Path.getDir() {{{1
-"
 " Returns this path if it is a directory, else this paths parent.
 "
 " Return:
@@ -298,8 +263,6 @@ function! s:Path.getDir()
     endif
 endfunction
 
-" FUNCTION: Path.getParent() {{{1
-"
 " Returns a new path object for this paths parent
 "
 " Return:
@@ -314,8 +277,6 @@ function! s:Path.getParent()
     return s:Path.New(path)
 endfunction
 
-" FUNCTION: Path.getLastPathComponent(dirSlash) {{{1
-"
 " Gets the last part of this path.
 "
 " Args:
@@ -332,7 +293,6 @@ function! s:Path.getLastPathComponent(dirSlash)
     return toReturn
 endfunction
 
-" FUNCTION: Path.getSortOrderIndex() {{{1
 " returns the index of the pattern in g:NERDTreeSortOrder that this path matches
 function! s:Path.getSortOrderIndex()
     let i = 0
@@ -345,7 +305,6 @@ function! s:Path.getSortOrderIndex()
     return s:NERDTreeSortStarIndex
 endfunction
 
-" FUNCTION: Path._splitChunks(path) {{{1
 " returns a list of path chunks
 function! s:Path._splitChunks(path)
     let chunks = split(a:path, '\(\D\+\|\d\+\)\zs')
@@ -360,7 +319,6 @@ function! s:Path._splitChunks(path)
     return chunks
 endfunction
 
-" FUNCTION: Path.getSortKey() {{{1
 " returns a key used in compare function for sorting
 function! s:Path.getSortKey()
     if !exists("self._sortKey")
@@ -382,13 +340,11 @@ function! s:Path.getSortKey()
 endfunction
 
 
-" FUNCTION: Path.isUnixHiddenFile() {{{1
 " check for unix hidden files
 function! s:Path.isUnixHiddenFile()
     return self.getLastPathComponent(0) =~# '^\.'
 endfunction
 
-" FUNCTION: Path.isUnixHiddenPath() {{{1
 " check for unix path with hidden components
 function! s:Path.isUnixHiddenPath()
     if self.getLastPathComponent(0) =~# '^\.'
@@ -403,7 +359,6 @@ function! s:Path.isUnixHiddenPath()
     endif
 endfunction
 
-" FUNCTION: Path.ignore(nerdtree) {{{1
 " returns true if this path should be ignored
 function! s:Path.ignore(nerdtree)
     "filter out the user specified paths to ignore
@@ -433,7 +388,6 @@ function! s:Path.ignore(nerdtree)
     return 0
 endfunction
 
-" FUNCTION: Path._ignorePatternMatches(pattern) {{{1
 " returns true if this path matches the given ignore pattern
 function! s:Path._ignorePatternMatches(pattern)
     let pat = a:pattern
@@ -452,7 +406,6 @@ function! s:Path._ignorePatternMatches(pattern)
     return self.getLastPathComponent(0) =~# pat
 endfunction
 
-" FUNCTION: Path.isAncestor(path) {{{1
 " return 1 if this path is somewhere above the given path in the filesystem.
 "
 " a:path should be a dir
@@ -466,7 +419,6 @@ function! s:Path.isAncestor(path)
     return stridx(that, this) == 0
 endfunction
 
-" FUNCTION: Path.isUnder(path) {{{1
 " return 1 if this path is somewhere under the given path in the filesystem.
 function! s:Path.isUnder(path)
     if a:path.isDirectory == 0
@@ -478,7 +430,6 @@ function! s:Path.isUnder(path)
     return stridx(this, that . s:Path.Slash()) == 0
 endfunction
 
-" FUNCTION: Path.JoinPathStrings(...) {{{1
 function! s:Path.JoinPathStrings(...)
     let components = []
     for i in a:000
@@ -487,8 +438,6 @@ function! s:Path.JoinPathStrings(...)
     return '/' . join(components, '/')
 endfunction
 
-" FUNCTION: Path.equals() {{{1
-"
 " Determines whether 2 path objects are "equal".
 " They are equal if the paths they represent are the same
 "
@@ -498,7 +447,6 @@ function! s:Path.equals(path)
     return self.str() ==# a:path.str()
 endfunction
 
-" FUNCTION: Path.New() {{{1
 " The Constructor for the Path object
 function! s:Path.New(path)
     let newPath = copy(self)
@@ -511,7 +459,6 @@ function! s:Path.New(path)
     return newPath
 endfunction
 
-" FUNCTION: Path.Slash() {{{1
 " Return the path separator used by the underlying file system.  Special
 " consideration is taken for the use of the 'shellslash' option on Windows
 " systems.
@@ -528,7 +475,6 @@ function! s:Path.Slash()
     return '/'
 endfunction
 
-" FUNCTION: Path.Resolve() {{{1
 " Invoke the vim resolve() function and return the result
 " This is necessary because in some versions of vim resolve() removes trailing
 " slashes while in other versions it doesn't.  This always removes the trailing
@@ -538,9 +484,6 @@ function! s:Path.Resolve(path)
     return tmp =~# '.\+/$' ? substitute(tmp, '/$', '', '') : tmp
 endfunction
 
-" FUNCTION: Path.readInfoFromDisk(fullpath) {{{1
-"
-"
 " Throws NERDTree.Path.InvalidArguments exception.
 function! s:Path.readInfoFromDisk(fullpath)
     call self.extractDriveLetter(a:fullpath)
@@ -592,21 +535,17 @@ function! s:Path.readInfoFromDisk(fullpath)
     endif
 endfunction
 
-" FUNCTION: Path.refresh(nerdtree) {{{1
 function! s:Path.refresh(nerdtree)
     call self.readInfoFromDisk(self.str())
     call g:NERDTreePathNotifier.NotifyListeners('refresh', self, a:nerdtree, {})
     call self.cacheDisplayString()
 endfunction
 
-" FUNCTION: Path.refreshFlags(nerdtree) {{{1
 function! s:Path.refreshFlags(nerdtree)
     call g:NERDTreePathNotifier.NotifyListeners('refreshFlags', self, a:nerdtree, {})
     call self.cacheDisplayString()
 endfunction
 
-" FUNCTION: Path.rename() {{{1
-"
 " Renames this node on the filesystem
 function! s:Path.rename(newPath)
     if a:newPath ==# ''
@@ -620,7 +559,6 @@ function! s:Path.rename(newPath)
     call self.readInfoFromDisk(a:newPath)
 endfunction
 
-" FUNCTION: Path.str() {{{1
 " Return a string representation of this Path object.
 "
 " Args:
@@ -676,7 +614,6 @@ function! s:Path.str(...)
     return toReturn
 endfunction
 
-" FUNCTION: Path._strForUI() {{{1
 function! s:Path._strForUI()
     let toReturn = '/' . join(self.pathSegments, '/')
     if self.isDirectory && toReturn != '/'
@@ -685,14 +622,12 @@ function! s:Path._strForUI()
     return toReturn
 endfunction
 
-" FUNCTION: Path._strForCd() {{{1
 " Return a string representation of this Path that is suitable for use as an
 " argument to Vim's internal ":cd" command.
 function! s:Path._strForCd()
     return fnameescape(self.str())
 endfunction
 
-" FUNCTION: Path._strForEdit() {{{1
 " Return a string representation of this Path that is suitable for use as an
 " argument to Vim's internal ":edit" command.
 function! s:Path._strForEdit()
@@ -715,7 +650,6 @@ function! s:Path._strForEdit()
     return l:result
 endfunction
 
-" FUNCTION: Path._strForGlob() {{{1
 function! s:Path._strForGlob()
     let lead = s:Path.Slash()
 
@@ -732,7 +666,6 @@ function! s:Path._strForGlob()
     return toReturn
 endfunction
 
-" FUNCTION: Path._str() {{{1
 " Return the absolute pathname associated with this Path object.  The pathname
 " returned is appropriate for the underlying file system.
 function! s:Path._str()
@@ -746,13 +679,11 @@ function! s:Path._str()
     return l:leader . join(self.pathSegments, l:separator)
 endfunction
 
-" FUNCTION: Path.strTrunk() {{{1
 " Gets the path without the last segment on the end.
 function! s:Path.strTrunk()
     return self.drive . '/' . join(self.pathSegments[0:-2], '/')
 endfunction
 
-" FUNCTION: Path.tabnr() {{{1
 " return the number of the first tab that is displaying this file
 "
 " return 0 if no tab was found
@@ -768,7 +699,6 @@ function! s:Path.tabnr()
     return 0
 endfunction
 
-" FUNCTION: Path.WinToUnixPath(pathstr){{{1
 " Takes in a windows path and returns the unix equiv
 "
 " A class level method

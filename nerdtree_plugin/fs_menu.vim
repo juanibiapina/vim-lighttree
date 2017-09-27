@@ -1,14 +1,3 @@
-" ============================================================================
-" File:        fs_menu.vim
-" Description: plugin for the NERD Tree that provides a file system menu
-" Maintainer:  Martin Grenfell <martin.grenfell at gmail dot com>
-" License:     This program is free software. It comes without any warranty,
-"              to the extent permitted by applicable law. You can redistribute
-"              it and/or modify it under the terms of the Do What The Fuck You
-"              Want To Public License, Version 2, as published by Sam Hocevar.
-"              See http://sam.zoy.org/wtfpl/COPYING for more details.
-"
-" ============================================================================
 if exists("g:loaded_nerdtree_fs_menu")
     finish
 endif
@@ -39,7 +28,6 @@ else
     call NERDTreeAddMenuItem({'text': '(l)ist the current node', 'shortcut': 'l', 'callback': 'NERDTreeListNodeWin32'})
 endif
 
-"FUNCTION: s:promptToDelBuffer(bufnum, msg){{{1
 "prints out the given msg and, if the user responds by pushing 'y' then the
 "buffer with the given bufnum is deleted
 "
@@ -63,7 +51,6 @@ function! s:promptToDelBuffer(bufnum, msg)
     endif
 endfunction
 
-"FUNCTION: s:promptToRenameBuffer(bufnum, msg){{{1
 "prints out the given msg and, if the user responds by pushing 'y' then the
 "buffer with the given bufnum is replaced with a new one
 "
@@ -89,7 +76,7 @@ function! s:promptToRenameBuffer(bufnum, msg, newFileName)
         exec "bwipeout! " . a:bufnum
     endif
 endfunction
-"FUNCTION: NERDTreeAddNode(){{{1
+
 function! NERDTreeAddNode()
     let curDirNode = g:NERDTreeDirNode.GetSelected()
 
@@ -121,7 +108,6 @@ function! NERDTreeAddNode()
     endtry
 endfunction
 
-"FUNCTION: NERDTreeMoveNode(){{{1
 function! NERDTreeMoveNode()
     let curNode = g:NERDTreeFileNode.GetSelected()
     let newNodePath = input("Rename the current node\n" .
@@ -155,7 +141,6 @@ function! NERDTreeMoveNode()
     endtry
 endfunction
 
-" FUNCTION: NERDTreeDeleteNode() {{{1
 function! NERDTreeDeleteNode()
     let currentNode = g:NERDTreeFileNode.GetSelected()
     let confirmed = 0
@@ -199,7 +184,6 @@ function! NERDTreeDeleteNode()
 
 endfunction
 
-" FUNCTION: NERDTreeListNode() {{{1
 function! NERDTreeListNode()
     let treenode = g:NERDTreeFileNode.GetSelected()
     if treenode != {}
@@ -210,7 +194,6 @@ function! NERDTreeListNode()
     endif
 endfunction
 
-" FUNCTION: NERDTreeListNodeWin32() {{{1
 function! NERDTreeListNodeWin32()
     let l:node = g:NERDTreeFileNode.GetSelected()
 
@@ -248,7 +231,6 @@ function! NERDTreeListNodeWin32()
     call nerdtree#echo('node not recognized')
 endfunction
 
-" FUNCTION: NERDTreeCopyNode() {{{1
 function! NERDTreeCopyNode()
     let currentNode = g:NERDTreeFileNode.GetSelected()
     let newNodePath = input("Copy the current node\n" .
@@ -287,7 +269,6 @@ function! NERDTreeCopyNode()
     redraw
 endfunction
 
-" FUNCTION: NERDTreeQuickLook() {{{1
 function! NERDTreeQuickLook()
     let treenode = g:NERDTreeFileNode.GetSelected()
     if treenode != {}
@@ -295,7 +276,6 @@ function! NERDTreeQuickLook()
     endif
 endfunction
 
-" FUNCTION: NERDTreeRevealInFinder() {{{1
 function! NERDTreeRevealInFinder()
     let treenode = g:NERDTreeFileNode.GetSelected()
     if treenode != {}
@@ -303,7 +283,6 @@ function! NERDTreeRevealInFinder()
     endif
 endfunction
 
-" FUNCTION: NERDTreeExecuteFile() {{{1
 function! NERDTreeExecuteFile()
     let treenode = g:NERDTreeFileNode.GetSelected()
     if treenode != {}

@@ -3,7 +3,6 @@ if exists("g:loaded_nerdtree_ui_glue_autoload")
 endif
 let g:loaded_nerdtree_ui_glue_autoload = 1
 
-" FUNCTION: nerdtree#ui_glue#createDefaultBindings() {{{1
 function! nerdtree#ui_glue#createDefaultBindings()
     let s = '<SNR>' . s:SID() . '_'
 
@@ -51,7 +50,6 @@ endfunction
 "SECTION: Interface bindings {{{1
 "============================================================
 
-"FUNCTION: s:activateAll() {{{1
 "handle the user activating the updir line
 function! s:activateAll()
     if getline(".") ==# g:NERDTreeUI.UpDirLine()
@@ -59,19 +57,16 @@ function! s:activateAll()
     endif
 endfunction
 
-"FUNCTION: s:activateDirNode() {{{1
 "handle the user activating a tree node
 function! s:activateDirNode(node)
     call a:node.activate()
 endfunction
 
-"FUNCTION: s:activateFileNode() {{{1
 "handle the user activating a tree node
 function! s:activateFileNode(node)
     call a:node.activate()
 endfunction
 
-" FUNCTION: s:chCwd(node) {{{1
 function! s:chCwd(node)
     try
         call a:node.path.changeToDir()
@@ -80,13 +75,11 @@ function! s:chCwd(node)
     endtry
 endfunction
 
-" FUNCTION: s:chRoot(node) {{{1
 " changes the current root to the selected one
 function! s:chRoot(node)
     call b:NERDTree.changeRoot(a:node)
 endfunction
 
-" FUNCTION: s:nerdtree#ui_glue#chRootCwd() {{{1
 " changes the current root to CWD
 function! nerdtree#ui_glue#chRootCwd()
     try
@@ -101,7 +94,6 @@ function! nerdtree#ui_glue#chRootCwd()
     call s:chRoot(g:NERDTreeDirNode.New(cwd, b:NERDTree))
 endfunction
 
-" FUNCTION: s:closeChildren(node) {{{1
 " closes all childnodes of the current node
 function! s:closeChildren(node)
     call a:node.closeChildren()
@@ -109,7 +101,6 @@ function! s:closeChildren(node)
     call a:node.putCursorHere(0, 0)
 endfunction
 
-" FUNCTION: s:closeCurrentDir(node) {{{1
 " closes the parent dir of the current node
 function! s:closeCurrentDir(node)
     let parent = a:node.parent
@@ -130,7 +121,6 @@ function! s:closeCurrentDir(node)
     endif
 endfunction
 
-" FUNCTION: s:closeTreeWindow() {{{1
 " close the tree window
 function! s:closeTreeWindow()
     if b:NERDTree.isWinTree() && b:NERDTree.previousBuf() != -1
@@ -144,7 +134,6 @@ function! s:closeTreeWindow()
     endif
 endfunction
 
-" FUNCTION: s:displayHelp() {{{1
 " toggles the help display
 function! s:displayHelp()
     call b:NERDTree.ui.toggleHelp()
@@ -152,7 +141,6 @@ function! s:displayHelp()
     call b:NERDTree.ui.centerView()
 endfunction
 
-" FUNCTION: s:findAndRevealPath() {{{1
 function! s:findAndRevealPath()
     try
         let p = g:NERDTreePath.New(expand("%:p"))
@@ -204,7 +192,6 @@ function! s:findAndRevealPath()
     endif
 endfunction
 
-" FUNCTION: s:jumpToChild(direction) {{{2
 " Args:
 " direction: 0 if going to first child, 1 if going to last
 function! s:jumpToChild(currentNode, direction)
@@ -233,26 +220,22 @@ function! s:jumpToChild(currentNode, direction)
 endfunction
 
 
-" FUNCTION: nerdtree#ui_glue#invokeKeyMap(key) {{{1
 "this is needed since I cant figure out how to invoke dict functions from a
 "key map
 function! nerdtree#ui_glue#invokeKeyMap(key)
     call g:NERDTreeKeyMap.Invoke(a:key)
 endfunction
 
-" FUNCTION: s:jumpToFirstChild() {{{1
 " wrapper for the jump to child method
 function! s:jumpToFirstChild(node)
     call s:jumpToChild(a:node, 0)
 endfunction
 
-" FUNCTION: s:jumpToLastChild() {{{1
 " wrapper for the jump to child method
 function! s:jumpToLastChild(node)
     call s:jumpToChild(a:node, 1)
 endfunction
 
-" FUNCTION: s:jumpToParent(node) {{{1
 " Move the cursor to the parent of the specified node. For a cascade, move to
 " the parent of the cascade's highest node. At the root, do nothing.
 function! s:jumpToParent(node)
@@ -277,24 +260,20 @@ function! s:jumpToParent(node)
     endif
 endfunction
 
-" FUNCTION: s:jumpToRoot() {{{1
 " moves the cursor to the root node
 function! s:jumpToRoot()
     call b:NERDTree.root.putCursorHere(1, 0)
     call b:NERDTree.ui.centerView()
 endfunction
 
-" FUNCTION: s:jumpToNextSibling(node) {{{1
 function! s:jumpToNextSibling(node)
     call s:jumpToSibling(a:node, 1)
 endfunction
 
-" FUNCTION: s:jumpToPrevSibling(node) {{{1
 function! s:jumpToPrevSibling(node)
     call s:jumpToSibling(a:node, 0)
 endfunction
 
-" FUNCTION: s:jumpToSibling(currentNode, forward) {{{2
 " moves the cursor to the sibling of the current node in the given direction
 "
 " Args:
@@ -309,12 +288,10 @@ function! s:jumpToSibling(currentNode, forward)
     endif
 endfunction
 
-" FUNCTION: s:openExplorer(node) {{{1
 function! s:openExplorer(node)
     call a:node.openExplorer()
 endfunction
 
-" FUNCTION: s:openNodeRecursively(node) {{{1
 function! s:openNodeRecursively(node)
     call nerdtree#echo("Recursively opening node. Please wait...")
     call a:node.openRecursively()
@@ -323,7 +300,6 @@ function! s:openNodeRecursively(node)
     call nerdtree#echo("Recursively opening node. Please wait... DONE")
 endfunction
 
-" FUNCTION: s:refreshRoot() {{{1
 " Reloads the current root. All nodes below this will be lost and the root dir
 " will be reloaded.
 function! s:refreshRoot()
@@ -334,7 +310,6 @@ function! s:refreshRoot()
     call nerdtree#echo("Refreshing the root node. This could take a while... DONE")
 endfunction
 
-" FUNCTION: s:refreshCurrent(node) {{{1
 " refreshes the root for the current node
 function! s:refreshCurrent(node)
     let node = a:node
@@ -349,7 +324,6 @@ function! s:refreshCurrent(node)
     call nerdtree#echo("Refreshing node. This could take a while... DONE")
 endfunction
 
-" FUNCTION: nerdtree#ui_glue#setupCommands() {{{1
 function! nerdtree#ui_glue#setupCommands()
     command! -n=? -complete=dir -bar NERDTree :call g:NERDTreeCreator.CreateTabTree('<args>')
     command! -n=? -complete=dir -bar NERDTreeToggle :call g:NERDTreeCreator.ToggleTabTree('<args>')
@@ -367,34 +341,28 @@ function s:SID()
     return s:sid
 endfun
 
-" FUNCTION: s:showMenu(node) {{{1
 function! s:showMenu(node)
     let mc = g:NERDTreeMenuController.New(g:NERDTreeMenuItem.AllEnabled())
     call mc.showMenu()
 endfunction
 
-" FUNCTION: s:toggleIgnoreFilter() {{{1
 function! s:toggleIgnoreFilter()
     call b:NERDTree.ui.toggleIgnoreFilter()
 endfunction
 
-" FUNCTION: s:toggleShowFiles() {{{1
 function! s:toggleShowFiles()
     call b:NERDTree.ui.toggleShowFiles()
 endfunction
 
-" FUNCTION: s:toggleShowHidden() {{{1
 " toggles the display of hidden files
 function! s:toggleShowHidden()
     call b:NERDTree.ui.toggleShowHidden()
 endfunction
 
-" FUNCTION: s:toggleZoom() {{{1
 function! s:toggleZoom()
     call b:NERDTree.ui.toggleZoom()
 endfunction
 
-"FUNCTION: nerdtree#ui_glue#upDir(keepState) {{{1
 "moves the tree up a level
 "
 "Args:
@@ -430,12 +398,10 @@ function! nerdtree#ui_glue#upDir(keepState)
     endif
 endfunction
 
-" FUNCTION: s:upDirCurrentRootOpen() {{{1
 function! s:upDirCurrentRootOpen()
     call nerdtree#ui_glue#upDir(1)
 endfunction
 
-" FUNCTION: s:upDirCurrentRootClosed() {{{1
 function! s:upDirCurrentRootClosed()
     call nerdtree#ui_glue#upDir(0)
 endfunction

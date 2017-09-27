@@ -1,16 +1,3 @@
-" ============================================================================
-" File:        NERD_tree.vim
-" Maintainer:  Martin Grenfell <martin.grenfell at gmail dot com>
-" License:     This program is free software. It comes without any warranty,
-"              to the extent permitted by applicable law. You can redistribute
-"              it and/or modify it under the terms of the Do What The Fuck You
-"              Want To Public License, Version 2, as published by Sam Hocevar.
-"              See http://sam.zoy.org/wtfpl/COPYING for more details.
-"
-" ============================================================================
-"
-" SECTION: Script init stuff {{{1
-"============================================================
 if exists("loaded_nerd_tree")
     finish
 endif
@@ -24,7 +11,6 @@ let loaded_nerd_tree = 1
 let s:old_cpo = &cpo
 set cpo&vim
 
-"Function: s:initVariable() function {{{2
 "This function is used to initialise a given variable to a given value. The
 "variable is only initialised if it does not exist prior
 "
@@ -134,15 +120,10 @@ call s:initVariable("g:NERDTreeMapUpdir", "u")
 call s:initVariable("g:NERDTreeMapUpdirKeepOpen", "U")
 call s:initVariable("g:NERDTreeMapCWD", "CD")
 
-"SECTION: Load class files{{{2
 call nerdtree#loadClassFiles()
 
-" SECTION: Commands {{{1
-"============================================================
 call nerdtree#ui_glue#setupCommands()
 
-" SECTION: Auto commands {{{1
-"============================================================
 augroup NERDTree
     "Save the cursor position whenever we close the nerd tree
     exec "autocmd BufLeave ". g:NERDTreeCreator.BufNamePrefix() ."* if g:NERDTree.IsOpen() | call b:NERDTree.ui.saveScreenState() | endif"

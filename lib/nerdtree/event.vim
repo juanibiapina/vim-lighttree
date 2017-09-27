@@ -1,5 +1,3 @@
-"CLASS: Event
-"============================================================
 let s:Event = {}
 let g:NERDTreeEvent = s:Event
 

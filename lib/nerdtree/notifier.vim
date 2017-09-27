@@ -1,5 +1,3 @@
-"CLASS: Notifier
-"============================================================
 let s:Notifier = {}
 
 function! s:Notifier.AddListener(event, funcname)

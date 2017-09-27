@@ -1,16 +1,6 @@
-" ============================================================================
-" CLASS: TreeDirNode
-"
-" A subclass of NERDTreeFileNode.
-"
-" The 'composite' part of the file/dir composite.
-" ============================================================================
-
-
 let s:TreeDirNode = copy(g:NERDTreeFileNode)
 let g:NERDTreeDirNode = s:TreeDirNode
 
-" FUNCTION: TreeDirNode.AbsoluteTreeRoot(){{{1
 " Class method that returns the highest cached ancestor of the current root.
 function! s:TreeDirNode.AbsoluteTreeRoot()
     let currentNode = b:NERDTree.root
@@ -27,7 +17,6 @@ function! s:TreeDirNode.activate()
     call self.putCursorHere(0, 0)
 endfunction
 
-" FUNCTION: TreeDirNode.addChild(treenode, inOrder) {{{1
 " Adds the given treenode to the list of children for this node
 "
 " Args:
@@ -42,7 +31,6 @@ function! s:TreeDirNode.addChild(treenode, inOrder)
     endif
 endfunction
 
-" FUNCTION: TreeDirNode.close() {{{1
 " Mark this TreeDirNode as closed.
 function! s:TreeDirNode.close()
 
@@ -53,7 +41,6 @@ function! s:TreeDirNode.close()
     endfor
 endfunction
 
-" FUNCTION: TreeDirNode.closeChildren() {{{1
 " Recursively close any directory nodes that are descendants of this node.
 function! s:TreeDirNode.closeChildren()
     for l:child in self.children
@@ -64,7 +51,6 @@ function! s:TreeDirNode.closeChildren()
     endfor
 endfunction
 
-" FUNCTION: TreeDirNode.createChild(path, inOrder) {{{1
 " Instantiates a new child node for this node with the given path. The new
 " nodes parent is set to this node.
 "
@@ -80,7 +66,6 @@ function! s:TreeDirNode.createChild(path, inOrder)
     return newTreeNode
 endfunction
 
-" FUNCTION: TreeDirNode.displayString() {{{1
 " Assemble and return a string that can represent this TreeDirNode object in
 " the NERDTree window.
 function! s:TreeDirNode.displayString()
@@ -106,7 +91,6 @@ function! s:TreeDirNode.displayString()
     return l:result
 endfunction
 
-" FUNCTION: TreeDirNode.findNode(path) {{{1
 " Will find one of the children (recursively) that has the given path
 "
 " Args:
@@ -131,7 +115,6 @@ function! s:TreeDirNode.findNode(path)
     return {}
 endfunction
 
-" FUNCTION: TreeDirNode.getCascade() {{{1
 " Return an array of dir nodes (starting from self) that can be cascade opened.
 function! s:TreeDirNode.getCascade()
     if !self.isCascadable()
@@ -144,13 +127,11 @@ function! s:TreeDirNode.getCascade()
     return [self] + visChild.getCascade()
 endfunction
 
-" FUNCTION: TreeDirNode.getChildCount() {{{1
 " Returns the number of children this node has
 function! s:TreeDirNode.getChildCount()
     return len(self.children)
 endfunction
 
-" FUNCTION: TreeDirNode.getChild(path) {{{1
 " Returns child node of this node that has the given path or {} if no such node
 " exists.
 "
@@ -172,7 +153,6 @@ function! s:TreeDirNode.getChild(path)
 
 endfunction
 
-" FUNCTION: TreeDirNode.getChildByIndex(indx, visible) {{{1
 " returns the child at the given index
 "
 " Args:
@@ -187,7 +167,6 @@ function! s:TreeDirNode.getChildByIndex(indx, visible)
     return array_to_search[a:indx]
 endfunction
 
-" FUNCTION: TreeDirNode.getChildIndex(path) {{{1
 " Returns the index of the child node of this node that has the given path or
 " -1 if no such node exists.
 "
@@ -218,7 +197,6 @@ function! s:TreeDirNode.getChildIndex(path)
     return -1
 endfunction
 
-" FUNCTION: TreeDirNode._glob(pattern, all) {{{1
 " Return a list of strings naming the descendants of the directory in this
 " TreeDirNode object that match the specified glob pattern.
 "
@@ -290,7 +268,6 @@ function! s:TreeDirNode._glob(pattern, all)
     return l:globList
 endfunction
 
-" FUNCTION: TreeDirNode.GetSelected() {{{1
 " Returns the current node if it is a dir node, or else returns the current
 " nodes parent
 unlet s:TreeDirNode.GetSelected
@@ -304,13 +281,11 @@ function! s:TreeDirNode.GetSelected()
     return currentDir
 endfunction
 
-" FUNCTION: TreeDirNode.getVisibleChildCount() {{{1
 " Returns the number of visible children this node has
 function! s:TreeDirNode.getVisibleChildCount()
     return len(self.getVisibleChildren())
 endfunction
 
-" FUNCTION: TreeDirNode.getVisibleChildren() {{{1
 " Returns a list of children to display for this node, in the correct order
 "
 " Return:
@@ -325,13 +300,11 @@ function! s:TreeDirNode.getVisibleChildren()
     return toReturn
 endfunction
 
-" FUNCTION: TreeDirNode.hasVisibleChildren() {{{1
 " returns 1 if this node has any childre, 0 otherwise..
 function! s:TreeDirNode.hasVisibleChildren()
     return self.getVisibleChildCount() != 0
 endfunction
 
-" FUNCTION: TreeDirNode.isCascadable() {{{1
 " true if this dir has only one visible child - which is also a dir
 function! s:TreeDirNode.isCascadable()
     if g:NERDTreeCascadeSingleChildDir == 0
@@ -342,7 +315,6 @@ function! s:TreeDirNode.isCascadable()
     return len(c) == 1 && c[0].path.isDirectory
 endfunction
 
-" FUNCTION: TreeDirNode._initChildren() {{{1
 " Removes all childen from this node and re-reads them
 "
 " Args:
@@ -383,7 +355,6 @@ function! s:TreeDirNode._initChildren(silent)
     return self.getChildCount()
 endfunction
 
-" FUNCTION: TreeDirNode.New(path, nerdtree) {{{1
 " Return a new TreeDirNode object with the given path and parent.
 "
 " Args:
@@ -406,7 +377,6 @@ function! s:TreeDirNode.New(path, nerdtree)
     return newTreeNode
 endfunction
 
-" FUNCTION: TreeDirNode.open([options]) {{{1
 " Open this directory node in the current tree. Return the number of new
 " cached nodes.
 function! s:TreeDirNode.open()
@@ -450,14 +420,12 @@ function! s:TreeDirNode.openAlong()
     return level
 endfunction
 
-" FUNCTION: TreeDirNode.openExplorer() {{{1
 " Open an explorer window for this node. The explorer can be a NERDTree window
 " or a netrw window.
 function! s:TreeDirNode.openExplorer()
     call self.open()
 endfunction
 
-" FUNCTION: TreeDirNode.openRecursively() {{{1
 " Open this directory node and any descendant directory nodes whose pathnames
 " are not ignored.
 function! s:TreeDirNode.openRecursively()
@@ -470,7 +438,6 @@ function! s:TreeDirNode.openRecursively()
     endfor
 endfunction
 
-" FUNCTION: TreeDirNode.refresh() {{{1
 function! s:TreeDirNode.refresh()
     call self.path.refresh(self.getNerdtree())
 
@@ -509,7 +476,6 @@ function! s:TreeDirNode.refresh()
     endif
 endfunction
 
-" FUNCTION: TreeDirNode.refreshFlags() {{{1
 unlet s:TreeDirNode.refreshFlags
 function! s:TreeDirNode.refreshFlags()
     call self.path.refreshFlags(self.getNerdtree())
@@ -518,12 +484,10 @@ function! s:TreeDirNode.refreshFlags()
     endfor
 endfunction
 
-" FUNCTION: TreeDirNode.refreshDirFlags() {{{1
 function! s:TreeDirNode.refreshDirFlags()
     call self.path.refreshFlags(self.getNerdtree())
 endfunction
 
-" FUNCTION: TreeDirNode.reveal(path) {{{1
 " reveal the given path, i.e. cache and open all treenodes needed to display it
 " in the UI
 " Returns the revealed node
@@ -553,7 +517,6 @@ function! s:TreeDirNode.reveal(path, ...)
     return n.reveal(a:path, opts)
 endfunction
 
-" FUNCTION: TreeDirNode.removeChild(treenode) {{{1
 " Remove the given treenode from "self.children".
 " Throws "NERDTree.ChildNotFoundError" if the node is not found.
 "
@@ -570,7 +533,6 @@ function! s:TreeDirNode.removeChild(treenode)
     throw "NERDTree.ChildNotFoundError: child node was not found"
 endfunction
 
-" FUNCTION: TreeDirNode.sortChildren() {{{1
 " Sort "self.children" by alphabetical order and directory priority.
 function! s:TreeDirNode.sortChildren()
     let CompareFunc = function("nerdtree#compareNodesBySortKey")
@@ -590,7 +552,6 @@ function! s:TreeDirNode.toggleOpen()
     endif
 endfunction
 
-" FUNCTION: TreeDirNode.transplantChild(newNode) {{{1
 " Replaces the child of this with the given node (where the child node's full
 " path matches a:newNode's fullpath). The search for the matching node is
 " non-recursive

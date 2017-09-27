@@ -1,11 +1,8 @@
-"CLASS: Creator
 "Creates tab/window nerdtree windows. Sets up all the window and
 "buffer options and key mappings etc.
-"============================================================
 let s:Creator = {}
 let g:NERDTreeCreator = s:Creator
 
-"FUNCTION: s:Creator._bindMappings() {{{1
 function! s:Creator._bindMappings()
     "make <cr> do the same as the activate node mapping
     nnoremap <silent> <buffer> <cr> :call nerdtree#ui_glue#invokeKeyMap(g:NERDTreeMapActivateNode)<cr>
@@ -17,18 +14,15 @@ function! s:Creator._broadcastInitEvent()
     silent doautocmd User LightTreeInit
 endfunction
 
-" FUNCTION: s:Creator.BufNamePrefix() {{{2
 function! s:Creator.BufNamePrefix()
     return 'NERD_tree_'
 endfunction
 
-"FUNCTION: s:Creator.CreateTabTree(a:name) {{{1
 function! s:Creator.CreateTabTree(name)
     let creator = s:Creator.New()
     call creator.createTabTree(a:name)
 endfunction
 
-"FUNCTION: s:Creator.createTabTree(a:name) {{{1
 "name: the name of a directory
 function! s:Creator.createTabTree(name)
     let path = self._pathForString(a:name)
@@ -64,13 +58,11 @@ function! s:Creator.createTabTree(name)
     call self._broadcastInitEvent()
 endfunction
 
-"FUNCTION: s:Creator.CreateWindowTree(dir) {{{1
 function! s:Creator.CreateWindowTree(dir)
     let creator = s:Creator.New()
     call creator.createWindowTree(a:dir)
 endfunction
 
-"FUNCTION: s:Creator.createWindowTree(dir) {{{1
 function! s:Creator.createWindowTree(dir)
     try
         let path = g:NERDTreePath.New(a:dir)
@@ -97,14 +89,12 @@ function! s:Creator.createWindowTree(dir)
     call self._broadcastInitEvent()
 endfunction
 
-" FUNCTION: s:Creator._createNERDTree(path) {{{1
 function! s:Creator._createNERDTree(path, type)
     let b:NERDTree = g:NERDTree.New(a:path, a:type)
 
     call b:NERDTree.root.open()
 endfunction
 
-"FUNCTION: s:Creator._createTreeWin() {{{1
 "Inits the NERD tree window. ie. opens it, sizes it, sets all the local
 "options etc
 function! s:Creator._createTreeWin()
@@ -125,7 +115,6 @@ function! s:Creator._createTreeWin()
     call self._setCommonBufOptions()
 endfunction
 
-"FUNCTION: s:Creator._isBufHidden(nr) {{{1
 function! s:Creator._isBufHidden(nr)
     redir => bufs
     silent ls!
@@ -134,20 +123,17 @@ function! s:Creator._isBufHidden(nr)
     return bufs =~ a:nr . '..h'
 endfunction
 
-"FUNCTION: s:Creator.New() {{{1
 function! s:Creator.New()
     let newCreator = copy(self)
     return newCreator
 endfunction
 
-" FUNCTION: s:Creator._nextBufferName() {{{2
 " returns the buffer name for the next nerd tree
 function! s:Creator._nextBufferName()
     let name = s:Creator.BufNamePrefix() . self._nextBufferNumber()
     return name
 endfunction
 
-" FUNCTION: s:Creator._nextBufferNumber() {{{2
 " the number to add to the nerd tree buffer name to make the buf name unique
 function! s:Creator._nextBufferNumber()
     if !exists("s:Creator._NextBufNum")
@@ -159,7 +145,6 @@ function! s:Creator._nextBufferNumber()
     return s:Creator._NextBufNum
 endfunction
 
-"FUNCTION: s:Creator._pathForString(str) {{{1
 "find a directory for the given string
 function! s:Creator._pathForString(str)
     let path = {}
@@ -203,7 +188,6 @@ function! s:Creator._removeTreeBufForTab()
     unlet t:NERDTreeBufName
 endfunction
 
-"FUNCTION: s:Creator._setCommonBufOptions() {{{1
 function! s:Creator._setCommonBufOptions()
     "throwaway buffer options
     setlocal noswapfile
@@ -235,14 +219,12 @@ function! s:Creator._setCommonBufOptions()
     setlocal filetype=nerdtree
 endfunction
 
-"FUNCTION: s:Creator._setupStatusline() {{{1
 function! s:Creator._setupStatusline()
     if g:NERDTreeStatusline != -1
         let &l:statusline = g:NERDTreeStatusline
     endif
 endfunction
 
-" FUNCTION: s:Creator._tabpagevar(tabnr, var) {{{1
 function! s:Creator._tabpagevar(tabnr, var)
     let currentTab = tabpagenr()
     let old_ei = &ei
@@ -260,13 +242,11 @@ function! s:Creator._tabpagevar(tabnr, var)
     return v
 endfunction
 
-"FUNCTION: s:Creator.ToggleTabTree(dir) {{{1
 function! s:Creator.ToggleTabTree(dir)
     let creator = s:Creator.New()
     call creator.toggleTabTree(a:dir)
 endfunction
 
-"FUNCTION: s:Creator.toggleTabTree(dir) {{{1
 "Toggles the NERD tree. I.e the NERD tree is open, it is closed, if it is
 "closed it is restored or initialized (if it doesnt exist)
 "

@@ -7,10 +7,6 @@ function! nerdtree#version()
     return '5.0.0'
 endfunction
 
-" SECTION: General Functions {{{1
-"============================================================
-
-"FUNCTION: nerdtree#checkForBrowse(dir) {{{2
 "inits a window tree in the current buffer if appropriate
 function! nerdtree#checkForBrowse(dir)
     if !isdirectory(a:dir)
@@ -24,7 +20,6 @@ function! nerdtree#checkForBrowse(dir)
     call g:NERDTreeCreator.CreateWindowTree(a:dir)
 endfunction
 
-"FUNCTION: s:reuseWin(dir) {{{2
 "finds a NERDTree buffer with root of dir, and opens it.
 function! s:reuseWin(dir) abort
     let path = g:NERDTreePath.New(fnamemodify(a:dir, ":p"))
@@ -46,12 +41,10 @@ function! s:reuseWin(dir) abort
     return 0
 endfunction
 
-"FUNCTION: nerdtree#compareNodes(dir) {{{2
 function! nerdtree#compareNodes(n1, n2)
     return a:n1.path.compareTo(a:n2.path)
 endfunction
 
-"FUNCTION: nerdtree#compareNodesBySortKey(n1, n2) {{{2
 function! nerdtree#compareNodesBySortKey(n1, n2)
     let sortKey1 = a:n1.path.getSortKey()
     let sortKey2 = a:n2.path.getSortKey()
@@ -86,7 +79,6 @@ function! nerdtree#compareNodesBySortKey(n1, n2)
     endif
 endfunction
 
-" FUNCTION: nerdtree#exec(cmd) {{{2
 " Same as :exec cmd but with eventignore set for the duration
 " to disable the autocommands used by NERDTree (BufEnter,
 " BufLeave and VimEnter)
@@ -97,12 +89,10 @@ function! nerdtree#exec(cmd)
     let &ei = old_ei
 endfunction
 
-" FUNCTION: nerdtree#has_opt(options, name) {{{2
 function! nerdtree#has_opt(options, name)
     return has_key(a:options, a:name) && a:options[a:name] == 1
 endfunction
 
-" FUNCTION: nerdtree#loadClassFiles() {{{2
 function! nerdtree#loadClassFiles()
     runtime lib/nerdtree/path.vim
     runtime lib/nerdtree/menu_controller.vim
@@ -119,7 +109,6 @@ function! nerdtree#loadClassFiles()
     runtime lib/nerdtree/notifier.vim
 endfunction
 
-" FUNCTION: nerdtree#postSourceActions() {{{2
 function! nerdtree#postSourceActions()
     call nerdtree#ui_glue#createDefaultBindings()
 
@@ -127,15 +116,10 @@ function! nerdtree#postSourceActions()
     runtime! nerdtree_plugin/**/*.vim
 endfunction
 
-"FUNCTION: nerdtree#runningWindows(dir) {{{2
 function! nerdtree#runningWindows()
     return has("win16") || has("win32") || has("win64")
 endfunction
 
-" SECTION: View Functions {{{1
-"============================================================
-
-"FUNCTION: nerdtree#echo  {{{2
 "A wrapper for :echo. Appends 'NERDTree:' on the front of all messages
 "
 "Args:
@@ -145,7 +129,6 @@ function! nerdtree#echo(msg)
     echomsg "NERDTree: " . a:msg
 endfunction
 
-"FUNCTION: nerdtree#echoError {{{2
 "Wrapper for nerdtree#echo, sets the message type to errormsg for this message
 "Args:
 "msg: the message to echo
@@ -155,7 +138,6 @@ function! nerdtree#echoError(msg)
     echohl normal
 endfunction
 
-"FUNCTION: nerdtree#echoWarning {{{2
 "Wrapper for nerdtree#echo, sets the message type to warningmsg for this message
 "Args:
 "msg: the message to echo
@@ -165,7 +147,6 @@ function! nerdtree#echoWarning(msg)
     echohl normal
 endfunction
 
-"FUNCTION: nerdtree#renderView {{{2
 function! nerdtree#renderView()
     call b:NERDTree.render()
 endfunction
