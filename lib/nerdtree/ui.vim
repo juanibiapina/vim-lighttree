@@ -77,8 +77,6 @@ function! s:UI._dumpHelp()
         let help .= "\"\n\" ----------------------------\n"
         let help .= "\" Other mappings~\n"
         let help .= "\" ". g:NERDTreeMapQuit .": Close the NERDTree window\n"
-        let help .= "\" ". g:NERDTreeMapToggleZoom .": Zoom (maximize-minimize)\n"
-        let help .= "\"    the NERDTree window\n"
         let help .= "\" ". g:NERDTreeMapHelp .": toggle help\n"
         silent! put =help
     endif
@@ -395,18 +393,6 @@ function! s:UI.toggleShowHidden()
     let self._showHidden = !self._showHidden
     call self.renderViewSavingPosition()
     call self.centerView()
-endfunction
-
-" zoom (maximize/minimize) the NERDTree window
-function! s:UI.toggleZoom()
-    if exists("b:NERDTreeZoomed") && b:NERDTreeZoomed
-        let size = exists("b:NERDTreeOldWindowSize") ? b:NERDTreeOldWindowSize : g:NERDTreeWinSize
-        exec "silent vertical resize ". size
-        let b:NERDTreeZoomed = 0
-    else
-        exec "vertical resize"
-        let b:NERDTreeZoomed = 1
-    endif
 endfunction
 
 function! s:UI.UpDirLine()
