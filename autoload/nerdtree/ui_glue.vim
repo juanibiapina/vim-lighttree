@@ -380,10 +380,6 @@ function! nerdtree#ui_glue#upDir(keepState)
             let b:NERDTree.root = b:NERDTree.root.parent
         endif
 
-        if g:NERDTreeChDirMode ==# 2
-            call b:NERDTree.root.path.changeToDir()
-        endif
-
         call b:NERDTree.render()
         call oldRoot.putCursorHere(0, 0)
     endif

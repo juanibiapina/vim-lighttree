@@ -36,12 +36,6 @@ function! s:Creator.createTabTree(name)
         return
     endif
 
-    "if instructed to, then change the vim CWD to the dir the NERDTree is
-    "inited in
-    if g:NERDTreeChDirMode != 0
-        call path.changeToDir()
-    endif
-
     if g:NERDTree.ExistsForTab()
         if g:NERDTree.IsOpen()
             call g:NERDTree.Close()

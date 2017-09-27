@@ -397,9 +397,6 @@ NERD tree. These options should be set in your vimrc.
                                 at the beginning of the hidden file names
                                 into account when sorting nodes.
 
-|'NERDTreeChDirMode'|           Tells the NERD tree if/when it should change
-                                vim's current working directory.
-
 |'NERDTreeHighlightCursorline'| Tell the NERD tree whether to highlight the
                                 current cursor line.
 
@@ -527,29 +524,6 @@ above nodes would then be sorted like this: >
     z100.txt
     z110.txt
 <
-------------------------------------------------------------------------------
-                                                         *'NERDTreeChDirMode'*
-
-Values: 0, 1 or 2.
-Default: 0.
-
-Use this option to tell the script when (if at all) to change the current
-working directory (CWD) for vim.
-
-If it is set to 0 then the CWD is never changed by the NERD tree.
-
-If set to 1 then the CWD is changed when the NERD tree is first loaded to the
-directory it is initialized in. For example, if you start the NERD tree with >
-    :NERDTree /home/marty/foobar
-<
-then the CWD will be changed to /home/marty/foobar and will not be changed
-again unless you init another NERD tree with a similar command.
-
-If the option is set to 2 then it behaves the same as if set to 1 except that
-the CWD is changed whenever the tree root is changed. For example, if the CWD
-is /home/marty/foobar and you make the node for /home/marty/foobar/baz the new
-root then the CWD will become /home/marty/foobar/baz.
-
 ------------------------------------------------------------------------------
                                                *'NERDTreeHighlightCursorline'*
 Values: 0 or 1.
