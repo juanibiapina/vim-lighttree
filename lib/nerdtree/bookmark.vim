@@ -12,8 +12,8 @@ let s:Bookmark = {}
 let g:NERDTreeBookmark = s:Bookmark
 
 " FUNCTION: Bookmark.activate(nerdtree) {{{1
-function! s:Bookmark.activate(nerdtree, ...)
-    call self.open(a:nerdtree, a:0 ? a:1 : {})
+function! s:Bookmark.activate(nerdtree)
+    call self.open(a:nerdtree)
 endfunction
 
 " FUNCTION: Bookmark.AddBookmark(name, path) {{{1
@@ -237,19 +237,11 @@ endfunction
 "Args:
 "
 "nerdtree: the tree to load open the bookmark in
-"
-"A dictionary containing the following keys (all optional):
-"  'where': Specifies whether the node should be opened in new split or in
-"           the previous window. Can be either 'v' (vertical split), 'h'
-"           (horizontal split) or 'p' (previous window).
-"
-function! s:Bookmark.open(nerdtree, ...)
-    let opts = a:0 ? a:1 : {}
-
-    if self.path.isDirectory && !has_key(opts, 'where')
+function! s:Bookmark.open(nerdtree)
+    if self.path.isDirectory
         call self.toRoot(a:nerdtree)
     else
-        let opener = g:NERDTreeOpener.New(self.path, opts)
+        let opener = g:NERDTreeOpener.New(self.path)
         call opener.open(self)
     endif
 endfunction

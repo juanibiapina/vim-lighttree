@@ -20,11 +20,9 @@ function! s:TreeDirNode.AbsoluteTreeRoot()
     return currentNode
 endfunction
 
-" FUNCTION: TreeDirNode.activate([options]) {{{1
 unlet s:TreeDirNode.activate
-function! s:TreeDirNode.activate(...)
-    let opts = a:0 ? a:1 : {}
-    call self.toggleOpen(opts)
+function! s:TreeDirNode.activate()
+    call self.toggleOpen()
     call self.getNerdtree().render()
     call self.putCursorHere(0, 0)
 endfunction
@@ -409,19 +407,9 @@ function! s:TreeDirNode.New(path, nerdtree)
 endfunction
 
 " FUNCTION: TreeDirNode.open([options]) {{{1
-" Open this directory node in the current tree or elsewhere if special options
-" are provided. Return 0 if options were processed. Otherwise, return the
-" number of new cached nodes.
-function! s:TreeDirNode.open(...)
-    let l:options = a:0 ? a:1 : {}
-
-    " If special options were specified, process them and return.
-    if has_key(l:options, 'where') && !empty(l:options['where'])
-        let l:opener = g:NERDTreeOpener.New(self.path, l:options)
-        call l:opener.open(self)
-        return 0
-    endif
-
+" Open this directory node in the current tree. Return the number of new
+" cached nodes.
+function! s:TreeDirNode.open()
     " Open any ancestors of this node that render within the same cascade.
     let l:parent = self.parent
     while !empty(l:parent) && !l:parent.isRoot()
@@ -443,17 +431,15 @@ function! s:TreeDirNode.open(...)
     return l:numChildrenCached
 endfunction
 
-" FUNCTION: TreeDirNode.openAlong([opts]) {{{1
 " recursive open the dir if it has only one directory child.
 "
 " return the level of opened directories.
-function! s:TreeDirNode.openAlong(...)
-    let opts = a:0 ? a:1 : {}
+function! s:TreeDirNode.openAlong()
     let level = 0
 
     let node = self
     while node.path.isDirectory
-        call node.open(opts)
+        call node.open()
         let level += 1
         if node.getVisibleChildCount() == 1
             let node = node.getChildByIndex(0, 1)
@@ -465,10 +451,10 @@ function! s:TreeDirNode.openAlong(...)
 endfunction
 
 " FUNCTION: TreeDirNode.openExplorer() {{{1
-" Open an explorer window for this node in the previous window. The explorer
-" can be a NERDTree window or a netrw window.
+" Open an explorer window for this node. The explorer can be a NERDTree window
+" or a netrw window.
 function! s:TreeDirNode.openExplorer()
-    call self.open({'where': 'p'})
+    call self.open()
 endfunction
 
 " FUNCTION: TreeDirNode.openRecursively() {{{1
@@ -591,17 +577,15 @@ function! s:TreeDirNode.sortChildren()
     call sort(self.children, CompareFunc)
 endfunction
 
-" FUNCTION: TreeDirNode.toggleOpen([options]) {{{1
 " Opens this directory if it is closed and vice versa
-function! s:TreeDirNode.toggleOpen(...)
-    let opts = a:0 ? a:1 : {}
+function! s:TreeDirNode.toggleOpen()
     if self.isOpen ==# 1
         call self.close()
     else
         if g:NERDTreeCascadeOpenSingleChildDir == 0
-            call self.open(opts)
+            call self.open()
         else
-            call self.openAlong(opts)
+            call self.openAlong()
         endif
     endif
 endfunction

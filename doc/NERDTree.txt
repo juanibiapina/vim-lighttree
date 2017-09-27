@@ -207,8 +207,6 @@ Default  Description~                                             help-tag~
 Key~
 
 o.......Open files, directories and bookmarks....................|NERDTree-o|
-i.......Open selected file in a split window.....................|NERDTree-i|
-s.......Open selected file in a new vsplit.......................|NERDTree-s|
 O.......Recursively open the selected directory..................|NERDTree-O|
 x.......Close the current nodes parent...........................|NERDTree-x|
 X.......Recursively close all children of the current node.......|NERDTree-X|
@@ -249,7 +247,7 @@ Default key: o
 Map option: NERDTreeMapActivateNode
 Applies to: files and directories.
 
-If a file node is selected, it is opened in the previous window.
+If a file node is selected, it is opened in the current window.
 
 If a directory is selected it is opened or closed depending on its current
 state.
@@ -258,25 +256,7 @@ If a bookmark that links to a directory is selected then that directory
 becomes the new root.
 
 If a bookmark that links to a file is selected then that file is opened in the
-previous window.
-
-------------------------------------------------------------------------------
-                                                                  *NERDTree-i*
-Default key: i
-Map option: NERDTreeMapOpenSplit
-Applies to: files.
-
-Opens the selected file in a new split window and puts the cursor in the new
-window.
-
-------------------------------------------------------------------------------
-                                                                  *NERDTree-s*
-Default key: s
-Map option: NERDTreeMapOpenVSplit
-Applies to: files.
-
-Opens the selected file in a new vertically split window and puts the cursor in
-the new window.
+current window.
 
 ------------------------------------------------------------------------------
                                                                   *NERDTree-O*

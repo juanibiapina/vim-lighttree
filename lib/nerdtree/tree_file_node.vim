@@ -6,9 +6,8 @@
 let s:TreeFileNode = {}
 let g:NERDTreeFileNode = s:TreeFileNode
 
-"FUNCTION: TreeFileNode.activate(...) {{{1
-function! s:TreeFileNode.activate(...)
-    call self.open(a:0 ? a:1 : {})
+function! s:TreeFileNode.activate()
+    call self.open()
 endfunction
 
 "FUNCTION: TreeFileNode.bookmark(name) {{{1
@@ -240,10 +239,8 @@ function! s:TreeFileNode.New(path, nerdtree)
     endif
 endfunction
 
-"FUNCTION: TreeFileNode.open() {{{1
-function! s:TreeFileNode.open(...)
-    let opts = a:0 ? a:1 : {}
-    let opener = g:NERDTreeOpener.New(self.path, opts)
+function! s:TreeFileNode.open()
+    let opener = g:NERDTreeOpener.New(self.path)
     call opener.open(self)
 endfunction
 
