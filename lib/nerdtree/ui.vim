@@ -95,10 +95,6 @@ function! s:UI.getPath(ln)
         return self.nerdtree.root.path
     endif
 
-    if line ==# s:UI.UpDirLine()
-        return self.nerdtree.root.path.getParent()
-    endif
-
     let indent = self._indentLevelFor(line)
 
     "remove the tree parts and the leading space
@@ -226,37 +222,6 @@ function! s:UI.MarkupReg()
     return '^\(['.g:NERDTreeDirArrowExpandable.g:NERDTreeDirArrowCollapsible.'] \| \+['.g:NERDTreeDirArrowExpandable.g:NERDTreeDirArrowCollapsible.'] \| \+\)'
 endfunction
 
-"
-"Sets the screen state back to what it was when nerdtree#saveScreenState was last
-"called.
-"
-"Assumes the cursor is in the NERDTree window
-function! s:UI.restoreScreenState()
-    if !has_key(self, '_screenState')
-        return
-    endif
-    exec("silent vertical resize " . self._screenState['oldWindowSize'])
-
-    let old_scrolloff=&scrolloff
-    let &scrolloff=0
-    call cursor(self._screenState['oldTopLine'], 0)
-    normal! zt
-    call setpos(".", self._screenState['oldPos'])
-    let &scrolloff=old_scrolloff
-endfunction
-
-"Saves the current cursor position in the current buffer and the window
-"scroll position
-function! s:UI.saveScreenState()
-    let win = winnr()
-    call g:NERDTree.CursorToTreeWin()
-    let self._screenState = {}
-    let self._screenState['oldPos'] = getpos(".")
-    let self._screenState['oldTopLine'] = line("w0")
-    let self._screenState['oldWindowSize']= winwidth("")
-    call nerdtree#exec(win . "wincmd w")
-endfunction
-
 function! s:UI.setShowHidden(val)
     let self._showHidden = a:val
 endfunction
@@ -372,8 +337,4 @@ endfunction
 function! s:UI.toggleShowHidden()
     let self._showHidden = !self._showHidden
     call self.renderViewSavingPosition()
-endfunction
-
-function! s:UI.UpDirLine()
-    return '.. (up a dir)'
 endfunction

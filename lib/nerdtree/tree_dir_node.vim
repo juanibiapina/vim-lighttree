@@ -33,7 +33,6 @@ endfunction
 
 " Mark this TreeDirNode as closed.
 function! s:TreeDirNode.close()
-
     " Close all directories in this directory node's cascade. This is
     " necessary to ensure consistency when cascades are rendered.
     for l:dirNode in self.getCascade()

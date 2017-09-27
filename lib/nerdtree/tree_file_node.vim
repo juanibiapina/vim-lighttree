@@ -139,14 +139,6 @@ function! s:TreeFileNode.getNerdtree()
     return self._nerdtree
 endfunction
 
-"get the root node for this tab
-function! s:TreeFileNode.GetRootForTab()
-    if g:NERDTree.ExistsForTab()
-        return getbufvar(t:NERDTreeBufName, 'NERDTree').root
-    end
-    return {}
-endfunction
-
 "gets the treenode that the cursor is currently over
 function! s:TreeFileNode.GetSelected()
     try

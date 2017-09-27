@@ -74,8 +74,6 @@ if !exists('g:NERDTreeStatusline')
     let g:NERDTreeStatusline = "%{exists('b:NERDTree')?b:NERDTree.root.path.str():''}"
 
 endif
-call s:initVariable("g:NERDTreeWinPos", "left")
-call s:initVariable("g:NERDTreeWinSize", 31)
 
 "init the shell commands that will be used to copy nodes, and remove dir trees
 "
@@ -120,9 +118,6 @@ call nerdtree#loadClassFiles()
 call nerdtree#ui_glue#setupCommands()
 
 augroup NERDTree
-    "Save the cursor position whenever we close the nerd tree
-    exec "autocmd BufLeave ". g:NERDTreeCreator.BufNamePrefix() ."* if g:NERDTree.IsOpen() | call b:NERDTree.ui.saveScreenState() | endif"
-
     "disallow insert mode in the NERDTree
     exec "autocmd BufEnter ". g:NERDTreeCreator.BufNamePrefix() ."* stopinsert"
 augroup END

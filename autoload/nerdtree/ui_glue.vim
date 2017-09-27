@@ -47,13 +47,6 @@ endfunction
 "SECTION: Interface bindings {{{1
 "============================================================
 
-"handle the user activating the updir line
-function! s:activateAll()
-    if getline(".") ==# g:NERDTreeUI.UpDirLine()
-        return nerdtree#ui_glue#upDir(0)
-    endif
-endfunction
-
 "handle the user activating a tree node
 function! s:activateDirNode(node)
     call a:node.activate()
