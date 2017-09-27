@@ -39,8 +39,6 @@ function! nerdtree#ui_glue#createDefaultBindings()
     call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapJumpRoot, 'scope': "all", 'callback': s."jumpToRoot" })
     call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapJumpNextSibling, 'scope': "Node", 'callback': s."jumpToNextSibling" })
     call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapJumpPrevSibling, 'scope': "Node", 'callback': s."jumpToPrevSibling" })
-
-    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapOpenExpl, 'scope': "DirNode", 'callback': s."openExplorer" })
 endfunction
 
 
@@ -238,10 +236,6 @@ function! s:jumpToSibling(currentNode, forward)
     if !empty(sibling)
         call sibling.putCursorHere(1, 0)
     endif
-endfunction
-
-function! s:openExplorer(node)
-    call a:node.openExplorer()
 endfunction
 
 function! s:openNodeRecursively(node)

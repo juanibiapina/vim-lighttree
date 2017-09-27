@@ -419,12 +419,6 @@ function! s:TreeDirNode.openAlong()
     return level
 endfunction
 
-" Open an explorer window for this node. The explorer can be a NERDTree window
-" or a netrw window.
-function! s:TreeDirNode.openExplorer()
-    call self.open()
-endfunction
-
 " Open this directory node and any descendant directory nodes whose pathnames
 " are not ignored.
 function! s:TreeDirNode.openRecursively()

@@ -17,7 +17,6 @@ function! s:UI._dumpHelp()
         let help .= "\" ". g:NERDTreeMapCloseDir .": close parent of node\n"
         let help .= "\" ". g:NERDTreeMapCloseChildren .": close all child nodes of\n"
         let help .= "\"    current node recursively\n"
-        let help .= "\" ". g:NERDTreeMapOpenExpl.": explore selected dir\n"
 
         let help .= "\"\n\" ----------------------------\n"
         let help .= "\" Tree navigation mappings~\n"

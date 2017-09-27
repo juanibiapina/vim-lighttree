@@ -109,7 +109,6 @@ o.......Open files and directories ..............................|NERDTree-o|
 O.......Recursively open the selected directory..................|NERDTree-O|
 x.......Close the current nodes parent...........................|NERDTree-x|
 X.......Recursively close all children of the current node.......|NERDTree-X|
-e.......Edit the current dir.....................................|NERDTree-e|
 
 <CR>...............same as |NERDTree-o|.
 
@@ -176,16 +175,6 @@ Applies to: directories.
 Recursively closes all children of the selected directory.
 
 Tip: To quickly "reset" the tree, use |NERDTree-P| with this mapping.
-
-------------------------------------------------------------------------------
-                                                                  *NERDTree-e*
-Default key: e
-Map option: NERDTreeMapOpenExpl
-Applies to: files and directories.
-
-|:edit|s the selected directory, or the selected file's directory. This could
-result in a NERD tree or a netrw being opened, depending on
-|'NERDTreeHijackNetrw'|.
 
 ------------------------------------------------------------------------------
                                                                   *NERDTree-P*
