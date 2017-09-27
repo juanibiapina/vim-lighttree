@@ -72,23 +72,6 @@ function! s:NERDTree.ExistsForTab()
     return !empty(getbufvar(bufnr(t:NERDTreeBufName), 'NERDTree'))
 endfunction
 
-function! s:NERDTree.ForCurrentBuf()
-    if s:NERDTree.ExistsForBuf()
-        return b:NERDTree
-    else
-        return {}
-    endif
-endfunction
-
-function! s:NERDTree.ForCurrentTab()
-    if !s:NERDTree.ExistsForTab()
-        return
-    endif
-
-    let bufnr = bufnr(t:NERDTreeBufName)
-    return getbufvar(bufnr, "NERDTree")
-endfunction
-
 function! s:NERDTree.getRoot()
     return self.root
 endfunction
