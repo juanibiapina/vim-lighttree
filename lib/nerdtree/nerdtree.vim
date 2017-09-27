@@ -97,14 +97,6 @@ function! s:NERDTree.PathFilters()
     return s:NERDTree._PathFilters
 endfunction
 
-function! s:NERDTree.previousBuf()
-    return self._previousBuf
-endfunction
-
-function! s:NERDTree.setPreviousBuf(bnum)
-    let self._previousBuf = a:bnum
-endfunction
-
 "A convenience function - since this is called often
 function! s:NERDTree.render()
     call self.ui.render()

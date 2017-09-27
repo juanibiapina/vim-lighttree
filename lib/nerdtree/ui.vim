@@ -59,7 +59,6 @@ function! s:UI._dumpHelp()
 
         let help .= "\"\n\" ----------------------------\n"
         let help .= "\" Other mappings~\n"
-        let help .= "\" ". g:NERDTreeMapQuit .": Close the NERDTree window\n"
         let help .= "\" ". g:NERDTreeMapHelp .": toggle help\n"
         silent! put =help
     endif

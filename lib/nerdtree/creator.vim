@@ -69,14 +69,11 @@ function! s:Creator.createWindowTree(dir)
     "we want the directory buffer to disappear when we do the :edit below
     setlocal bufhidden=wipe
 
-    let previousBuf = expand("#")
-
     "we need a unique name for each window tree buffer to ensure they are
     "all independent
     exec g:NERDTreeCreatePrefix . " edit " . self._nextBufferName()
 
     call self._createNERDTree(path)
-    let b:NERDTree._previousBuf = bufnr(previousBuf)
     call self._setCommonBufOptions()
 
     call b:NERDTree.render()
@@ -280,7 +277,6 @@ function! s:Creator.restoreBuffer(dir) abort
         endif
 
         if nt.root.path.equals(path)
-            call nt.setPreviousBuf(bufnr("#"))
             exec "buffer " . i
             return 1
         endif

@@ -18,8 +18,6 @@ function! nerdtree#ui_glue#createDefaultBindings()
 
     call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapChdir, 'scope': "Node", 'callback': s."chCwd" })
 
-    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapQuit, 'scope': "all", 'callback': s."closeTreeWindow" })
-
     call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapCWD, 'scope': "all", 'callback': "nerdtree#ui_glue#chRootCwd" })
 
     call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapRefreshRoot, 'scope': "all", 'callback': s."refreshRoot" })
@@ -114,19 +112,6 @@ function! s:closeCurrentDir(node)
         call parent.close()
         call b:NERDTree.render()
         call parent.putCursorHere(0, 0)
-    endif
-endfunction
-
-" close the tree window
-function! s:closeTreeWindow()
-    if b:NERDTree.previousBuf() != -1
-        exec "buffer " . b:NERDTree.previousBuf()
-    else
-        if winnr("$") > 1
-            call g:NERDTree.Close()
-        else
-            call nerdtree#echo("Cannot close last window")
-        endif
     endif
 endfunction
 

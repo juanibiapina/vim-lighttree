@@ -135,7 +135,6 @@ I.......Toggle whether hidden files displayed....................|NERDTree-I|
 f.......Toggle whether the file filters are used.................|NERDTree-f|
 F.......Toggle whether files are displayed.......................|NERDTree-F|
 
-q.......Close the NERDTree window................................|NERDTree-q|
 ?.......Toggle the display of the quick help.....................|NERDTree-?|
 
 ------------------------------------------------------------------------------
@@ -339,14 +338,6 @@ Map option: NERDTreeMapToggleFiles
 Applies to: no restrictions.
 
 Toggles whether file nodes are displayed.
-
-------------------------------------------------------------------------------
-                                                                  *NERDTree-q*
-Default key: q
-Map option: NERDTreeMapQuit
-Applies to: no restrictions.
-
-Closes the NERDtree window.
 
 ------------------------------------------------------------------------------
                                                                   *NERDTree-?*
