@@ -153,35 +153,19 @@ function! s:findAndRevealPath()
         let g:NERDTreeShowHidden = 1
     endif
 
-    if !g:NERDTree.ExistsForTab()
-        try
-            let cwd = g:NERDTreePath.New(getcwd())
-        catch /^NERDTree.InvalidArgumentsError/
-            call nerdtree#echo("current directory does not exist.")
-            let cwd = p.getParent()
-        endtry
+    try
+        let rootDir = g:NERDTreePath.New(getcwd())
+    catch /^NERDTree.InvalidArgumentsError/
+        call nerdtree#echo("current directory does not exist.")
+        let rootDir = p.getParent()
+    endtry
 
-        if p.isUnder(cwd)
-            call g:NERDTreeCreator.CreateTabTree(cwd.str())
-        else
-            call g:NERDTreeCreator.CreateTabTree(p.getParent().str())
-        endif
+    if p.isUnder(rootDir)
+        call g:NERDTreeCreator.RestoreOrCreateBuffer(rootDir.str())
     else
-        if !p.isUnder(g:NERDTreeFileNode.GetRootForTab().path)
-            if !g:NERDTree.IsOpen()
-                call g:NERDTreeCreator.ToggleTabTree('')
-            else
-                call g:NERDTree.CursorToTreeWin()
-            endif
-            call b:NERDTree.ui.setShowHidden(g:NERDTreeShowHidden)
-            call s:chRoot(g:NERDTreeDirNode.New(p.getParent(), b:NERDTree))
-        else
-            if !g:NERDTree.IsOpen()
-                call g:NERDTreeCreator.ToggleTabTree("")
-            endif
-        endif
+        call g:NERDTreeCreator.RestoreOrCreateBuffer(p.getParent().str())
     endif
-    call g:NERDTree.CursorToTreeWin()
+
     let node = b:NERDTree.root.reveal(p)
     call b:NERDTree.render()
     call node.putCursorHere(1,0)
