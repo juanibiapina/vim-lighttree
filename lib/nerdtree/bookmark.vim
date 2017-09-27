@@ -242,7 +242,6 @@ endfunction
 "  'where': Specifies whether the node should be opened in new split or in
 "           the previous window. Can be either 'v' (vertical split), 'h'
 "           (horizontal split) or 'p' (previous window).
-"  'stay': open the file, but keep the cursor in the tree win
 "
 function! s:Bookmark.open(nerdtree, ...)
     let opts = a:0 ? a:1 : {}

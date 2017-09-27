@@ -109,16 +109,13 @@ endfunction
 " A dictionary containing the following keys (all optional):
 "   'where': Specifies whether the node should be opened in new split or in
 "            the previous window. Can be either 'v' or 'h'
-"   'stay': open the file, but keep the cursor in the tree win
 function! s:Opener.New(path, opts)
     let newObj = copy(self)
 
     let newObj._path = a:path
-    let newObj._stay = nerdtree#has_opt(a:opts, 'stay')
 
     let newObj._where = has_key(a:opts, 'where') ? a:opts['where'] : ''
     let newObj._nerdtree = b:NERDTree
-    call newObj._saveCursorPos()
 
     return newObj
 endfunction
@@ -216,9 +213,6 @@ endfunction
 function! s:Opener._openFile()
     call self._gotoTargetWin()
     call self._path.edit()
-    if self._stay
-        call self._restoreCursorPos()
-    endif
 endfunction
 
 " FUNCTION: Opener._openDirectory(node) {{{1
@@ -233,10 +227,6 @@ function! s:Opener._openDirectory(node)
         else
             call g:NERDTreeCreator.CreateWindowTree(a:node.path.str())
         endif
-    endif
-
-    if self._stay
-        call self._restoreCursorPos()
     endif
 endfunction
 
@@ -258,18 +248,6 @@ function! s:Opener._previousWindow()
             echo v:exception
         endtry
     endif
-endfunction
-
-" FUNCTION: Opener._restoreCursorPos() {{{1
-function! s:Opener._restoreCursorPos()
-    call nerdtree#exec('normal ' . self._tabnr . 'gt')
-    call nerdtree#exec(bufwinnr(self._bufnr) . 'wincmd w')
-endfunction
-
-" FUNCTION: Opener._saveCursorPos() {{{1
-function! s:Opener._saveCursorPos()
-    let self._bufnr = bufnr("")
-    let self._tabnr = tabpagenr()
 endfunction
 
 " vim: set sw=4 sts=4 et fdm=marker:
