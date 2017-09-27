@@ -308,7 +308,7 @@ function! s:refreshCurrent(node)
 endfunction
 
 function! nerdtree#ui_glue#setupCommands()
-    command! -n=? -complete=dir -bar NERDTree :call g:NERDTreeCreator.CreateTabTree('<args>')
+    command! -n=? -complete=dir -bar NERDTree :call g:NERDTreeCreator.RestoreOrCreateBuffer('<args>')
     command! -n=0 -bar NERDTreeFind call s:findAndRevealPath()
 endfunction
 
