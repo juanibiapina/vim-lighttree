@@ -119,7 +119,7 @@ endfunction
 
 " close the tree window
 function! s:closeTreeWindow()
-    if b:NERDTree.isWinTree() && b:NERDTree.previousBuf() != -1
+    if b:NERDTree.previousBuf() != -1
         exec "buffer " . b:NERDTree.previousBuf()
     else
         if winnr("$") > 1

@@ -27,11 +27,7 @@ function! s:Opener._openFile()
 endfunction
 
 function! s:Opener._openDirectory(node)
-    if self._nerdtree.isWinTree()
-        call g:NERDTreeCreator.CreateWindowTree(a:node.path.str())
-    else
-        call b:NERDTree.changeRoot(a:node)
-    endif
+    call g:NERDTreeCreator.CreateWindowTree(a:node.path.str())
 endfunction
 
 " vim: set sw=4 sts=4 et fdm=marker:

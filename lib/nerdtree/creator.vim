@@ -43,7 +43,7 @@ function! s:Creator.createTabTree(name)
     endif
 
     call self._createTreeWin()
-    call self._createNERDTree(path, "tab")
+    call self._createNERDTree(path)
     call b:NERDTree.render()
     call b:NERDTree.root.putCursorHere(0, 0)
 
@@ -75,7 +75,7 @@ function! s:Creator.createWindowTree(dir)
     "all independent
     exec g:NERDTreeCreatePrefix . " edit " . self._nextBufferName()
 
-    call self._createNERDTree(path, "window")
+    call self._createNERDTree(path)
     let b:NERDTree._previousBuf = bufnr(previousBuf)
     call self._setCommonBufOptions()
 
@@ -84,8 +84,8 @@ function! s:Creator.createWindowTree(dir)
     call self._broadcastInitEvent()
 endfunction
 
-function! s:Creator._createNERDTree(path, type)
-    let b:NERDTree = g:NERDTree.New(a:path, a:type)
+function! s:Creator._createNERDTree(path)
+    let b:NERDTree = g:NERDTree.New(a:path)
 
     call b:NERDTree.root.open()
 endfunction
@@ -279,7 +279,7 @@ function! s:Creator.restoreBuffer(dir) abort
             continue
         endif
 
-        if nt.isWinTree() && nt.root.path.equals(path)
+        if nt.root.path.equals(path)
             call nt.setPreviousBuf(bufnr("#"))
             exec "buffer " . i
             return 1

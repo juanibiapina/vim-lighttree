@@ -77,25 +77,16 @@ function! s:NERDTree.IsOpen()
     return s:NERDTree.GetWinNum() != -1
 endfunction
 
-function! s:NERDTree.isTabTree()
-    return self._type == "tab"
-endfunction
-
-function! s:NERDTree.isWinTree()
-    return self._type == "window"
-endfunction
-
 function! s:NERDTree.MustBeOpen()
     if !s:NERDTree.IsOpen()
         throw "NERDTree.TreeNotOpen"
     endif
 endfunction
 
-function! s:NERDTree.New(path, type)
+function! s:NERDTree.New(path)
     let newObj = copy(self)
     let newObj.ui = g:NERDTreeUI.New(newObj)
     let newObj.root = g:NERDTreeDirNode.New(a:path, newObj)
-    let newObj._type = a:type
     return newObj
 endfunction
 

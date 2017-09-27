@@ -21,11 +21,7 @@ function! s:UI._dumpHelp()
         let help .= "\" ============================\n"
         let help .= "\" File node mappings~\n"
         let help .= "\" <CR>,\n"
-        if self.nerdtree.isTabTree()
-            let help .= "\" ". g:NERDTreeMapActivateNode .": open in prev window\n"
-        else
-            let help .= "\" ". g:NERDTreeMapActivateNode .": open in current window\n"
-        endif
+        let help .= "\" ". g:NERDTreeMapActivateNode .": open in current window\n"
 
         let help .= "\"\n\" ----------------------------\n"
         let help .= "\" Directory node mappings~\n"
