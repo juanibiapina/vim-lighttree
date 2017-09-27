@@ -13,32 +13,7 @@ function! nerdtree#checkForBrowse(dir)
         return
     endif
 
-    if s:reuseWin(a:dir)
-        return
-    endif
-
-    call g:NERDTreeCreator.CreateWindowTree(a:dir)
-endfunction
-
-"finds a NERDTree buffer with root of dir, and opens it.
-function! s:reuseWin(dir) abort
-    let path = g:NERDTreePath.New(fnamemodify(a:dir, ":p"))
-
-    for i in range(1, bufnr("$"))
-        unlet! nt
-        let nt = getbufvar(i, "NERDTree")
-        if empty(nt)
-            continue
-        endif
-
-        if nt.isWinTree() && nt.root.path.equals(path)
-            call nt.setPreviousBuf(bufnr("#"))
-            exec "buffer " . i
-            return 1
-        endif
-    endfor
-
-    return 0
+    call g:NERDTreeCreator.RestoreOrCreateBuffer(a:dir)
 endfunction
 
 function! nerdtree#compareNodes(n1, n2)

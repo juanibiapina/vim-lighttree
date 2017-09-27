@@ -264,6 +264,41 @@ function! s:Creator.toggleTabTree(dir)
     endif
 endfunction
 
+function! s:Creator.RestoreBuffer(dir)
+    let creator = s:Creator.New()
+    return creator.restoreBuffer(a:dir)
+endfunction
+
+function! s:Creator.restoreBuffer(dir) abort
+    let path = g:NERDTreePath.New(fnamemodify(a:dir, ":p"))
+
+    for i in range(1, bufnr("$"))
+        unlet! nt
+        let nt = getbufvar(i, "NERDTree")
+        if empty(nt)
+            continue
+        endif
+
+        if nt.isWinTree() && nt.root.path.equals(path)
+            call nt.setPreviousBuf(bufnr("#"))
+            exec "buffer " . i
+            return 1
+        endif
+    endfor
+
+    return 0
+endfunction
+
+function! s:Creator.RestoreOrCreateBuffer(dir)
+    let creator = s:Creator.New()
+
+    if creator.restoreBuffer(a:dir)
+        return
+    else
+        return creator.createWindowTree(a:dir)
+    endif
+endfunction
+
 " Function: s:Creator._uniq(list)   {{{1
 " returns a:list without duplicates
 function! s:Creator._uniq(list)
