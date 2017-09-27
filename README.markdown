@@ -1,27 +1,28 @@
-The NERDTree
-=============
+LightTree
+=========
 
 Introduction
 ------------
 
-The NERDTree is a file system explorer for the Vim editor. Using this plugin,
-users can visually browse complex directory hierarchies, quickly open files for
-reading or editing, and perform basic file system operations.
+LightTree is a file system explorer for the Vim editor.
 
-This plugin can also be extended with custom mappings using a special API. The
-details of this API and of other NERDTree features are described in the
-included documentation.
+It is designed to work well with splits, in an attempt to provide a good
+solution for this problem:
+http://vimcasts.org/blog/2013/01/oil-and-vinegar-split-windows-and-project-drawer/
+
+*WARNING*: Although everything works, this plugin is still in development and
+breaking changes will happen. Since it is a fork of
+[NERDTree](https://github.com/scrooloose/nerdtree), most configuration options
+and global functions have the same name.
+
 
 Installation
 ------------
 
-#### [pathogen.vim](https://github.com/tpope/vim-pathogen)
+#### [vim-pathogen](https://github.com/tpope/vim-pathogen)
 
-    git clone https://github.com/scrooloose/nerdtree.git ~/.vim/bundle/nerdtree
+    git clone https://github.com/juanibiapina/vim-lighttree.git ~/.vim/bundle/lighttree
 
-Then reload Vim, run `:helptags ~/.vim/bundle/nerdtree/doc/`, and check out `:help NERDTree.txt`.
+#### [vim-plug](https://github.com/junegunn/vim-plug)
 
-
-#### [apt-vim](https://github.com/egalpin/apt-vim)
-
-    apt-vim install -y https://github.com/scrooloose/nerdtree.git
+    Plug 'juanibiapina/vim-lighttree'
