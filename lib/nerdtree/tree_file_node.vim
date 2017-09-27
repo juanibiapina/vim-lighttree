@@ -184,8 +184,7 @@ function! s:TreeFileNode.New(path, nerdtree)
 endfunction
 
 function! s:TreeFileNode.open()
-    let opener = g:NERDTreeOpener.New(self.path)
-    call opener.open(self)
+    call self.path.edit()
 endfunction
 
 "Places the cursor on the line number this node is rendered on
