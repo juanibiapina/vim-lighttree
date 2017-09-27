@@ -1,4 +1,4 @@
-*NERDTree.txt* Lightweight tree explorer
+*LightTree.txt* Lightweight tree explorer
 
 
                  _     _       _     _  _____
