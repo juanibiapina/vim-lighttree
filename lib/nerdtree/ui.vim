@@ -24,31 +24,26 @@ function! s:UI._dumpHelp()
         let help  = "\" NERDTree (" . nerdtree#version() . ") quickhelp~\n"
         let help .= "\" ============================\n"
         let help .= "\" File node mappings~\n"
-        let help .= "\" ". (g:NERDTreeMouseMode ==# 3 ? "single" : "double") ."-click,\n"
         let help .= "\" <CR>,\n"
         if self.nerdtree.isTabTree()
             let help .= "\" ". g:NERDTreeMapActivateNode .": open in prev window\n"
         else
             let help .= "\" ". g:NERDTreeMapActivateNode .": open in current window\n"
         endif
-        let help .= "\" middle-click,\n"
         let help .= "\" ". g:NERDTreeMapOpenSplit .": open split\n"
         let help .= "\" ". g:NERDTreeMapOpenVSplit .": open vsplit\n"
 
         let help .= "\"\n\" ----------------------------\n"
         let help .= "\" Directory node mappings~\n"
-        let help .= "\" ". (g:NERDTreeMouseMode ==# 1 ? "double" : "single") ."-click,\n"
         let help .= "\" ". g:NERDTreeMapActivateNode .": open & close node\n"
         let help .= "\" ". g:NERDTreeMapOpenRecursively .": recursively open node\n"
         let help .= "\" ". g:NERDTreeMapCloseDir .": close parent of node\n"
         let help .= "\" ". g:NERDTreeMapCloseChildren .": close all child nodes of\n"
         let help .= "\"    current node recursively\n"
-        let help .= "\" middle-click,\n"
         let help .= "\" ". g:NERDTreeMapOpenExpl.": explore selected dir\n"
 
         let help .= "\"\n\" ----------------------------\n"
         let help .= "\" Bookmark table mappings~\n"
-        let help .= "\" double-click,\n"
         let help .= "\" ". g:NERDTreeMapActivateNode .": open bookmark\n"
         let help .= "\" ". g:NERDTreeMapDeleteBookmark .": delete bookmark\n"
 

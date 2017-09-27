@@ -41,9 +41,8 @@ CONTENTS                                                   *NERDTree-contents*
 What is this "NERD tree"??
 
 The NERD tree allows you to explore your filesystem and to open files and
-directories. It presents the filesystem to you in the form of a tree which you
-manipulate with the keyboard and/or mouse. It also allows you to perform
-simple filesystem operations.
+directories. It presents the filesystem to you in the form of a tree. It also
+allows you to perform simple filesystem operations.
 
 The following features and functionality are provided by the NERD tree:
     * Files and directories are displayed in a hierarchical tree structure
@@ -61,7 +60,6 @@ The following features and functionality are provided by the NERD tree:
         * Mappings to navigate around the tree
         * ...
     * Directories and files can be bookmarked.
-    * Most NERD tree navigation can also be done with the mouse
     * Filtering of tree content (can be toggled at runtime)
         * custom file filters to prevent e.g. vim backup files being displayed
         * optional displaying of hidden files (. files)
@@ -82,8 +80,7 @@ The following features and functionality are provided by the NERD tree:
     * By default the script overrides the default file browser (netrw), so if
       you :edit a directory a (slightly modified) NERD tree will appear in the
       current window
-    * A programmable menu system is provided (simulates right clicking on a
-      node)
+    * A programmable menu system is provided
         * one default menu plugin is provided to perform basic filesystem
           operations (create/delete/move/copy files/directories)
     * There's an API for adding your own keymappings
@@ -143,8 +140,8 @@ For example, you could use bookmarks to tag all of your project directories.
 2.2.1. The Bookmark Table                              *NERDTreeBookmarkTable*
 
 If the bookmark table is active (see |NERDTree-B| and
-|'NERDTreeShowBookmarks'|), it will be rendered above the tree. You can double
-click bookmarks or use the |NERDTree-o| mapping to activate them.
+|'NERDTreeShowBookmarks'|), it will be rendered above the tree. You can use the
+|NERDTree-o| mapping to activate them.
 
 ------------------------------------------------------------------------------
 2.2.2. Bookmark commands                            *NERDTreeBookmarkCommands*
@@ -218,9 +215,6 @@ X.......Recursively close all children of the current node.......|NERDTree-X|
 e.......Edit the current dir.....................................|NERDTree-e|
 
 <CR>...............same as |NERDTree-o|.
-double-click.......same as the |NERDTree-o| map.
-middle-click.......same as |NERDTree-i| for files, same as
-                   |NERDTree-e| for dirs.
 
 D.......Delete the current bookmark .............................|NERDTree-D|
 
@@ -519,8 +513,7 @@ Toggles whether the quickhelp is displayed.
 2.3. The NERD tree menu                                         *NERDTreeMenu*
 
 The NERD tree has a menu that can be programmed via the an API (see
-|NERDTreeMenuAPI|). The idea is to simulate the "right click" menus that most
-file explorers have.
+|NERDTreeMenuAPI|).
 
 The script comes with two default menu plugins: exec_menuitem.vim and
 fs_menu.vim. fs_menu.vim adds some basic filesystem operations to the menu for
@@ -575,8 +568,6 @@ NERD tree. These options should be set in your vimrc.
 |'NERDTreeBookmarksSort'|       Control how the Bookmark table is sorted.
 
 |'NERDTreeMarkBookmarks'|       Render bookmarked nodes with markers.
-
-|'NERDTreeMouseMode'|           Manage the interpretation of mouse clicks.
 
 |'NERDTreeShowBookmarks'|       Tells the NERD tree whether to display the
                                 bookmarks table on startup.
@@ -813,24 +804,6 @@ Default: 1
 If set to 1, Bookmarks will be specially marked whenever the NERDTree is
 rendered. Users of the |'NERDTreeMinimalUI'| setting may prefer to disable
 this setting for even less visual clutter.
-
-------------------------------------------------------------------------------
-                                                       *'NERDTreeMouseMode'*
-Values: 1, 2 or 3.
-Default: 1.
-
-If set to 1 then a double click on a node is required to open it.
-If set to 2 then a single click will open directory nodes, while a double
-click will still be required for file nodes.
-If set to 3 then a single click will open any node.
-
-Note: a double click anywhere on a line that a tree node is on will
-activate it, but all single-click activations must be done on name of the node
-itself. For example, if you have the following node: >
-    | | |-application.rb
-<
-then (to single click activate it) you must click somewhere in
-'application.rb'.
 
 ------------------------------------------------------------------------------
                                                      *'NERDTreeShowBookmarks'*

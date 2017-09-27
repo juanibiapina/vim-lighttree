@@ -7,14 +7,6 @@ let g:loaded_nerdtree_ui_glue_autoload = 1
 function! nerdtree#ui_glue#createDefaultBindings()
     let s = '<SNR>' . s:SID() . '_'
 
-    call NERDTreeAddKeyMap({ 'key': '<MiddleMouse>', 'scope': 'all', 'callback': s . 'handleMiddleMouse' })
-    call NERDTreeAddKeyMap({ 'key': '<LeftRelease>', 'scope': "all", 'callback': s."handleLeftClick" })
-    call NERDTreeAddKeyMap({ 'key': '<2-LeftMouse>', 'scope': "DirNode", 'callback': s."activateDirNode" })
-    call NERDTreeAddKeyMap({ 'key': '<2-LeftMouse>', 'scope': "FileNode", 'callback': s."activateFileNode" })
-    call NERDTreeAddKeyMap({ 'key': '<2-LeftMouse>', 'scope': "Bookmark", 'callback': s."activateBookmark" })
-    call NERDTreeAddKeyMap({ 'key': '<2-LeftMouse>', 'scope': "all", 'callback': s."activateAll" })
-
-
     call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapActivateNode, 'scope': "DirNode", 'callback': s."activateDirNode" })
     call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapActivateNode, 'scope': "FileNode", 'callback': s."activateFileNode" })
     call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapActivateNode, 'scope': "Bookmark", 'callback': s."activateBookmark" })
@@ -282,63 +274,6 @@ function! s:findAndRevealPath()
 
     if p.isUnixHiddenFile()
         let g:NERDTreeShowHidden = showhidden
-    endif
-endfunction
-
-"FUNCTION: s:handleLeftClick() {{{1
-"Checks if the click should open the current node
-function! s:handleLeftClick()
-    let currentNode = g:NERDTreeFileNode.GetSelected()
-    if currentNode != {}
-
-        "the dir arrows are multibyte chars, and vim's string functions only
-        "deal with single bytes - so split the line up with the hack below and
-        "take the line substring manually
-        let line = split(getline(line(".")), '\zs')
-        let startToCur = ""
-        for i in range(0,len(line)-1)
-            let startToCur .= line[i]
-        endfor
-
-        if currentNode.path.isDirectory
-            if startToCur =~# g:NERDTreeUI.MarkupReg() && startToCur =~# '[+~'.g:NERDTreeDirArrowExpandable.g:NERDTreeDirArrowCollapsible.'] \?$'
-                call currentNode.activate()
-                return
-            endif
-        endif
-
-        if (g:NERDTreeMouseMode ==# 2 && currentNode.path.isDirectory) || g:NERDTreeMouseMode ==# 3
-            let char = strpart(startToCur, strlen(startToCur)-1, 1)
-            if char !~# g:NERDTreeUI.MarkupReg()
-                if currentNode.path.isDirectory
-                    call currentNode.activate()
-                else
-                    call currentNode.activate({'where': 'p'})
-                endif
-                return
-            endif
-        endif
-    endif
-endfunction
-
-" FUNCTION: s:handleMiddleMouse() {{{1
-function! s:handleMiddleMouse()
-
-    " A middle mouse click does not automatically position the cursor as one
-    " would expect. Forcing the execution of a regular left mouse click here
-    " fixes this problem.
-    execute "normal! \<LeftMouse>"
-
-    let l:currentNode = g:NERDTreeFileNode.GetSelected()
-    if empty(l:currentNode)
-        call nerdtree#echoError('use the pointer to select a node')
-        return
-    endif
-
-    if l:currentNode.path.isDirectory
-        call l:currentNode.openExplorer()
-    else
-        call l:currentNode.open({'where': 'h'})
     endif
 endfunction
 
