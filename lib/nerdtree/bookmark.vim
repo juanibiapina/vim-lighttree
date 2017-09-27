@@ -239,9 +239,9 @@ endfunction
 "nerdtree: the tree to load open the bookmark in
 "
 "A dictionary containing the following keys (all optional):
-"  'where': Specifies whether the node should be opened in new split/tab or in
+"  'where': Specifies whether the node should be opened in new split or in
 "           the previous window. Can be either 'v' (vertical split), 'h'
-"           (horizontal split), 't' (new tab) or 'p' (previous window).
+"           (horizontal split) or 'p' (previous window).
 "  'stay': open the file, but keep the cursor in the tree win
 "
 function! s:Bookmark.open(nerdtree, ...)

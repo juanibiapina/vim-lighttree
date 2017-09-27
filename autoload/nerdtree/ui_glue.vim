@@ -414,14 +414,6 @@ function! s:openExplorer(node)
     call a:node.openExplorer()
 endfunction
 
-function! s:openInNewTab(target)
-    call a:target.activate({'where': 't'})
-endfunction
-
-function! s:openInNewTabSilent(target)
-    call a:target.activate({'where': 't', 'stay': 1})
-endfunction
-
 " FUNCTION: s:openNodeRecursively(node) {{{1
 function! s:openNodeRecursively(node)
     call nerdtree#echo("Recursively opening node. Please wait...")
