@@ -167,7 +167,7 @@ function! s:TreeFileNode.isVisible()
 endfunction
 
 function! s:TreeFileNode.isRoot()
-    if !g:NERDTree.ExistsForBuf()
+    if !exists("b:NERDTree")
         throw "NERDTree.NoTreeError: No tree exists for the current buffer"
     endif
 

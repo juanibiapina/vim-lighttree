@@ -55,13 +55,6 @@ function! s:NERDTree.CursorToTreeWin()
     call nerdtree#exec(g:NERDTree.GetWinNum() . "wincmd w")
 endfunction
 
-" Function: s:NERDTree.ExistsForBuffer()   {{{1
-" Returns 1 if a nerd tree root exists in the current buffer
-function! s:NERDTree.ExistsForBuf()
-    return exists("b:NERDTree")
-endfunction
-
-" Function: s:NERDTree.ExistsForTab()   {{{1
 " Returns 1 if a nerd tree root exists in the current tab
 function! s:NERDTree.ExistsForTab()
     if !exists("t:NERDTreeBufName")
