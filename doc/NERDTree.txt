@@ -83,14 +83,14 @@ The following features and functionality are provided by the NERD tree:
 ------------------------------------------------------------------------------
 2.1. Global Commands                                  *NERDTreeGlobalCommands*
 
-:NERDTree [<start-directory>]                                      *:NERDTree*
+:LightTree [<start-directory>]                                    *:LightTree*
     Opens a fresh NERD tree. The root of the tree depends on the argument
     given. There are 2 cases: If no argument is given, the current directory
     will be used.  If a directory is given, that will be used. For example: >
-        :NERDTree /home/marty/vim7/src
+        :LightTree /home/marty/vim7/src
 <
 
-:NERDTreeFind                                                  *:NERDTreeFind*
+:LightTreeFind                                                *:LightTreeFind*
     Find the current file in the tree.
 
     If no tree exists and the current file is under vim's CWD, then init a

@@ -271,8 +271,8 @@ function! s:refreshCurrent(node)
 endfunction
 
 function! nerdtree#ui_glue#setupCommands()
-    command! -n=? -complete=dir -bar NERDTree :call g:NERDTreeCreator.RestoreOrCreateBuffer('<args>')
-    command! -n=0 -bar NERDTreeFind call s:findAndRevealPath()
+    command! -n=? -complete=dir -bar LightTree :call g:NERDTreeCreator.RestoreOrCreateBuffer('<args>')
+    command! -n=0 -bar LightTreeFind call s:findAndRevealPath()
 endfunction
 
 " Function: s:SID()   {{{1
