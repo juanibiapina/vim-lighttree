@@ -85,9 +85,6 @@ function! s:UI._dumpHelp()
         let help .= "\"    the NERDTree window\n"
         let help .= "\" ". g:NERDTreeMapHelp .": toggle help\n"
         silent! put =help
-    elseif !self.isMinimal()
-        let help ="\" Press ". g:NERDTreeMapHelp ." for help\n"
-        silent! put =help
     endif
 endfunction
 
@@ -259,11 +256,6 @@ function! s:UI.isIgnoreFilterEnabled()
     return self._ignoreEnabled == 1
 endfunction
 
-"FUNCTION: s:UI.isMinimal() {{{1
-function! s:UI.isMinimal()
-    return g:NERDTreeMinimalUI
-endfunction
-
 "FUNCTION: s:UI.MarkupReg() {{{1
 function! s:UI.MarkupReg()
     return '^\(['.g:NERDTreeDirArrowExpandable.g:NERDTreeDirArrowCollapsible.'] \| \+['.g:NERDTreeDirArrowExpandable.g:NERDTreeDirArrowCollapsible.'] \| \+\)'
@@ -358,18 +350,6 @@ function! s:UI.render()
     silent 1,$delete _
 
     call self._dumpHelp()
-
-    "delete the blank line before the help and add one after it
-    if !self.isMinimal()
-        call setline(line(".")+1, "")
-        call cursor(line(".")+1, col("."))
-    endif
-
-    "add the 'up a dir' line
-    if !self.isMinimal()
-        call setline(line(".")+1, s:UI.UpDirLine())
-        call cursor(line(".")+1, col("."))
-    endif
 
     "draw the header line
     let header = self.nerdtree.root.path.str({'format': 'UI', 'truncateTo': winwidth(0)})

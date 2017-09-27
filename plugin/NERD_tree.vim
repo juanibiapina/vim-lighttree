@@ -50,7 +50,6 @@ call s:initVariable("g:NERDTreeNaturalSort", 0)
 call s:initVariable("g:NERDTreeSortHiddenFirst", 1)
 call s:initVariable("g:NERDTreeChDirMode", 0)
 call s:initVariable("g:NERDTreeCreatePrefix", "silent")
-call s:initVariable("g:NERDTreeMinimalUI", 0)
 if !exists("g:NERDTreeIgnore")
     let g:NERDTreeIgnore = ['\~$']
 endif

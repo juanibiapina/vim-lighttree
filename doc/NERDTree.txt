@@ -457,8 +457,6 @@ NERD tree. These options should be set in your vimrc.
 |'NERDTreeWinSize'|             Sets the window size when the NERD tree is
                                 opened.
 
-|'NERDTreeMinimalUI'|           Disables display of the 'Press ? for help' text.
-
 |'NERDTreeCascadeSingleChildDir'|
                                 Collapses on the same line directories that
                                 have only one child directory.
@@ -741,17 +739,6 @@ Values: a positive integer.
 Default: 31.
 
 This option is used to change the size of the NERD tree when it is loaded.
-
-------------------------------------------------------------------------------
-                                                         *'NERDTreeMinimalUI'*
-Values: 0 or 1
-Default: 0
-
-This options disables the 'Press ? for help' text. Use one of the following
-lines to set this option: >
-    let NERDTreeMinimalUI=0
-    let NERDTreeMinimalUI=1
-<
 
 ------------------------------------------------------------------------------
                                              *'NERDTreeCascadeSingleChildDir'*
