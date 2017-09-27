@@ -134,7 +134,6 @@ endfunction
 function! s:displayHelp()
     call b:NERDTree.ui.toggleHelp()
     call b:NERDTree.render()
-    call b:NERDTree.ui.centerView()
 endfunction
 
 function! s:findAndRevealPath()
@@ -195,8 +194,6 @@ function! s:jumpToChild(currentNode, direction)
     endif
 
     call targetNode.putCursorHere(1, 0)
-
-    call b:NERDTree.ui.centerView()
 endfunction
 
 
@@ -234,7 +231,6 @@ function! s:jumpToParent(node)
 
     if !empty(l:parent)
         call l:parent.putCursorHere(1, 0)
-        call b:NERDTree.ui.centerView()
     else
         call nerdtree#echo('could not jump to parent node')
     endif
@@ -243,7 +239,6 @@ endfunction
 " moves the cursor to the root node
 function! s:jumpToRoot()
     call b:NERDTree.root.putCursorHere(1, 0)
-    call b:NERDTree.ui.centerView()
 endfunction
 
 function! s:jumpToNextSibling(node)
@@ -264,7 +259,6 @@ function! s:jumpToSibling(currentNode, forward)
 
     if !empty(sibling)
         call sibling.putCursorHere(1, 0)
-        call b:NERDTree.ui.centerView()
     endif
 endfunction
 

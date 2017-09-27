@@ -381,12 +381,6 @@ NERD tree. These options should be set in your vimrc.
 
 |'loaded_nerd_tree'|            Turns off the script.
 
-|'NERDTreeAutoCenter'|          Controls whether the NERD tree window centers
-                                when the cursor moves within a specified
-                                distance to the top/bottom of the window.
-
-|'NERDTreeAutoCenterThreshold'| Controls the sensitivity of autocentering.
-
 |'NERDTreeCaseSensitiveSort'|   Tells the NERD tree whether to be case
                                 sensitive or not when sorting nodes.
 
@@ -453,28 +447,6 @@ If this plugin is making you feel homicidal, it may be a good idea to turn it
 off with this line in your vimrc: >
     let loaded_nerd_tree=1
 <
-
-------------------------------------------------------------------------------
-                                                        *'NERDTreeAutoCenter'*
-Values: 0 or 1.
-Default: 1
-
-If set to 1, the NERD tree window will center around the cursor if it moves to
-within |'NERDTreeAutoCenterThreshold'| lines of the top/bottom of the window.
-
-This is ONLY done in response to tree navigation mappings,
-i.e. |NERDTree-J| |NERDTree-K| |NERDTree-C-J| |NERDTree-C-K| |NERDTree-p|
-|NERDTree-P|
-
-The centering is done with a |zz| operation.
-
-------------------------------------------------------------------------------
-                                               *'NERDTreeAutoCenterThreshold'*
-Values: Any natural number.
-Default: 3
-
-This option controls the "sensitivity" of the NERD tree auto centering. See
-|'NERDTreeAutoCenter'| for details.
 
 ------------------------------------------------------------------------------
                                                  *'NERDTreeCaseSensitiveSort'*

@@ -1,19 +1,6 @@
 let s:UI = {}
 let g:NERDTreeUI = s:UI
 
-"centers the nerd tree window around the cursor (provided the nerd tree
-"options permit)
-function! s:UI.centerView()
-    if g:NERDTreeAutoCenter
-        let current_line = winline()
-        let lines_to_top = current_line
-        let lines_to_bottom = winheight(g:NERDTree.GetWinNum()) - current_line
-        if lines_to_top < g:NERDTreeAutoCenterThreshold || lines_to_bottom < g:NERDTreeAutoCenterThreshold
-            normal! zz
-        endif
-    endif
-endfunction
-
 "prints out the quick help
 function! s:UI._dumpHelp()
     if self.getShowHelp()
@@ -374,21 +361,18 @@ endfunction
 function! s:UI.toggleIgnoreFilter()
     let self._ignoreEnabled = !self._ignoreEnabled
     call self.renderViewSavingPosition()
-    call self.centerView()
 endfunction
 
 " toggles the display of hidden files
 function! s:UI.toggleShowFiles()
     let self._showFiles = !self._showFiles
     call self.renderViewSavingPosition()
-    call self.centerView()
 endfunction
 
 " toggles the display of hidden files
 function! s:UI.toggleShowHidden()
     let self._showHidden = !self._showHidden
     call self.renderViewSavingPosition()
-    call self.centerView()
 endfunction
 
 function! s:UI.UpDirLine()
