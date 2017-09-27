@@ -328,7 +328,6 @@ function! nerdtree#ui_glue#setupCommands()
     command! -n=0 -bar NERDTreeClose :call g:NERDTree.Close()
     command! -n=0 -bar NERDTreeFind call s:findAndRevealPath()
     command! -n=0 -bar NERDTreeFocus call NERDTreeFocus()
-    command! -n=0 -bar NERDTreeCWD call NERDTreeCWD()
 endfunction
 
 " Function: s:SID()   {{{1

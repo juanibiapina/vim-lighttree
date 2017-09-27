@@ -169,11 +169,6 @@ function! NERDTreeFocus()
     endif
 endfunction
 
-function! NERDTreeCWD()
-    call NERDTreeFocus()
-    call nerdtree#ui_glue#chRootCwd()
-endfunction
-
 function! NERDTreeAddPathFilter(callback)
     call g:NERDTree.AddPathFilter(a:callback)
 endfunction
