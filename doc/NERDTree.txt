@@ -92,10 +92,6 @@ The following features and functionality are provided by the NERD tree:
         :NERDTree /home/marty/vim7/src
 <
 
-:NERDTreeFocus                                                *:NERDTreeFocus*
-    Opens (or reopens) the NERD Tree if it is not currently visible;
-    otherwise, the cursor is moved to the already-open NERD Tree.
-
 :NERDTreeClose                                                *:NERDTreeClose*
     Close the NERD tree in this tab.
 

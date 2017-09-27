@@ -161,14 +161,6 @@ function! NERDTreeRender()
     call nerdtree#renderView()
 endfunction
 
-function! NERDTreeFocus()
-    if g:NERDTree.IsOpen()
-        call g:NERDTree.CursorToTreeWin()
-    else
-        call g:NERDTreeCreator.ToggleTabTree("")
-    endif
-endfunction
-
 function! NERDTreeAddPathFilter(callback)
     call g:NERDTree.AddPathFilter(a:callback)
 endfunction
