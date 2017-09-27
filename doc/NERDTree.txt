@@ -67,9 +67,7 @@ The following features and functionality are provided by the NERD tree:
         * If you revisit a part of the tree that you left earlier in your
           session, the directory nodes will be opened/closed as you left them
     * The script remembers the cursor position and window position in the NERD
-      tree so you can toggle it off (or just close the tree window) and then
-      reopen it (with NERDTreeToggle) the NERD tree window will appear exactly
-      as you left it
+      tree, so it will always appear exactly as you left it.
     * You can have a separate NERD tree for each tab, share trees across tabs,
       or a mix of both.
     * By default the script overrides the default file browser (netrw), so if
@@ -93,11 +91,6 @@ The following features and functionality are provided by the NERD tree:
     will be used.  If a directory is given, that will be used. For example: >
         :NERDTree /home/marty/vim7/src
 <
-
-:NERDTreeToggle [<start-directory>]                          *:NERDTreeToggle*
-    If a NERD tree already exists for this tab, it is reopened and rendered
-    again. If no NERD tree exists for this tab then this command acts the
-    same as the |:NERDTree| command.
 
 :NERDTreeFocus                                                *:NERDTreeFocus*
     Opens (or reopens) the NERD Tree if it is not currently visible;
