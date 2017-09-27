@@ -72,7 +72,6 @@ endfunction
 "Scope is determined as follows:
 "   * if the cursor is on a dir node then "DirNode"
 "   * if the cursor is on a file node then "FileNode"
-"   * if the cursor is on a bookmark then "Bookmark"
 "
 "If a keymap has the scope of "all" then it will be called if no other keymap
 "is found for a:key and the scope.
@@ -103,15 +102,6 @@ function! s:KeyMap.Invoke(key)
             return km.invoke(node)
         endif
 
-    endif
-
-    "try bookmark
-    let bm = g:NERDTreeBookmark.GetSelected()
-    if !empty(bm)
-        let km = s:KeyMap.FindFor(a:key, "Bookmark")
-        if !empty(km)
-            return km.invoke(bm)
-        endif
     endif
 
     "try all

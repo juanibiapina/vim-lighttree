@@ -27,35 +27,21 @@ exec 'syn match NERDTreeOpenable #' . escape(g:NERDTreeDirArrowExpandable, '~') 
 
 let s:dirArrows = escape(g:NERDTreeDirArrowCollapsible, '~]\-').escape(g:NERDTreeDirArrowExpandable, '~]\-')
 exec 'syn match NERDTreeDir #[^'.s:dirArrows.' ].*/#'
-syn match NERDTreeExecFile  #^ .*\*\($\| \)# contains=NERDTreeRO,NERDTreeBookmark
-exec 'syn match NERDTreeFile  #^[^"\.'.s:dirArrows.'] *[^'.s:dirArrows.']*# contains=NERDTreeLink,NERDTreeRO,NERDTreeBookmark,NERDTreeExecFile'
+syn match NERDTreeExecFile  #^ .*\*\($\| \)# contains=NERDTreeRO
+exec 'syn match NERDTreeFile  #^[^"\.'.s:dirArrows.'] *[^'.s:dirArrows.']*# contains=NERDTreeLink,NERDTreeRO,NERDTreeExecFile'
 
 "highlighting for readonly files
-exec 'syn match NERDTreeRO # *\zs.*\ze \['.g:NERDTreeGlyphReadOnly.'\]# contains=NERDTreeIgnore,NERDTreeBookmark,NERDTreeFile'
+exec 'syn match NERDTreeRO # *\zs.*\ze \['.g:NERDTreeGlyphReadOnly.'\]# contains=NERDTreeIgnore,NERDTreeFile'
 
 syn match NERDTreeFlags #^ *\zs\[.\]# containedin=NERDTreeFile,NERDTreeExecFile
 syn match NERDTreeFlags #\[.\]# containedin=NERDTreeDir
 
 syn match NERDTreeCWD #^[</].*$#
 
-"highlighting for bookmarks
-syn match NERDTreeBookmark # {.*}#hs=s+1
-
-"highlighting for the bookmarks table
-syn match NERDTreeBookmarksLeader #^>#
-syn match NERDTreeBookmarksHeader #^>-\+Bookmarks-\+$# contains=NERDTreeBookmarksLeader
-syn match NERDTreeBookmarkName #^>.\{-} #he=e-1 contains=NERDTreeBookmarksLeader
-syn match NERDTreeBookmark #^>.*$# contains=NERDTreeBookmarksLeader,NERDTreeBookmarkName,NERDTreeBookmarksHeader
-
 hi def link NERDTreePart Special
 hi def link NERDTreePartFile Type
 hi def link NERDTreeExecFile Title
 hi def link NERDTreeDirSlash Identifier
-
-hi def link NERDTreeBookmarksHeader statement
-hi def link NERDTreeBookmarksLeader ignore
-hi def link NERDTreeBookmarkName Identifier
-hi def link NERDTreeBookmark normal
 
 hi def link NERDTreeHelp String
 hi def link NERDTreeHelpKey Identifier
@@ -76,7 +62,6 @@ hi def link NERDTreeOpenable Directory
 hi def link NERDTreeClosable Directory
 hi def link NERDTreeIgnore ignore
 hi def link NERDTreeRO WarningMsg
-hi def link NERDTreeBookmark Statement
 hi def link NERDTreeFlags Number
 
 hi def link NERDTreeCurrentNode Search

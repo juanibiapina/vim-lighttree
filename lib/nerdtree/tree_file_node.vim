@@ -10,28 +10,6 @@ function! s:TreeFileNode.activate()
     call self.open()
 endfunction
 
-"FUNCTION: TreeFileNode.bookmark(name) {{{1
-"bookmark this node with a:name
-function! s:TreeFileNode.bookmark(name)
-
-    "if a bookmark exists with the same name and the node is cached then save
-    "it so we can update its display string
-    let oldMarkedNode = {}
-    try
-        let oldMarkedNode = g:NERDTreeBookmark.GetNodeForName(a:name, 1, self.getNerdtree())
-    catch /^NERDTree.BookmarkNotFoundError/
-    catch /^NERDTree.BookmarkedNodeNotFoundError/
-    endtry
-
-    call g:NERDTreeBookmark.AddBookmark(a:name, self.path)
-    call self.path.cacheDisplayString()
-    call g:NERDTreeBookmark.Write()
-
-    if !empty(oldMarkedNode)
-        call oldMarkedNode.path.cacheDisplayString()
-    endif
-endfunction
-
 "FUNCTION: TreeFileNode.cacheParent() {{{1
 "initializes self.parent if it isnt already
 function! s:TreeFileNode.cacheParent()
@@ -42,16 +20,6 @@ function! s:TreeFileNode.cacheParent()
         endif
         let self.parent = s:TreeFileNode.New(parentPath, self.getNerdtree())
     endif
-endfunction
-
-"FUNCTION: TreeFileNode.clearBookmarks() {{{1
-function! s:TreeFileNode.clearBookmarks()
-    for i in g:NERDTreeBookmark.Bookmarks()
-        if i.path.equals(self.path)
-            call i.delete()
-        end
-    endfor
-    call self.path.cacheDisplayString()
 endfunction
 
 "FUNCTION: TreeFileNode.copy(dest) {{{1

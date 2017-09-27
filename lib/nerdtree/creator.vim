@@ -11,15 +11,6 @@ function! s:Creator._bindMappings()
     nnoremap <silent> <buffer> <cr> :call nerdtree#ui_glue#invokeKeyMap(g:NERDTreeMapActivateNode)<cr>
 
     call g:NERDTreeKeyMap.BindAll()
-
-    command! -buffer -nargs=? Bookmark :call nerdtree#ui_glue#bookmarkNode('<args>')
-    command! -buffer -complete=customlist,nerdtree#completeBookmarks -nargs=1 RevealBookmark :call nerdtree#ui_glue#revealBookmark('<args>')
-    command! -buffer -complete=customlist,nerdtree#completeBookmarks -nargs=1 OpenBookmark call nerdtree#ui_glue#openBookmark('<args>')
-    command! -buffer -complete=customlist,nerdtree#completeBookmarks -nargs=* ClearBookmarks call nerdtree#ui_glue#clearBookmarks('<args>')
-    command! -buffer -complete=customlist,nerdtree#completeBookmarks -nargs=+ BookmarkToRoot call g:NERDTreeBookmark.ToRoot('<args>', b:NERDTree)
-    command! -buffer -nargs=0 ClearAllBookmarks call g:NERDTreeBookmark.ClearAll() <bar> call b:NERDTree.render()
-    command! -buffer -nargs=0 ReadBookmarks call g:NERDTreeBookmark.CacheBookmarks(0) <bar> call b:NERDTree.render()
-    command! -buffer -nargs=0 WriteBookmarks call g:NERDTreeBookmark.Write()
 endfunction
 
 function! s:Creator._broadcastInitEvent()
@@ -38,11 +29,11 @@ function! s:Creator.CreateTabTree(name)
 endfunction
 
 "FUNCTION: s:Creator.createTabTree(a:name) {{{1
-"name: the name of a bookmark or a directory
+"name: the name of a directory
 function! s:Creator.createTabTree(name)
     let path = self._pathForString(a:name)
 
-    "abort if exception was thrown (bookmark/dir doesn't exist)
+    "abort if exception was thrown (dir doesn't exist)
     if empty(path)
         return
     endif
@@ -169,27 +160,25 @@ function! s:Creator._nextBufferNumber()
 endfunction
 
 "FUNCTION: s:Creator._pathForString(str) {{{1
-"find a bookmark or adirectory for the given string
+"find a directory for the given string
 function! s:Creator._pathForString(str)
     let path = {}
-    if g:NERDTreeBookmark.BookmarkExistsFor(a:str)
-        let path = g:NERDTreeBookmark.BookmarkFor(a:str).path
-    else
-        let dir = a:str ==# '' ? getcwd() : a:str
 
-        "hack to get an absolute path if a relative path is given
-        if dir =~# '^\.'
-            let dir = getcwd() . g:NERDTreePath.Slash() . dir
-        endif
-        let dir = g:NERDTreePath.Resolve(dir)
+    let dir = a:str ==# '' ? getcwd() : a:str
 
-        try
-            let path = g:NERDTreePath.New(dir)
-        catch /^NERDTree.InvalidArgumentsError/
-            call nerdtree#echo("No bookmark or directory found for: " . a:str)
-            return {}
-        endtry
+    "hack to get an absolute path if a relative path is given
+    if dir =~# '^\.'
+        let dir = getcwd() . g:NERDTreePath.Slash() . dir
     endif
+    let dir = g:NERDTreePath.Resolve(dir)
+
+    try
+        let path = g:NERDTreePath.New(dir)
+    catch /^NERDTree.InvalidArgumentsError/
+        call nerdtree#echo("No directory found for: " . a:str)
+        return {}
+    endtry
+
     if !path.isDirectory
         let path = path.getParent()
     endif

@@ -41,11 +41,6 @@ function! s:UI._dumpHelp()
         let help .= "\" ". g:NERDTreeMapOpenExpl.": explore selected dir\n"
 
         let help .= "\"\n\" ----------------------------\n"
-        let help .= "\" Bookmark table mappings~\n"
-        let help .= "\" ". g:NERDTreeMapActivateNode .": open bookmark\n"
-        let help .= "\" ". g:NERDTreeMapDeleteBookmark .": delete bookmark\n"
-
-        let help .= "\"\n\" ----------------------------\n"
         let help .= "\" Tree navigation mappings~\n"
         let help .= "\" ". g:NERDTreeMapJumpRoot .": go to root\n"
         let help .= "\" ". g:NERDTreeMapJumpParent .": go to parent\n"
@@ -73,7 +68,6 @@ function! s:UI._dumpHelp()
         let help .= "\" ". g:NERDTreeMapToggleHidden .": hidden files (" . (self.getShowHidden() ? "on" : "off") . ")\n"
         let help .= "\" ". g:NERDTreeMapToggleFilters .": file filters (" . (self.isIgnoreFilterEnabled() ? "on" : "off") . ")\n"
         let help .= "\" ". g:NERDTreeMapToggleFiles .": files (" . (self.getShowFiles() ? "on" : "off") . ")\n"
-        let help .= "\" ". g:NERDTreeMapToggleBookmarks .": bookmarks (" . (self.getShowBookmarks() ? "on" : "off") . ")\n"
 
         "add quickhelp entries for each custom key map
         let help .= "\"\n\" ----------------------------\n"
@@ -90,14 +84,6 @@ function! s:UI._dumpHelp()
         let help .= "\" ". g:NERDTreeMapToggleZoom .": Zoom (maximize-minimize)\n"
         let help .= "\"    the NERDTree window\n"
         let help .= "\" ". g:NERDTreeMapHelp .": toggle help\n"
-        let help .= "\"\n\" ----------------------------\n"
-        let help .= "\" Bookmark commands~\n"
-        let help .= "\" :Bookmark [<name>]\n"
-        let help .= "\" :BookmarkToRoot <name>\n"
-        let help .= "\" :RevealBookmark <name>\n"
-        let help .= "\" :OpenBookmark <name>\n"
-        let help .= "\" :ClearBookmarks [<names>]\n"
-        let help .= "\" :ClearAllBookmarks\n"
         silent! put =help
     elseif !self.isMinimal()
         let help ="\" Press ". g:NERDTreeMapHelp ." for help\n"
@@ -114,7 +100,6 @@ function! s:UI.New(nerdtree)
     let newObj._ignoreEnabled = 1
     let newObj._showFiles = g:NERDTreeShowFiles
     let newObj._showHidden = g:NERDTreeShowHidden
-    let newObj._showBookmarks = g:NERDTreeShowBookmarks
 
     return newObj
 endfunction
@@ -239,11 +224,6 @@ function! s:UI.getRootLineNum()
     return rootLine
 endfunction
 
-"FUNCTION: s:UI.getShowBookmarks() {{{1
-function! s:UI.getShowBookmarks()
-    return self._showBookmarks
-endfunction
-
 "FUNCTION: s:UI.getShowFiles() {{{1
 function! s:UI.getShowFiles()
     return self._showFiles
@@ -287,27 +267,6 @@ endfunction
 "FUNCTION: s:UI.MarkupReg() {{{1
 function! s:UI.MarkupReg()
     return '^\(['.g:NERDTreeDirArrowExpandable.g:NERDTreeDirArrowCollapsible.'] \| \+['.g:NERDTreeDirArrowExpandable.g:NERDTreeDirArrowCollapsible.'] \| \+\)'
-endfunction
-
-"FUNCTION: s:UI._renderBookmarks {{{1
-function! s:UI._renderBookmarks()
-
-    if !self.isMinimal()
-        call setline(line(".")+1, ">----------Bookmarks----------")
-        call cursor(line(".")+1, col("."))
-    endif
-
-    if g:NERDTreeBookmarksSort == 1 || g:NERDTreeBookmarksSort == 2
-        call g:NERDTreeBookmark.SortBookmarksList()
-    endif
-
-    for i in g:NERDTreeBookmark.Bookmarks()
-        call setline(line(".")+1, i.str())
-        call cursor(line(".")+1, col("."))
-    endfor
-
-    call setline(line(".")+1, '')
-    call cursor(line(".")+1, col("."))
 endfunction
 
 "FUNCTION: s:UI.restoreScreenState() {{{1
@@ -363,9 +322,6 @@ function! s:UI._stripMarkup(line, removeLeadingSpaces)
     "strip off any read only flag
     let line = substitute (line, ' \['.g:NERDTreeGlyphReadOnly.'\]', "","")
 
-    "strip off any bookmark flags
-    let line = substitute (line, ' {[^}]*}', "","")
-
     "strip off any executable flags
     let line = substitute (line, '*\ze\($\| \)', "","")
 
@@ -407,10 +363,6 @@ function! s:UI.render()
     if !self.isMinimal()
         call setline(line(".")+1, "")
         call cursor(line(".")+1, col("."))
-    endif
-
-    if self.getShowBookmarks()
-        call self._renderBookmarks()
     endif
 
     "add the 'up a dir' line
@@ -471,19 +423,6 @@ endfunction
 function! s:UI.toggleIgnoreFilter()
     let self._ignoreEnabled = !self._ignoreEnabled
     call self.renderViewSavingPosition()
-    call self.centerView()
-endfunction
-
-" FUNCTION: s:UI.toggleShowBookmarks() {{{1
-" toggles the display of bookmarks
-function! s:UI.toggleShowBookmarks()
-    let self._showBookmarks = !self._showBookmarks
-    if self.getShowBookmarks()
-        call self.nerdtree.render()
-        call g:NERDTree.CursorToBookmarkTable()
-    else
-        call self.renderViewSavingPosition()
-    endif
     call self.centerView()
 endfunction
 

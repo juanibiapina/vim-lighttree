@@ -31,30 +31,12 @@ function! s:Path.AbsolutePathFor(str)
     return toReturn
 endfunction
 
-" FUNCTION: Path.bookmarkNames() {{{1
-function! s:Path.bookmarkNames()
-    if !exists("self._bookmarkNames")
-        call self.cacheDisplayString()
-    endif
-    return self._bookmarkNames
-endfunction
-
 " FUNCTION: Path.cacheDisplayString() {{{1
 function! s:Path.cacheDisplayString() abort
     let self.cachedDisplayString = self.getLastPathComponent(1)
 
     if self.isExecutable
         let self.cachedDisplayString = self.cachedDisplayString . '*'
-    endif
-
-    let self._bookmarkNames = []
-    for i in g:NERDTreeBookmark.Bookmarks()
-        if i.path.equals(self)
-            call add(self._bookmarkNames, i.name)
-        endif
-    endfor
-    if !empty(self._bookmarkNames) && g:NERDTreeMarkBookmarks == 1
-        let self.cachedDisplayString .= ' {' . join(self._bookmarkNames) . '}'
     endif
 
     if self.isSymLink
@@ -249,12 +231,6 @@ function! s:Path.delete()
             throw "NERDTree.PathDeletionError: Could not delete file: '" . self.str() . "'"
         endif
     endif
-
-    "delete all bookmarks for this path
-    for i in self.bookmarkNames()
-        let bookmark = g:NERDTreeBookmark.BookmarkFor(i)
-        call bookmark.delete()
-    endfor
 endfunction
 
 " FUNCTION: Path.displayString() {{{1
@@ -642,12 +618,6 @@ function! s:Path.rename(newPath)
         throw "NERDTree.PathRenameError: Could not rename: '" . self.str() . "'" . 'to:' . a:newPath
     endif
     call self.readInfoFromDisk(a:newPath)
-
-    for i in self.bookmarkNames()
-        let b = g:NERDTreeBookmark.BookmarkFor(i)
-        call b.setPath(copy(self))
-    endfor
-    call g:NERDTreeBookmark.Write()
 endfunction
 
 " FUNCTION: Path.str() {{{1

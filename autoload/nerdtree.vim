@@ -46,12 +46,6 @@ function! s:reuseWin(dir) abort
     return 0
 endfunction
 
-" FUNCTION: nerdtree#completeBookmarks(A,L,P) {{{2
-" completion function for the bookmark commands
-function! nerdtree#completeBookmarks(A,L,P)
-    return filter(g:NERDTreeBookmark.BookmarkNames(), 'v:val =~# "^' . a:A . '"')
-endfunction
-
 "FUNCTION: nerdtree#compareNodes(dir) {{{2
 function! nerdtree#compareNodes(n1, n2)
     return a:n1.path.compareTo(a:n2.path)
@@ -114,7 +108,6 @@ function! nerdtree#loadClassFiles()
     runtime lib/nerdtree/menu_controller.vim
     runtime lib/nerdtree/menu_item.vim
     runtime lib/nerdtree/key_map.vim
-    runtime lib/nerdtree/bookmark.vim
     runtime lib/nerdtree/tree_file_node.vim
     runtime lib/nerdtree/tree_dir_node.vim
     runtime lib/nerdtree/opener.vim
@@ -128,7 +121,6 @@ endfunction
 
 " FUNCTION: nerdtree#postSourceActions() {{{2
 function! nerdtree#postSourceActions()
-    call g:NERDTreeBookmark.CacheBookmarks(1)
     call nerdtree#ui_glue#createDefaultBindings()
 
     "load all nerdtree plugins

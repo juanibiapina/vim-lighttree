@@ -9,7 +9,6 @@ function! nerdtree#ui_glue#createDefaultBindings()
 
     call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapActivateNode, 'scope': "DirNode", 'callback': s."activateDirNode" })
     call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapActivateNode, 'scope': "FileNode", 'callback': s."activateFileNode" })
-    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapActivateNode, 'scope': "Bookmark", 'callback': s."activateBookmark" })
     call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapActivateNode, 'scope': "all", 'callback': s."activateAll" })
 
     call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapOpenRecursively, 'scope': "DirNode", 'callback': s."openNodeRecursively" })
@@ -32,7 +31,6 @@ function! nerdtree#ui_glue#createDefaultBindings()
     call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapToggleHidden, 'scope': "all", 'callback': s."toggleShowHidden" })
     call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapToggleFilters, 'scope': "all", 'callback': s."toggleIgnoreFilter" })
     call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapToggleFiles, 'scope': "all", 'callback': s."toggleShowFiles" })
-    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapToggleBookmarks, 'scope': "all", 'callback': s."toggleShowBookmarks" })
 
     call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapCloseDir, 'scope': "Node", 'callback': s."closeCurrentDir" })
     call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapCloseChildren, 'scope': "DirNode", 'callback': s."closeChildren" })
@@ -47,8 +45,6 @@ function! nerdtree#ui_glue#createDefaultBindings()
     call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapJumpPrevSibling, 'scope': "Node", 'callback': s."jumpToPrevSibling" })
 
     call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapOpenExpl, 'scope': "DirNode", 'callback': s."openExplorer" })
-
-    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapDeleteBookmark, 'scope': "Bookmark", 'callback': s."deleteBookmark" })
 endfunction
 
 
@@ -73,32 +69,6 @@ endfunction
 "handle the user activating a tree node
 function! s:activateFileNode(node)
     call a:node.activate()
-endfunction
-
-"FUNCTION: s:activateBookmark() {{{1
-"handle the user activating a bookmark
-function! s:activateBookmark(bm)
-    call a:bm.activate(b:NERDTree)
-endfunction
-
-" FUNCTION: nerdtree#ui_glue#bookmarkNode(name) {{{1
-" Associate the current node with the given name
-function! nerdtree#ui_glue#bookmarkNode(...)
-    let currentNode = g:NERDTreeFileNode.GetSelected()
-    if currentNode != {}
-        let name = a:1
-        if empty(name)
-            let name = currentNode.path.getLastPathComponent(0)
-        endif
-        try
-            call currentNode.bookmark(name)
-            call b:NERDTree.render()
-        catch /^NERDTree.IllegalBookmarkNameError/
-            call nerdtree#echo("bookmark names must not contain spaces")
-        endtry
-    else
-        call nerdtree#echo("select a node first")
-    endif
 endfunction
 
 " FUNCTION: s:chCwd(node) {{{1
@@ -129,23 +99,6 @@ function! nerdtree#ui_glue#chRootCwd()
        return
     endif
     call s:chRoot(g:NERDTreeDirNode.New(cwd, b:NERDTree))
-endfunction
-
-" FUNCTION: nnerdtree#ui_glue#clearBookmarks(bookmarks) {{{1
-function! nerdtree#ui_glue#clearBookmarks(bookmarks)
-    if a:bookmarks ==# ''
-        let currentNode = g:NERDTreeFileNode.GetSelected()
-        if currentNode != {}
-            call currentNode.clearBookmarks()
-        endif
-    else
-        for name in split(a:bookmarks, ' ')
-            let bookmark = g:NERDTreeBookmark.BookmarkFor(name)
-            call bookmark.delete()
-        endfor
-    endif
-    call b:NERDTree.root.refresh()
-    call b:NERDTree.render()
 endfunction
 
 " FUNCTION: s:closeChildren(node) {{{1
@@ -189,26 +142,6 @@ function! s:closeTreeWindow()
             call nerdtree#echo("Cannot close last window")
         endif
     endif
-endfunction
-
-" FUNCTION: s:deleteBookmark(bm) {{{1
-" if the cursor is on a bookmark, prompt to delete
-function! s:deleteBookmark(bm)
-    echo  "Are you sure you wish to delete the bookmark:\n\"" . a:bm.name . "\" (yN):"
-
-    if  nr2char(getchar()) ==# 'y'
-        try
-            call a:bm.delete()
-            call b:NERDTree.root.refresh()
-            call b:NERDTree.render()
-            redraw
-        catch /^NERDTree/
-            call nerdtree#echoWarning("Could not remove bookmark")
-        endtry
-    else
-        call nerdtree#echo("delete aborted" )
-    endif
-
 endfunction
 
 " FUNCTION: s:displayHelp() {{{1
@@ -376,20 +309,6 @@ function! s:jumpToSibling(currentNode, forward)
     endif
 endfunction
 
-" FUNCTION: nerdtree#ui_glue#openBookmark(name) {{{1
-" Open the Bookmark that has the specified name. This function provides the
-" implementation for the ":OpenBookmark" command.
-function! nerdtree#ui_glue#openBookmark(name)
-    try
-        let l:bookmark = g:NERDTreeBookmark.BookmarkFor(a:name)
-    catch /^NERDTree.BookmarkNotFoundError/
-        call nerdtree#echoError('bookmark "' . a:name . '" not found')
-        return
-    endtry
-
-    call l:bookmark.open(b:NERDTree)
-endfunction
-
 " FUNCTION: s:openExplorer(node) {{{1
 function! s:openExplorer(node)
     call a:node.openExplorer()
@@ -402,17 +321,6 @@ function! s:openNodeRecursively(node)
     call b:NERDTree.render()
     redraw
     call nerdtree#echo("Recursively opening node. Please wait... DONE")
-endfunction
-
-" FUNCTION: nerdtree#ui_glue#revealBookmark(name) {{{1
-" put the cursor on the node associate with the given name
-function! nerdtree#ui_glue#revealBookmark(name)
-    try
-        let targetNode = g:NERDTreeBookmark.GetNodeForName(a:name, 0, b:NERDTree)
-        call targetNode.putCursorHere(0, 1)
-    catch /^NERDTree.BookmarkNotFoundError/
-        call nerdtree#echo("Bookmark isnt cached under the current root")
-    endtry
 endfunction
 
 " FUNCTION: s:refreshRoot() {{{1
@@ -446,7 +354,6 @@ function! nerdtree#ui_glue#setupCommands()
     command! -n=? -complete=dir -bar NERDTree :call g:NERDTreeCreator.CreateTabTree('<args>')
     command! -n=? -complete=dir -bar NERDTreeToggle :call g:NERDTreeCreator.ToggleTabTree('<args>')
     command! -n=0 -bar NERDTreeClose :call g:NERDTree.Close()
-    command! -n=1 -complete=customlist,nerdtree#completeBookmarks -bar NERDTreeFromBookmark call g:NERDTreeCreator.CreateTabTree('<args>')
     command! -n=0 -bar NERDTreeFind call s:findAndRevealPath()
     command! -n=0 -bar NERDTreeFocus call NERDTreeFocus()
     command! -n=0 -bar NERDTreeCWD call NERDTreeCWD()
@@ -469,11 +376,6 @@ endfunction
 " FUNCTION: s:toggleIgnoreFilter() {{{1
 function! s:toggleIgnoreFilter()
     call b:NERDTree.ui.toggleIgnoreFilter()
-endfunction
-
-" FUNCTION: s:toggleShowBookmarks() {{{1
-function! s:toggleShowBookmarks()
-    call b:NERDTree.ui.toggleShowBookmarks()
 endfunction
 
 " FUNCTION: s:toggleShowFiles() {{{1
