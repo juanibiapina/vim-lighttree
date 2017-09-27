@@ -23,11 +23,9 @@ function! s:Creator.CreateTabTree(name)
     call creator.createTabTree(a:name)
 endfunction
 
-"name: the name of a directory
 function! s:Creator.createTabTree(name)
     let path = self._pathForString(a:name)
 
-    "abort if exception was thrown (dir doesn't exist)
     if empty(path)
         return
     endif
@@ -58,12 +56,15 @@ function! s:Creator.CreateWindowTree(dir)
 endfunction
 
 function! s:Creator.createWindowTree(dir)
-    try
-        let path = g:NERDTreePath.New(a:dir)
-    catch /^NERDTree.InvalidArgumentsError/
-        call nerdtree#echo("Invalid directory name:" . a:name)
+    let path = self._pathForString(a:dir)
+
+    if empty(path)
         return
-    endtry
+    endif
+
+    if path == {}
+        return
+    endif
 
     "we want the directory buffer to disappear when we do the :edit below
     setlocal bufhidden=wipe
