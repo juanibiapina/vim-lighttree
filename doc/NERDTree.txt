@@ -92,9 +92,6 @@ The following features and functionality are provided by the NERD tree:
         :NERDTree /home/marty/vim7/src
 <
 
-:NERDTreeClose                                                *:NERDTreeClose*
-    Close the NERD tree in this tab.
-
 :NERDTreeFind                                                  *:NERDTreeFind*
     Find the current file in the tree.
 
