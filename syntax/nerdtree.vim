@@ -1,9 +1,5 @@
-let s:tree_up_dir_line = '.. (up a dir)'
 syn match NERDTreeIgnore #\~#
 exec 'syn match NERDTreeIgnore #\['.g:NERDTreeGlyphReadOnly.'\]#'
-
-"highlighting for the .. (up dir) line at the top of the tree
-execute "syn match NERDTreeUp #\\V". s:tree_up_dir_line ."#"
 
 "quickhelp syntax elements
 syn match NERDTreeHelpKey #" \{1,2\}[^ ]*:#ms=s+2,me=e-1
@@ -55,7 +51,6 @@ hi def link NERDTreeLinkFile Macro
 hi def link NERDTreeLinkDir Macro
 
 hi def link NERDTreeDir Directory
-hi def link NERDTreeUp Directory
 hi def link NERDTreeFile Normal
 hi def link NERDTreeCWD Statement
 hi def link NERDTreeOpenable Directory
