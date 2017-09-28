@@ -3,18 +3,6 @@ if exists("g:loaded_nerdtree_autoload")
 endif
 let g:loaded_nerdtree_autoload = 1
 
-"inits a window tree in the current buffer if appropriate
-function! lighttree#checkForBrowse(dir)
-    if !isdirectory(a:dir)
-        return
-    endif
-
-    " make netrw buffer disappear when lighttree buffer is opened
-    setlocal bufhidden=wipe
-
-    call g:NERDTreeCreator.RestoreOrCreateBuffer(a:dir)
-endfunction
-
 function! lighttree#compareNodes(n1, n2)
     return a:n1.path.compareTo(a:n2.path)
 endfunction

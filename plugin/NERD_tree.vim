@@ -132,9 +132,20 @@ augroup NERDTree
 augroup END
 
 if g:NERDTreeHijackNetrw
+    function! s:checkForBrowse(dir)
+        if !isdirectory(a:dir)
+            return
+        endif
+
+        " make netrw buffer disappear when lighttree buffer is opened
+        setlocal bufhidden=wipe
+
+        call g:NERDTreeCreator.RestoreOrCreateBuffer(a:dir)
+    endfunction
+
     augroup NERDTreeHijackNetrw
         autocmd VimEnter * silent! autocmd! FileExplorer
-        au BufEnter,VimEnter * call lighttree#checkForBrowse(expand("<amatch>"))
+        au BufEnter,VimEnter * call s:checkForBrowse(expand("<amatch>"))
     augroup END
 endif
 
