@@ -16,7 +16,7 @@ function! s:NERDTree.changeRoot(node)
     call self.root.open()
 
     call self.render()
-    call self.root.putCursorHere(0, 0)
+    call self.root.putCursorHere(0)
 
     silent doautocmd User LightTreeNewRoot
 endfunction

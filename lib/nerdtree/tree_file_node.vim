@@ -191,25 +191,13 @@ endfunction
 "
 "Args:
 "isJump: 1 if this cursor movement should be counted as a jump by vim
-"recurseUpward: try to put the cursor on the parent if the this node isnt
-"visible
-function! s:TreeFileNode.putCursorHere(isJump, recurseUpward)
+function! s:TreeFileNode.putCursorHere(isJump)
     let ln = self.getNerdtree().ui.getLineNum(self)
     if ln != -1
         if a:isJump
             mark '
         endif
         call cursor(ln, col("."))
-    else
-        if a:recurseUpward
-            let node = self
-            while node != {} && self.getNerdtree().ui.getLineNum(node) ==# -1
-                let node = node.parent
-                call node.open()
-            endwhile
-            call self._nerdtree.render()
-            call node.putCursorHere(a:isJump, 0)
-        endif
     endif
 endfunction
 

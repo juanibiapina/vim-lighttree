@@ -312,7 +312,7 @@ function! s:UI.renderViewSavingPosition()
     call self.render()
 
     if currentNode != {}
-        call currentNode.putCursorHere(0, 0)
+        call currentNode.putCursorHere(0)
     endif
 endfunction
 

@@ -101,7 +101,7 @@ function! NERDTreeAddNode()
         elseif parentNode.isOpen || !empty(parentNode.children)
             call parentNode.addChild(newTreeNode, 1)
             call b:NERDTree.render()
-            call newTreeNode.putCursorHere(1, 0)
+            call newTreeNode.putCursorHere(1)
         endif
     catch /^NERDTree/
         call nerdtree#echoWarning("Node Not Created.")
@@ -133,7 +133,7 @@ function! NERDTreeMoveNode()
             call s:promptToRenameBuffer(bufnum,  prompt, newNodePath)
         endif
 
-        call curNode.putCursorHere(1, 0)
+        call curNode.putCursorHere(1)
 
         redraw
     catch /^NERDTree/
@@ -257,7 +257,7 @@ function! NERDTreeCopyNode()
                     call b:NERDTree.render()
                 else
                     call b:NERDTree.render()
-                    call newNode.putCursorHere(0, 0)
+                    call newNode.putCursorHere(0)
                 endif
             catch /^NERDTree/
                 call nerdtree#echoWarning("Could not copy node")

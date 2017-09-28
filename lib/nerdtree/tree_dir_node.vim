@@ -14,7 +14,7 @@ unlet s:TreeDirNode.activate
 function! s:TreeDirNode.activate()
     call self.toggleOpen()
     call self.getNerdtree().render()
-    call self.putCursorHere(0, 0)
+    call self.putCursorHere(0)
 endfunction
 
 " Adds the given treenode to the list of children for this node

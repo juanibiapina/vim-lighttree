@@ -83,7 +83,7 @@ endfunction
 function! s:closeChildren(node)
     call a:node.closeChildren()
     call b:NERDTree.render()
-    call a:node.putCursorHere(0, 0)
+    call a:node.putCursorHere(0)
 endfunction
 
 " closes the parent dir of the current node
@@ -102,7 +102,7 @@ function! s:closeCurrentDir(node)
     else
         call parent.close()
         call b:NERDTree.render()
-        call parent.putCursorHere(0, 0)
+        call parent.putCursorHere(0)
     endif
 endfunction
 
@@ -140,7 +140,7 @@ function! s:findAndRevealPath()
 
     let node = b:NERDTree.root.reveal(p)
     call b:NERDTree.render()
-    call node.putCursorHere(1,0)
+    call node.putCursorHere(1)
 
     if p.isUnixHiddenFile()
         let g:NERDTreeShowHidden = showhidden
@@ -169,7 +169,7 @@ function! s:jumpToChild(currentNode, direction)
         endif
     endif
 
-    call targetNode.putCursorHere(1, 0)
+    call targetNode.putCursorHere(1)
 endfunction
 
 
@@ -206,7 +206,7 @@ function! s:jumpToParent(node)
     endif
 
     if !empty(l:parent)
-        call l:parent.putCursorHere(1, 0)
+        call l:parent.putCursorHere(1)
     else
         call nerdtree#echo('could not jump to parent node')
     endif
@@ -214,7 +214,7 @@ endfunction
 
 " moves the cursor to the root node
 function! s:jumpToRoot()
-    call b:NERDTree.root.putCursorHere(1, 0)
+    call b:NERDTree.root.putCursorHere(1)
 endfunction
 
 function! s:jumpToNextSibling(node)
@@ -234,7 +234,7 @@ function! s:jumpToSibling(currentNode, forward)
     let sibling = a:currentNode.findSibling(a:forward)
 
     if !empty(sibling)
-        call sibling.putCursorHere(1, 0)
+        call sibling.putCursorHere(1)
     endif
 endfunction
 
@@ -328,7 +328,7 @@ function! nerdtree#ui_glue#upDir(keepState)
         endif
 
         call b:NERDTree.render()
-        call oldRoot.putCursorHere(0, 0)
+        call oldRoot.putCursorHere(0)
     endif
 endfunction
 
