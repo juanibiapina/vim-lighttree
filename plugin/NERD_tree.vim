@@ -152,8 +152,10 @@ function! NERDTreeAddPathFilter(callback)
     call g:NERDTree.AddPathFilter(a:callback)
 endfunction
 
-" SECTION: Post Source Actions {{{1
-call lighttree#postSourceActions()
+call lighttree#ui_glue#createDefaultBindings()
+
+"load all nerdtree plugins
+runtime! nerdtree_plugin/**/*.vim
 
 "reset &cpo back to users setting
 let &cpo = s:old_cpo

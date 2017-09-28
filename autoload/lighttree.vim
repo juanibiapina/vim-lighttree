@@ -67,13 +67,6 @@ function! lighttree#has_opt(options, name)
     return has_key(a:options, a:name) && a:options[a:name] == 1
 endfunction
 
-function! lighttree#postSourceActions()
-    call lighttree#ui_glue#createDefaultBindings()
-
-    "load all nerdtree plugins
-    runtime! nerdtree_plugin/**/*.vim
-endfunction
-
 function! lighttree#runningWindows()
     return has("win16") || has("win32") || has("win64")
 endfunction
