@@ -6,7 +6,7 @@ let g:NERDTreePath = s:Path
 
 function! s:Path.AbsolutePathFor(str)
     let prependCWD = 0
-    if lighttree#runningWindows()
+    if lighttree#os#is_windows()
         let prependCWD = a:str !~# '^.:\(\\\|\/\)' && a:str !~# '^\(\\\\\|\/\/\)'
     else
         let prependCWD = a:str !~# '^/'
@@ -223,7 +223,7 @@ endfunction
 
 " If running windows, cache the drive letter for this path
 function! s:Path.extractDriveLetter(fullpath)
-    if lighttree#runningWindows()
+    if lighttree#os#is_windows()
         if a:fullpath =~ '^\(\\\\\|\/\/\)'
             "For network shares, the 'drive' consists of the first two parts of the path, i.e. \\boxname\share
             let self.drive = substitute(a:fullpath, '^\(\(\\\\\|\/\/\)[^\\\/]*\(\\\|\/\)[^\\\/]*\).*', '\1', '')
@@ -244,7 +244,7 @@ function! s:Path.exists()
 endfunction
 
 function! s:Path._escChars()
-    if lighttree#runningWindows()
+    if lighttree#os#is_windows()
         return " `\|\"#%&,?()\*^<>$"
     endif
 
@@ -268,7 +268,7 @@ endfunction
 " Return:
 " a new Path object
 function! s:Path.getParent()
-    if lighttree#runningWindows()
+    if lighttree#os#is_windows()
         let path = self.drive . '\' . join(self.pathSegments[0:-2], '\')
     else
         let path = '/'. join(self.pathSegments[0:-2], '/')
@@ -464,7 +464,7 @@ endfunction
 " systems.
 function! s:Path.Slash()
 
-    if lighttree#runningWindows()
+    if lighttree#os#is_windows()
         if exists('+shellslash') && &shellslash
             return '/'
         endif
@@ -637,7 +637,7 @@ function! s:Path._strForEdit()
 
     " On Windows, the drive letter may be removed by "fnamemodify()".  Add it
     " back, if necessary.
-    if lighttree#runningWindows() && l:result[0] == s:Path.Slash()
+    if lighttree#os#is_windows() && l:result[0] == s:Path.Slash()
         let l:result = self.drive . l:result
     endif
 
@@ -654,13 +654,13 @@ function! s:Path._strForGlob()
     let lead = s:Path.Slash()
 
     "if we are running windows then slap a drive letter on the front
-    if lighttree#runningWindows()
+    if lighttree#os#is_windows()
         let lead = self.drive . '\'
     endif
 
     let toReturn = lead . join(self.pathSegments, s:Path.Slash())
 
-    if !lighttree#runningWindows()
+    if !lighttree#os#is_windows()
         let toReturn = escape(toReturn, self._escChars())
     endif
     return toReturn
@@ -672,7 +672,7 @@ function! s:Path._str()
     let l:separator = s:Path.Slash()
     let l:leader = l:separator
 
-    if lighttree#runningWindows()
+    if lighttree#os#is_windows()
         let l:leader = self.drive . l:separator
     endif
 
@@ -706,7 +706,7 @@ endfunction
 " Args:
 " pathstr: the windows path to convert
 function! s:Path.WinToUnixPath(pathstr)
-    if !lighttree#runningWindows()
+    if !lighttree#os#is_windows()
         return a:pathstr
     endif
 

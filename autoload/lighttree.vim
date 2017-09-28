@@ -55,10 +55,6 @@ function! lighttree#has_opt(options, name)
     return has_key(a:options, a:name) && a:options[a:name] == 1
 endfunction
 
-function! lighttree#runningWindows()
-    return has("win16") || has("win32") || has("win64")
-endfunction
-
 function! lighttree#echo(msg)
     redraw
     echomsg "LightTree: " . a:msg

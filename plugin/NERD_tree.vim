@@ -44,7 +44,7 @@ call s:initVariable("g:NERDTreeShowHidden", 0)
 call s:initVariable("g:NERDTreeShowLineNumbers", 0)
 call s:initVariable("g:NERDTreeSortDirs", 1)
 
-if !lighttree#runningWindows()
+if !lighttree#os#is_windows()
     call s:initVariable("g:NERDTreeDirArrowExpandable", "▸")
     call s:initVariable("g:NERDTreeDirArrowCollapsible", "▾")
 else
@@ -77,7 +77,7 @@ endif
 "init the shell commands that will be used to copy nodes, and remove dir trees
 "
 "Note: the space after the command is important
-if lighttree#runningWindows()
+if lighttree#os#is_windows()
     call s:initVariable("g:NERDTreeRemoveDirCmd", 'rmdir /s /q ')
     call s:initVariable("g:NERDTreeCopyDirCmd", 'xcopy /s /e /i /y /q ')
     call s:initVariable("g:NERDTreeCopyFileCmd", 'copy /y ')
