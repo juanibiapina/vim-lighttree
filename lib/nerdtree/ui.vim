@@ -4,8 +4,7 @@ let g:NERDTreeUI = s:UI
 "prints out the quick help
 function! s:UI._dumpHelp()
     if self.getShowHelp()
-        let help  = "\" NERDTree (" . nerdtree#version() . ") quickhelp~\n"
-        let help .= "\" ============================\n"
+        let help  = "\" ----------------------------\n"
         let help .= "\" File node mappings~\n"
         let help .= "\" <CR>,\n"
         let help .= "\" ". g:NERDTreeMapActivateNode .": open in current window\n"

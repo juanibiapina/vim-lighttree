@@ -3,10 +3,6 @@ if exists("g:loaded_nerdtree_autoload")
 endif
 let g:loaded_nerdtree_autoload = 1
 
-function! nerdtree#version()
-    return '0.1.0'
-endfunction
-
 "inits a window tree in the current buffer if appropriate
 function! nerdtree#checkForBrowse(dir)
     if !isdirectory(a:dir)
