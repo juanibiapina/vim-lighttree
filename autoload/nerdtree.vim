@@ -13,6 +13,9 @@ function! nerdtree#checkForBrowse(dir)
         return
     endif
 
+    " make netrw buffer disappear when lighttree buffer is opened
+    setlocal bufhidden=wipe
+
     call g:NERDTreeCreator.RestoreOrCreateBuffer(a:dir)
 endfunction
 

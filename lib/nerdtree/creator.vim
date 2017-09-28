@@ -34,9 +34,6 @@ function! s:Creator.createWindowTree(dir)
         return
     endif
 
-    "we want the directory buffer to disappear when we do the :edit below
-    setlocal bufhidden=wipe
-
     "we need a unique name for each window tree buffer to ensure they are
     "all independent
     exec g:NERDTreeCreatePrefix . " edit " . self._nextBufferName()
