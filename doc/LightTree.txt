@@ -13,9 +13,9 @@
 
 
 ==============================================================================
-CONTENTS                                                   *NERDTree-contents*
+CONTENTS                                                  *LightTree-contents*
 
-    1.Intro...................................|NERDTree|
+    1.Introduction............................|LightTreeIntro|
     2.Functionality provided..................|NERDTreeFunctionality|
         2.1.Global commands...................|NERDTreeGlobalCommands|
         2.2.NERD tree mappings................|NERDTreeMappings|
@@ -32,9 +32,7 @@ CONTENTS                                                   *NERDTree-contents*
     6.License.................................|NERDTreeLicense|
 
 ==============================================================================
-1. Intro                                                            *NERDTree*
-
-What is this "NERD tree"??
+1. Introduction                                               *LightTreeIntro*
 
 The NERD tree allows you to explore your filesystem and to open files and
 directories. It presents the filesystem to you in the form of a tree. It also
