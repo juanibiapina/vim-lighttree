@@ -26,7 +26,6 @@ function! s:MenuItem.Create(options)
 
     let newMenuItem.text = a:options['text']
     let newMenuItem.shortcut = a:options['shortcut']
-    let newMenuItem.children = []
 
     let newMenuItem.isActiveCallback = -1
     if has_key(a:options, 'isActiveCallback')
@@ -38,23 +37,9 @@ function! s:MenuItem.Create(options)
         let newMenuItem.callback = a:options['callback']
     endif
 
-    if has_key(a:options, 'parent')
-        call add(a:options['parent'].children, newMenuItem)
-    else
-        call add(s:MenuItem.All(), newMenuItem)
-    endif
+    call add(s:MenuItem.All(), newMenuItem)
 
     return newMenuItem
-endfunction
-
-"make a new separator menu item and add it to the global list
-function! s:MenuItem.CreateSeparator(options)
-    let standard_options = { 'text': '--------------------',
-                \ 'shortcut': -1,
-                \ 'callback': -1 }
-    let options = extend(a:options, standard_options, "force")
-
-    return s:MenuItem.Create(options)
 endfunction
 
 "make a new submenu and add it to global list
@@ -76,28 +61,10 @@ function! s:MenuItem.enabled()
     return 1
 endfunction
 
-"perform the action behind this menu item, if this menuitem has children then
-"display a new menu for them, otherwise deletegate off to the menuitem's
-"callback
 function! s:MenuItem.execute()
-    if len(self.children)
-        let mc = g:NERDTreeMenuController.New(self.children)
-        call mc.showMenu()
-    else
-        if self.callback != -1
-            call {self.callback}()
-        endif
+    if self.callback != -1
+        call {self.callback}()
     endif
-endfunction
-
-"return 1 if this menuitem is a separator
-function! s:MenuItem.isSeparator()
-    return self.callback == -1 && self.children == []
-endfunction
-
-"return 1 if this menuitem is a submenu
-function! s:MenuItem.isSubmenu()
-    return self.callback == -1 && !empty(self.children)
 endfunction
 
 " vim: set sw=4 sts=4 et fdm=marker:

@@ -704,23 +704,6 @@ NERDTreeAddKeyMap({options})                             *NERDTreeAddKeyMap()*
 ------------------------------------------------------------------------------
 4.2. Menu API                                                *NERDTreeMenuAPI*
 
-NERDTreeAddSubmenu({options})                           *NERDTreeAddSubmenu()*
-    Creates and returns a new submenu.
-
-    {options} must be a dictionary and must contain the following keys:
-    "text" - the text of the submenu that the user will see
-    "shortcut" - a shortcut key for the submenu (need not be unique)
-
-    The following keys are optional:
-    "isActiveCallback" - a function that will be called to determine whether
-    this submenu item will be displayed or not. The callback function must return
-    0 or 1.
-    "parent" - the parent submenu of the new submenu (returned from a previous
-    invocation of NERDTreeAddSubmenu()). If this key is left out then the new
-    submenu will sit under the top level menu.
-
-    See below for an example.
-
 NERDTreeAddMenuItem({options})                         *NERDTreeAddMenuItem()*
     Adds a new menu item to the NERD tree menu (see |NERDTreeMenu|).
 
@@ -735,52 +718,25 @@ NERDTreeAddMenuItem({options})                         *NERDTreeAddMenuItem()*
     "isActiveCallback" - a function that will be called to determine whether
     this menu item will be displayed or not. The callback function must return
     0 or 1.
-    "parent" - if the menu item belongs under a submenu then this key must be
-    specified. This value for this key will be the object that
-    was returned when the submenu was created with |NERDTreeAddSubmenu()|.
 
     See below for an example.
 
-NERDTreeAddMenuSeparator([{options}])             *NERDTreeAddMenuSeparator()*
-    Adds a menu separator (a row of dashes).
-
-    {options} is an optional dictionary that may contain the following keys:
-    "isActiveCallback" - see description in |NERDTreeAddMenuItem()|.
-
 Below is an example of the menu API in action. >
-    call NERDTreeAddMenuSeparator()
-
     call NERDTreeAddMenuItem({
-                \ 'text': 'a (t)op level menu item',
-                \ 'shortcut': 't',
+                \ 'text': '(i)tem 1',
+                \ 'shortcut': 'i',
                 \ 'callback': 'SomeFunction' })
 
-    let submenu = NERDTreeAddSubmenu({
-                \ 'text': 'a (s)ub menu',
-                \ 'shortcut': 's' })
-
     call NERDTreeAddMenuItem({
-                \ 'text': '(n)ested item 1',
-                \ 'shortcut': 'n',
-                \ 'callback': 'SomeFunction',
-                \ 'parent': submenu })
-
-    call NERDTreeAddMenuItem({
-                \ 'text': '(n)ested item 2',
-                \ 'shortcut': 'n',
-                \ 'callback': 'SomeFunction',
-                \ 'parent': submenu })
+                \ 'text': 'i(t)em 2',
+                \ 'shortcut': 't',
+                \ 'callback': 'SomeFunction' })
 <
 This will create the following menu: >
-  --------------------
-  a (t)op level menu item
-  a (s)ub menu
+  (i)tem 1
+  i(t)em 2
 <
-Where selecting "a (s)ub menu" will lead to a second menu: >
-  (n)ested item 1
-  (n)ested item 2
-<
-When any of the 3 concrete menu items are selected the function "SomeFunction"
+When any of the 2 menu items are selected the function "SomeFunction"
 will be called.
 
 ------------------------------------------------------------------------------

@@ -130,15 +130,6 @@ endif
 " SECTION: Public API {{{1
 "============================================================
 function! NERDTreeAddMenuItem(options)
-    call g:NERDTreeMenuItem.Create(a:options)
-endfunction
-
-function! NERDTreeAddMenuSeparator(...)
-    let opts = a:0 ? a:1 : {}
-    call g:NERDTreeMenuItem.CreateSeparator(opts)
-endfunction
-
-function! NERDTreeAddSubmenu(options)
     return g:NERDTreeMenuItem.Create(a:options)
 endfunction
 

@@ -3,12 +3,8 @@ let g:NERDTreeMenuController = s:MenuController
 
 "create a new menu controller that operates on the given menu items
 function! s:MenuController.New(menuItems)
-    let newMenuController =  copy(self)
-    if a:menuItems[0].isSeparator()
-        let newMenuController.menuItems = a:menuItems[1:-1]
-    else
-        let newMenuController.menuItems = a:menuItems
-    endif
+    let newMenuController = copy(self)
+    let newMenuController.menuItems = a:menuItems
     return newMenuController
 endfunction
 
@@ -131,36 +127,20 @@ function! s:MenuController._restoreOptions()
     let &lazyredraw = self._oldLazyredraw
 endfunction
 
-"move the cursor to the next menu item, skipping separators
 function! s:MenuController._cursorDown()
-    let done = 0
-    while !done
-        if self.selection < len(self.menuItems)-1
-            let self.selection += 1
-        else
-            let self.selection = 0
-        endif
-
-        if !self._current().isSeparator()
-            let done = 1
-        endif
-    endwhile
+    if self.selection < len(self.menuItems)-1
+        let self.selection += 1
+    else
+        let self.selection = 0
+    endif
 endfunction
 
-"move the cursor to the previous menu item, skipping separators
 function! s:MenuController._cursorUp()
-    let done = 0
-    while !done
-        if self.selection > 0
-            let self.selection -= 1
-        else
-            let self.selection = len(self.menuItems)-1
-        endif
-
-        if !self._current().isSeparator()
-            let done = 1
-        endif
-    endwhile
+    if self.selection > 0
+        let self.selection -= 1
+    else
+        let self.selection = len(self.menuItems)-1
+    endif
 endfunction
 
 " vim: set sw=4 sts=4 et fdm=marker:
