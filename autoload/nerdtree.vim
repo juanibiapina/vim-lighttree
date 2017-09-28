@@ -124,8 +124,4 @@ function! nerdtree#echoWarning(msg)
     echohl normal
 endfunction
 
-function! nerdtree#renderView()
-    call b:NERDTree.render()
-endfunction
-
 " vim: set sw=4 sts=4 et fdm=marker:

@@ -100,7 +100,7 @@ function! NERDTreeAddNode()
             call b:NERDTree.render()
         elseif parentNode.isOpen || !empty(parentNode.children)
             call parentNode.addChild(newTreeNode, 1)
-            call NERDTreeRender()
+            call b:NERDTree.render()
             call newTreeNode.putCursorHere(1, 0)
         endif
     catch /^NERDTree/
@@ -124,7 +124,7 @@ function! NERDTreeMoveNode()
         let bufnum = bufnr("^".curNode.path.str()."$")
 
         call curNode.rename(newNodePath)
-        call NERDTreeRender()
+        call b:NERDTree.render()
 
         "if the node is open in a buffer, ask the user if they want to
         "close that buffer
@@ -164,7 +164,7 @@ function! NERDTreeDeleteNode()
     if confirmed
         try
             call currentNode.delete()
-            call NERDTreeRender()
+            call b:NERDTree.render()
 
             "if the node is open in a buffer, ask the user if they want to
             "close that buffer
@@ -256,7 +256,7 @@ function! NERDTreeCopyNode()
                     call b:NERDTree.root.refresh()
                     call b:NERDTree.render()
                 else
-                    call NERDTreeRender()
+                    call b:NERDTree.render()
                     call newNode.putCursorHere(0, 0)
                 endif
             catch /^NERDTree/

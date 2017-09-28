@@ -147,10 +147,6 @@ function! NERDTreeAddKeyMap(options)
     call g:NERDTreeKeyMap.Create(a:options)
 endfunction
 
-function! NERDTreeRender()
-    call nerdtree#renderView()
-endfunction
-
 function! NERDTreeAddPathFilter(callback)
     call g:NERDTree.AddPathFilter(a:callback)
 endfunction

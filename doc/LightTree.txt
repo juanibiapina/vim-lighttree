@@ -838,11 +838,6 @@ Current events supported:
   refresh ~
   refreshFlags ~
 
-------------------------------------------------------------------------------
-NERDTreeRender()                                            *NERDTreeRender()*
-    Re-renders the NERD tree buffer. Useful if you change the state of the
-    tree and you want to it to be reflected in the UI.
-
 ==============================================================================
 5. About                                                       *NERDTreeAbout*
 
