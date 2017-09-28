@@ -28,7 +28,7 @@ CONTENTS                                                  *LightTree-contents*
         4.2.Menu API..........................|NERDTreeMenuAPI|
         4.3.Menu API..........................|NERDTreeAddPathFilter()|
         4.4.Path Listener API.................|NERDTreePathListenerAPI|
-    5.License.................................|NERDTreeLicense|
+    5.License.................................|LightTreeLicense|
 
 ==============================================================================
 1. Introduction                                               *LightTreeIntro*
@@ -822,7 +822,7 @@ Current events supported:
   refreshFlags ~
 
 ==============================================================================
-5. License                                                   *NERDTreeLicense*
+5. License                                                  *LightTreeLicense*
 
-The NERD tree is released under the wtfpl.
-See http://sam.zoy.org/wtfpl/COPYING.
+LightTree is released under the MIT license.
+https://choosealicense.com/licenses/mit/
