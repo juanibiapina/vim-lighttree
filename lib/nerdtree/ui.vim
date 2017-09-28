@@ -271,7 +271,7 @@ function! s:UI.render()
     let topLine = line("w0")
 
     "delete all lines in the buffer (being careful not to clobber a register)
-    silent 1,$delete _
+    silent keepjumps 1,$delete _
 
     call self._dumpHelp()
 
@@ -284,7 +284,7 @@ function! s:UI.render()
     silent put =self.nerdtree.root.renderToString()
 
     "delete the blank line at the top of the buffer
-    silent 1,1delete _
+    silent keepjumps 1,1delete _
 
     "restore the view
     let old_scrolloff=&scrolloff
