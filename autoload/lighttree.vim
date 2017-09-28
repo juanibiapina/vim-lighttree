@@ -4,7 +4,7 @@ endif
 let g:loaded_nerdtree_autoload = 1
 
 "inits a window tree in the current buffer if appropriate
-function! nerdtree#checkForBrowse(dir)
+function! lighttree#checkForBrowse(dir)
     if !isdirectory(a:dir)
         return
     endif
@@ -15,11 +15,11 @@ function! nerdtree#checkForBrowse(dir)
     call g:NERDTreeCreator.RestoreOrCreateBuffer(a:dir)
 endfunction
 
-function! nerdtree#compareNodes(n1, n2)
+function! lighttree#compareNodes(n1, n2)
     return a:n1.path.compareTo(a:n2.path)
 endfunction
 
-function! nerdtree#compareNodesBySortKey(n1, n2)
+function! lighttree#compareNodesBySortKey(n1, n2)
     let sortKey1 = a:n1.path.getSortKey()
     let sortKey2 = a:n2.path.getSortKey()
 
@@ -56,18 +56,18 @@ endfunction
 " Same as :exec cmd but with eventignore set for the duration
 " to disable the autocommands used by NERDTree (BufEnter,
 " BufLeave and VimEnter)
-function! nerdtree#exec(cmd)
+function! lighttree#exec(cmd)
     let old_ei = &ei
     set ei=BufEnter,BufLeave,VimEnter
     exec a:cmd
     let &ei = old_ei
 endfunction
 
-function! nerdtree#has_opt(options, name)
+function! lighttree#has_opt(options, name)
     return has_key(a:options, a:name) && a:options[a:name] == 1
 endfunction
 
-function! nerdtree#loadClassFiles()
+function! lighttree#loadClassFiles()
     runtime lib/nerdtree/path.vim
     runtime lib/nerdtree/menu_controller.vim
     runtime lib/nerdtree/menu_item.vim
@@ -82,41 +82,31 @@ function! nerdtree#loadClassFiles()
     runtime lib/nerdtree/notifier.vim
 endfunction
 
-function! nerdtree#postSourceActions()
-    call nerdtree#ui_glue#createDefaultBindings()
+function! lighttree#postSourceActions()
+    call lighttree#ui_glue#createDefaultBindings()
 
     "load all nerdtree plugins
     runtime! nerdtree_plugin/**/*.vim
 endfunction
 
-function! nerdtree#runningWindows()
+function! lighttree#runningWindows()
     return has("win16") || has("win32") || has("win64")
 endfunction
 
-"A wrapper for :echo. Appends 'NERDTree:' on the front of all messages
-"
-"Args:
-"msg: the message to echo
-function! nerdtree#echo(msg)
+function! lighttree#echo(msg)
     redraw
-    echomsg "NERDTree: " . a:msg
+    echomsg "LightTree: " . a:msg
 endfunction
 
-"Wrapper for nerdtree#echo, sets the message type to errormsg for this message
-"Args:
-"msg: the message to echo
-function! nerdtree#echoError(msg)
+function! lighttree#echoError(msg)
     echohl errormsg
-    call nerdtree#echo(a:msg)
+    call lighttree#echo(a:msg)
     echohl normal
 endfunction
 
-"Wrapper for nerdtree#echo, sets the message type to warningmsg for this message
-"Args:
-"msg: the message to echo
-function! nerdtree#echoWarning(msg)
+function! lighttree#echoWarning(msg)
     echohl warningmsg
-    call nerdtree#echo(a:msg)
+    call lighttree#echo(a:msg)
     echohl normal
 endfunction
 

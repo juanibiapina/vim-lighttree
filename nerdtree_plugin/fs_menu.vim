@@ -86,7 +86,7 @@ function! NERDTreeAddNode()
                           \ "", curDirNode.path.str() . g:NERDTreePath.Slash(), "file")
 
     if newNodeName ==# ''
-        call nerdtree#echo("Node Creation Aborted.")
+        call lighttree#echo("Node Creation Aborted.")
         return
     endif
 
@@ -104,7 +104,7 @@ function! NERDTreeAddNode()
             call newTreeNode.putCursorHere(1)
         endif
     catch /^NERDTree/
-        call nerdtree#echoWarning("Node Not Created.")
+        call lighttree#echoWarning("Node Not Created.")
     endtry
 endfunction
 
@@ -116,7 +116,7 @@ function! NERDTreeMoveNode()
                           \ "", curNode.path.str(), "file")
 
     if newNodePath ==# ''
-        call nerdtree#echo("Node Renaming Aborted.")
+        call lighttree#echo("Node Renaming Aborted.")
         return
     endif
 
@@ -137,7 +137,7 @@ function! NERDTreeMoveNode()
 
         redraw
     catch /^NERDTree/
-        call nerdtree#echoWarning("Node Not Renamed.")
+        call lighttree#echoWarning("Node Not Renamed.")
     endtry
 endfunction
 
@@ -176,10 +176,10 @@ function! NERDTreeDeleteNode()
 
             redraw
         catch /^NERDTree/
-            call nerdtree#echoWarning("Could not remove node")
+            call lighttree#echoWarning("Could not remove node")
         endtry
     else
-        call nerdtree#echo("delete aborted")
+        call lighttree#echo("delete aborted")
     endif
 
 endfunction
@@ -188,9 +188,9 @@ function! NERDTreeListNode()
     let treenode = g:NERDTreeFileNode.GetSelected()
     if treenode != {}
         let metadata = split(system('ls -ld ' . shellescape(treenode.path.str())), '\n')
-        call nerdtree#echo(metadata[0])
+        call lighttree#echo(metadata[0])
     else
-        call nerdtree#echo("No information avaialable")
+        call lighttree#echo("No information avaialable")
     endif
 endfunction
 
@@ -214,9 +214,9 @@ function! NERDTreeListNodeWin32()
         let l:metadata = split(system(l:command), "\n")
 
         if v:shell_error == 0
-            call nerdtree#echo(l:metadata[0])
+            call lighttree#echo(l:metadata[0])
         else
-            call nerdtree#echoError('shell command failed')
+            call lighttree#echoError('shell command failed')
         endif
 
         let &shell = l:save_shell
@@ -228,7 +228,7 @@ function! NERDTreeListNodeWin32()
         return
     endif
 
-    call nerdtree#echo('node not recognized')
+    call lighttree#echo('node not recognized')
 endfunction
 
 function! NERDTreeCopyNode()
@@ -244,7 +244,7 @@ function! NERDTreeCopyNode()
 
         let confirmed = 1
         if currentNode.path.copyingWillOverwrite(newNodePath)
-            call nerdtree#echo("Warning: copying may overwrite files! Continue? (yN)")
+            call lighttree#echo("Warning: copying may overwrite files! Continue? (yN)")
             let choice = nr2char(getchar())
             let confirmed = choice ==# 'y'
         endif
@@ -260,11 +260,11 @@ function! NERDTreeCopyNode()
                     call newNode.putCursorHere(0)
                 endif
             catch /^NERDTree/
-                call nerdtree#echoWarning("Could not copy node")
+                call lighttree#echoWarning("Could not copy node")
             endtry
         endif
     else
-        call nerdtree#echo("Copy aborted.")
+        call lighttree#echo("Copy aborted.")
     endif
     redraw
 endfunction

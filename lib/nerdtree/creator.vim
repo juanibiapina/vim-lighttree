@@ -5,7 +5,7 @@ let g:NERDTreeCreator = s:Creator
 
 function! s:Creator._bindMappings()
     "make <cr> do the same as the activate node mapping
-    nnoremap <silent> <buffer> <cr> :call nerdtree#ui_glue#invokeKeyMap(g:NERDTreeMapActivateNode)<cr>
+    nnoremap <silent> <buffer> <cr> :call lighttree#ui_glue#invokeKeyMap(g:NERDTreeMapActivateNode)<cr>
 
     call g:NERDTreeKeyMap.BindAll()
 endfunction
@@ -89,7 +89,7 @@ function! s:Creator._pathForString(str)
     try
         let path = g:NERDTreePath.New(dir)
     catch /^NERDTree.InvalidArgumentsError/
-        call nerdtree#echo("No directory found for: " . a:str)
+        call lighttree#echo("No directory found for: " . a:str)
         return {}
     endtry
 

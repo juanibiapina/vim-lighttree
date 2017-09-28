@@ -44,7 +44,7 @@ call s:initVariable("g:NERDTreeShowHidden", 0)
 call s:initVariable("g:NERDTreeShowLineNumbers", 0)
 call s:initVariable("g:NERDTreeSortDirs", 1)
 
-if !nerdtree#runningWindows()
+if !lighttree#runningWindows()
     call s:initVariable("g:NERDTreeDirArrowExpandable", "▸")
     call s:initVariable("g:NERDTreeDirArrowCollapsible", "▾")
 else
@@ -77,7 +77,7 @@ endif
 "init the shell commands that will be used to copy nodes, and remove dir trees
 "
 "Note: the space after the command is important
-if nerdtree#runningWindows()
+if lighttree#runningWindows()
     call s:initVariable("g:NERDTreeRemoveDirCmd", 'rmdir /s /q ')
     call s:initVariable("g:NERDTreeCopyDirCmd", 'xcopy /s /e /i /y /q ')
     call s:initVariable("g:NERDTreeCopyFileCmd", 'copy /y ')
@@ -111,9 +111,9 @@ call s:initVariable("g:NERDTreeMapUpdir", "u")
 call s:initVariable("g:NERDTreeMapUpdirKeepOpen", "U")
 call s:initVariable("g:NERDTreeMapCWD", "CD")
 
-call nerdtree#loadClassFiles()
+call lighttree#loadClassFiles()
 
-call nerdtree#ui_glue#setupCommands()
+call lighttree#ui_glue#setupCommands()
 
 augroup NERDTree
     "disallow insert mode in the NERDTree
@@ -123,7 +123,7 @@ augroup END
 if g:NERDTreeHijackNetrw
     augroup NERDTreeHijackNetrw
         autocmd VimEnter * silent! autocmd! FileExplorer
-        au BufEnter,VimEnter * call nerdtree#checkForBrowse(expand("<amatch>"))
+        au BufEnter,VimEnter * call lighttree#checkForBrowse(expand("<amatch>"))
     augroup END
 endif
 
@@ -151,7 +151,7 @@ function! NERDTreeAddPathFilter(callback)
 endfunction
 
 " SECTION: Post Source Actions {{{1
-call nerdtree#postSourceActions()
+call lighttree#postSourceActions()
 
 "reset &cpo back to users setting
 let &cpo = s:old_cpo

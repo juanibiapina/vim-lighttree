@@ -3,7 +3,7 @@ if exists("g:loaded_nerdtree_ui_glue_autoload")
 endif
 let g:loaded_nerdtree_ui_glue_autoload = 1
 
-function! nerdtree#ui_glue#createDefaultBindings()
+function! lighttree#ui_glue#createDefaultBindings()
     let s = '<SNR>' . s:SID() . '_'
 
     call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapActivateNode, 'scope': "DirNode", 'callback': s."activateDirNode" })
@@ -18,7 +18,7 @@ function! nerdtree#ui_glue#createDefaultBindings()
 
     call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapChdir, 'scope': "Node", 'callback': s."chCwd" })
 
-    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapCWD, 'scope': "all", 'callback': "nerdtree#ui_glue#chRootCwd" })
+    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapCWD, 'scope': "all", 'callback': "lighttree#ui_glue#chRootCwd" })
 
     call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapRefreshRoot, 'scope': "all", 'callback': s."refreshRoot" })
     call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapRefresh, 'scope': "Node", 'callback': s."refreshCurrent" })
@@ -59,7 +59,7 @@ function! s:chCwd(node)
     try
         call a:node.path.changeToDir()
     catch /^NERDTree.PathChangeError/
-        call nerdtree#echoWarning("could not change cwd")
+        call lighttree#echoWarning("could not change cwd")
     endtry
 endfunction
 
@@ -69,11 +69,11 @@ function! s:chRoot(node)
 endfunction
 
 " changes the current root to CWD
-function! nerdtree#ui_glue#chRootCwd()
+function! lighttree#ui_glue#chRootCwd()
     try
         let cwd = g:NERDTreePath.New(getcwd())
     catch /^NERDTree.InvalidArgumentsError/
-        call nerdtree#echo("current directory does not exist.")
+        call lighttree#echo("current directory does not exist.")
         return
     endtry
     call s:chRoot(g:NERDTreeDirNode.New(cwd, b:NERDTree))
@@ -98,7 +98,7 @@ function! s:closeCurrentDir(node)
         endif
     endwhile
     if parent ==# {} || parent.isRoot()
-        call nerdtree#echo("cannot close tree root")
+        call lighttree#echo("cannot close tree root")
     else
         call parent.close()
         call b:NERDTree.render()
@@ -116,7 +116,7 @@ function! s:findAndRevealPath()
     try
         let p = g:NERDTreePath.New(expand("%:p"))
     catch /^NERDTree.InvalidArgumentsError/
-        call nerdtree#echo("no file for the current buffer")
+        call lighttree#echo("no file for the current buffer")
         return
     endtry
 
@@ -128,7 +128,7 @@ function! s:findAndRevealPath()
     try
         let rootDir = g:NERDTreePath.New(getcwd())
     catch /^NERDTree.InvalidArgumentsError/
-        call nerdtree#echo("current directory does not exist.")
+        call lighttree#echo("current directory does not exist.")
         let rootDir = p.getParent()
     endtry
 
@@ -151,7 +151,7 @@ endfunction
 " direction: 0 if going to first child, 1 if going to last
 function! s:jumpToChild(currentNode, direction)
     if a:currentNode.isRoot()
-        return nerdtree#echo("cannot jump to " . (a:direction ? "last" : "first") .  " child")
+        return lighttree#echo("cannot jump to " . (a:direction ? "last" : "first") .  " child")
     end
     let dirNode = a:currentNode.parent
     let childNodes = dirNode.getVisibleChildren()
@@ -175,7 +175,7 @@ endfunction
 
 "this is needed since I cant figure out how to invoke dict functions from a
 "key map
-function! nerdtree#ui_glue#invokeKeyMap(key)
+function! lighttree#ui_glue#invokeKeyMap(key)
     call g:NERDTreeKeyMap.Invoke(a:key)
 endfunction
 
@@ -208,7 +208,7 @@ function! s:jumpToParent(node)
     if !empty(l:parent)
         call l:parent.putCursorHere(1)
     else
-        call nerdtree#echo('could not jump to parent node')
+        call lighttree#echo('could not jump to parent node')
     endif
 endfunction
 
@@ -239,21 +239,21 @@ function! s:jumpToSibling(currentNode, forward)
 endfunction
 
 function! s:openNodeRecursively(node)
-    call nerdtree#echo("Recursively opening node. Please wait...")
+    call lighttree#echo("Recursively opening node. Please wait...")
     call a:node.openRecursively()
     call b:NERDTree.render()
     redraw
-    call nerdtree#echo("Recursively opening node. Please wait... DONE")
+    call lighttree#echo("Recursively opening node. Please wait... DONE")
 endfunction
 
 " Reloads the current root. All nodes below this will be lost and the root dir
 " will be reloaded.
 function! s:refreshRoot()
-    call nerdtree#echo("Refreshing the root node. This could take a while...")
+    call lighttree#echo("Refreshing the root node. This could take a while...")
     call b:NERDTree.root.refresh()
     call b:NERDTree.render()
     redraw
-    call nerdtree#echo("Refreshing the root node. This could take a while... DONE")
+    call lighttree#echo("Refreshing the root node. This could take a while... DONE")
 endfunction
 
 " refreshes the root for the current node
@@ -263,14 +263,14 @@ function! s:refreshCurrent(node)
         let node = node.parent
     endif
 
-    call nerdtree#echo("Refreshing node. This could take a while...")
+    call lighttree#echo("Refreshing node. This could take a while...")
     call node.refresh()
     call b:NERDTree.render()
     redraw
-    call nerdtree#echo("Refreshing node. This could take a while... DONE")
+    call lighttree#echo("Refreshing node. This could take a while... DONE")
 endfunction
 
-function! nerdtree#ui_glue#setupCommands()
+function! lighttree#ui_glue#setupCommands()
     command! -n=? -complete=dir -bar LightTree :call g:NERDTreeCreator.RestoreOrCreateBuffer('<args>')
     command! -n=0 -bar LightTreeFind call s:findAndRevealPath()
 endfunction
@@ -306,10 +306,10 @@ endfunction
 "Args:
 "keepState: 1 if the current root should be left open when the tree is
 "re-rendered
-function! nerdtree#ui_glue#upDir(keepState)
+function! lighttree#ui_glue#upDir(keepState)
     let cwd = b:NERDTree.root.path.str({'format': 'UI'})
     if cwd ==# "/" || cwd =~# '^[^/]..$'
-        call nerdtree#echo("already at top dir")
+        call lighttree#echo("already at top dir")
     else
         if !a:keepState
             call b:NERDTree.root.close()
@@ -333,11 +333,11 @@ function! nerdtree#ui_glue#upDir(keepState)
 endfunction
 
 function! s:upDirCurrentRootOpen()
-    call nerdtree#ui_glue#upDir(1)
+    call lighttree#ui_glue#upDir(1)
 endfunction
 
 function! s:upDirCurrentRootClosed()
-    call nerdtree#ui_glue#upDir(0)
+    call lighttree#ui_glue#upDir(0)
 endfunction
 
 " vim: set sw=4 sts=4 et fdm=marker:

@@ -36,7 +36,7 @@ function! s:KeyMap.bind()
         let keymapInvokeString = self.key
     endif
 
-    exec 'nnoremap <buffer> <silent> '. self.key . ' :call nerdtree#ui_glue#invokeKeyMap("'. keymapInvokeString .'")<cr>'
+    exec 'nnoremap <buffer> <silent> '. self.key . ' :call lighttree#ui_glue#invokeKeyMap("'. keymapInvokeString .'")<cr>'
 endfunction
 
 function! s:KeyMap.Remove(key, scope)

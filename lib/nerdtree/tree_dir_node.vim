@@ -218,7 +218,7 @@ function! s:TreeDirNode._glob(pattern, all)
         let l:pathSpec = fnamemodify(self.path.str({'format': 'Glob'}), ':.')
 
         " On Windows, the drive letter may be removed by "fnamemodify()".
-        if nerdtree#runningWindows() && l:pathSpec[0] == g:NERDTreePath.Slash()
+        if lighttree#runningWindows() && l:pathSpec[0] == g:NERDTreePath.Slash()
             let l:pathSpec = self.path.drive . l:pathSpec
         endif
     endif
@@ -328,7 +328,7 @@ function! s:TreeDirNode._initChildren(silent)
     let files = self._glob('*', 1) + self._glob('.*', 0)
 
     if !a:silent && len(files) > g:NERDTreeNotificationThreshold
-        call nerdtree#echo("Please wait, caching a large dir ...")
+        call lighttree#echo("Please wait, caching a large dir ...")
     endif
 
     let invalidFilesFound = 0
@@ -345,11 +345,11 @@ function! s:TreeDirNode._initChildren(silent)
     call self.sortChildren()
 
     if !a:silent && len(files) > g:NERDTreeNotificationThreshold
-        call nerdtree#echo("Please wait, caching a large dir ... DONE (". self.getChildCount() ." nodes cached).")
+        call lighttree#echo("Please wait, caching a large dir ... DONE (". self.getChildCount() ." nodes cached).")
     endif
 
     if invalidFilesFound
-        call nerdtree#echoWarning(invalidFilesFound . " file(s) could not be loaded into the NERD tree")
+        call lighttree#echoWarning(invalidFilesFound . " file(s) could not be loaded into the NERD tree")
     endif
     return self.getChildCount()
 endfunction
@@ -464,7 +464,7 @@ function! s:TreeDirNode.refresh()
         call self.sortChildren()
 
         if invalidFilesFound
-            call nerdtree#echoWarning("some files could not be loaded into the NERD tree")
+            call lighttree#echoWarning("some files could not be loaded into the NERD tree")
         endif
     endif
 endfunction
@@ -528,7 +528,7 @@ endfunction
 
 " Sort "self.children" by alphabetical order and directory priority.
 function! s:TreeDirNode.sortChildren()
-    let CompareFunc = function("nerdtree#compareNodesBySortKey")
+    let CompareFunc = function("lighttree#compareNodesBySortKey")
     call sort(self.children, CompareFunc)
 endfunction
 
