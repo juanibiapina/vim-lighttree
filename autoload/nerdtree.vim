@@ -4,7 +4,7 @@ endif
 let g:loaded_nerdtree_autoload = 1
 
 function! nerdtree#version()
-    return '5.0.0'
+    return '0.1.0'
 endfunction
 
 "inits a window tree in the current buffer if appropriate
