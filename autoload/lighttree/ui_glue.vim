@@ -89,14 +89,7 @@ endfunction
 " closes the parent dir of the current node
 function! s:closeCurrentDir(node)
     let parent = a:node.parent
-    while g:NERDTreeCascadeOpenSingleChildDir && !parent.isRoot()
-        let childNodes = parent.getVisibleChildren()
-        if len(childNodes) == 1 && childNodes[0].path.isDirectory
-            let parent = parent.parent
-        else
-            break
-        endif
-    endwhile
+
     if parent ==# {} || parent.isRoot()
         call lighttree#echo("cannot close tree root")
     else
