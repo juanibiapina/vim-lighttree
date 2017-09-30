@@ -393,10 +393,6 @@ NERD tree. These options should be set in your vimrc.
 
 |'NERDTreeStatusline'|          Set a statusline for NERD tree windows.
 
-|'NERDTreeCascadeSingleChildDir'|
-                                Collapses on the same line directories that
-                                have only one child directory.
-
 |'NERDTreeCascadeOpenSingleChildDir'|
                                 Cascade open while selected directory has only
                                 one child that also is a directory.
@@ -602,17 +598,6 @@ isn't necessary.
 
 Setting this option to -1 will will deactivate it so that your global
 statusline setting is used instead.
-
-------------------------------------------------------------------------------
-                                             *'NERDTreeCascadeSingleChildDir'*
-Values: 0 or 1
-Default: 1.
-
-When displaying dir nodes, this option tells NERDTree to collapse dirs that
-have only one child. Use one of the follow lines to set this option: >
-    let NERDTreeCascadeSingleChildDir=0
-    let NERDTreeCascadeSingleChildDir=1
-<
 
 ------------------------------------------------------------------------------
                                          *'NERDTreeCascadeOpenSingleChildDir'*

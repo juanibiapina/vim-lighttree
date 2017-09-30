@@ -189,21 +189,10 @@ function! s:jumpToLastChild(node)
     call s:jumpToChild(a:node, 1)
 endfunction
 
-" Move the cursor to the parent of the specified node. For a cascade, move to
-" the parent of the cascade's highest node. At the root, do nothing.
+" Move the cursor to the parent of the specified node. At the root, do
+" nothing.
 function! s:jumpToParent(node)
     let l:parent = a:node.parent
-
-    " If "a:node" represents a directory, back out of its cascade.
-    if a:node.path.isDirectory
-        while !empty(l:parent) && !l:parent.isRoot()
-            if index(l:parent.getCascade(), a:node) >= 0
-                let l:parent = l:parent.parent
-            else
-                break
-            endif
-        endwhile
-    endif
 
     if !empty(l:parent)
         call l:parent.putCursorHere(1)

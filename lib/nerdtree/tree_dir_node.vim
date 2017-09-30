@@ -33,11 +33,7 @@ endfunction
 
 " Mark this TreeDirNode as closed.
 function! s:TreeDirNode.close()
-    " Close all directories in this directory node's cascade. This is
-    " necessary to ensure consistency when cascades are rendered.
-    for l:dirNode in self.getCascade()
-        let l:dirNode.isOpen = 0
-    endfor
+    let self.isOpen = 0
 endfunction
 
 " Recursively close any directory nodes that are descendants of this node.
@@ -65,29 +61,19 @@ function! s:TreeDirNode.createChild(path, inOrder)
     return newTreeNode
 endfunction
 
-" Assemble and return a string that can represent this TreeDirNode object in
-" the NERDTree window.
+" Assemble and return a string that can represent this TreeDirNode
 function! s:TreeDirNode.displayString()
-    let l:result = ''
-
-    " Build a label that identifies this TreeDirNode.
-    let l:label = ''
-    let l:cascade = self.getCascade()
-    for l:dirNode in l:cascade
-        let l:label .= l:dirNode.path.displayString()
-    endfor
-
-    " Select the appropriate open/closed status indicator symbol.
-    if l:cascade[-1].isOpen
+    if self.isOpen
         let l:symbol = g:NERDTreeDirArrowCollapsible
     else
         let l:symbol = g:NERDTreeDirArrowExpandable
     endif
 
-    let l:flags = l:cascade[-1].path.flagSet.renderToString()
+    let l:label = self.path.displayString()
 
-    let l:result = l:symbol . ' ' . l:flags . l:label
-    return l:result
+    let l:flags = self.path.flagSet.renderToString()
+
+    return l:symbol . ' ' . l:flags . l:label
 endfunction
 
 " Will find one of the children (recursively) that has the given path
@@ -112,18 +98,6 @@ function! s:TreeDirNode.findNode(path)
         endfor
     endif
     return {}
-endfunction
-
-" Return an array of dir nodes (starting from self) that can be cascade opened.
-function! s:TreeDirNode.getCascade()
-    if !self.isCascadable()
-        return [self]
-    endif
-
-    let vc = self.getVisibleChildren()
-    let visChild = vc[0]
-
-    return [self] + visChild.getCascade()
 endfunction
 
 " Returns the number of children this node has
@@ -304,16 +278,6 @@ function! s:TreeDirNode.hasVisibleChildren()
     return self.getVisibleChildCount() != 0
 endfunction
 
-" true if this dir has only one visible child - which is also a dir
-function! s:TreeDirNode.isCascadable()
-    if g:NERDTreeCascadeSingleChildDir == 0
-        return 0
-    endif
-
-    let c = self.getVisibleChildren()
-    return len(c) == 1 && c[0].path.isDirectory
-endfunction
-
 " Removes all childen from this node and re-reads them
 "
 " Args:
@@ -379,17 +343,6 @@ endfunction
 " Open this directory node in the current tree. Return the number of new
 " cached nodes.
 function! s:TreeDirNode.open()
-    " Open any ancestors of this node that render within the same cascade.
-    let l:parent = self.parent
-    while !empty(l:parent) && !l:parent.isRoot()
-        if index(l:parent.getCascade(), self) >= 0
-            let l:parent.isOpen = 1
-            let l:parent = l:parent.parent
-        else
-            break
-        endif
-    endwhile
-
     let self.isOpen = 1
 
     let l:numChildrenCached = 0

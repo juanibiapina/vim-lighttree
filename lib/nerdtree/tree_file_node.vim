@@ -254,11 +254,7 @@ function! s:TreeFileNode._renderToString(depth, drawText)
 
         let childNodesToDraw = self.getVisibleChildren()
 
-        if self.isCascadable() && a:depth > 0
-
-            let output = output . childNodesToDraw[0]._renderToString(a:depth, 0)
-
-        elseif len(childNodesToDraw) > 0
+        if len(childNodesToDraw) > 0
             for i in childNodesToDraw
                 let output = output . i._renderToString(a:depth + 1, 1)
             endfor
