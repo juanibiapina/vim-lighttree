@@ -16,8 +16,8 @@
 CONTENTS                                                  *LightTree-contents*
 
     1.Introduction............................|LightTreeIntro|
-    2.Functionality provided..................|NERDTreeFunctionality|
-        2.1.Global commands...................|NERDTreeGlobalCommands|
+    2.Functionality provided..................|LightTreeFunctionality|
+        2.1.Global commands...................|LightTreeGlobalCommands|
         2.2.NERD tree mappings................|NERDTreeMappings|
         2.3.The NERD tree menu................|NERDTreeMenu|
     3.Options.................................|NERDTreeOptions|
@@ -33,11 +33,14 @@ CONTENTS                                                  *LightTree-contents*
 ==============================================================================
 1. Introduction                                               *LightTreeIntro*
 
-The NERD tree allows you to explore your filesystem and to open files and
+LightTree allows you to explore your filesystem and to open files and
 directories. It presents the filesystem to you in the form of a tree. It also
 allows you to perform simple filesystem operations.
 
-The following features and functionality are provided by the NERD tree:
+LightTree is a fork of NERDTree. Although everything works, many configuration
+options and functions haven't been renamed yet.
+
+The following features and functionality are provided:
     * Files and directories are displayed in a hierarchical tree structure
     * Different highlighting is provided for the following types of nodes:
         * files
@@ -48,26 +51,22 @@ The following features and functionality are provided by the NERD tree:
         * executable files
     * Many (customisable) mappings are provided to manipulate the tree:
         * Mappings to open/close/explore directory nodes
-        * Mappings to open files in new/existing windows
         * Mappings to change the current root of the tree
         * Mappings to navigate around the tree
-        * ...
     * Filtering of tree content (can be toggled at runtime)
         * custom file filters to prevent e.g. vim backup files being displayed
         * optional displaying of hidden files (. files)
         * files can be "turned off" so that only directories are displayed
-    * The position and size of the NERD tree window can be customised
     * The order in which the nodes in the tree are listed can be customised.
     * A model of your filesystem is created/maintained as you explore it. This
       has several advantages:
         * All filesystem information is cached and is only re-read on demand
         * If you revisit a part of the tree that you left earlier in your
           session, the directory nodes will be opened/closed as you left them
-    * The script remembers the cursor position and window position in the NERD
-      tree, so it will always appear exactly as you left it.
+    * The script remembers the cursor position and window position in the tree,
+      so it will always appear exactly as you left it.
     * By default the script overrides the default file browser (netrw), so if
-      you :edit a directory a (slightly modified) NERD tree will appear in the
-      current window
+      you :edit a directory LightTree will appear in the current window instead
     * A programmable menu system is provided
         * one default menu plugin is provided to perform basic filesystem
           operations (create/delete/move/copy files/directories)
@@ -75,20 +74,24 @@ The following features and functionality are provided by the NERD tree:
 
 
 ==============================================================================
-2. Functionality provided                              *NERDTreeFunctionality*
+2. Functionality provided                             *LightTreeFunctionality*
 
 ------------------------------------------------------------------------------
-2.1. Global Commands                                  *NERDTreeGlobalCommands*
+2.1. Global Commands                                 *LightTreeGlobalCommands*
 
 :LightTree [<start-directory>]                                    *:LightTree*
-    Opens a fresh NERD tree. The root of the tree depends on the argument
-    given. There are 2 cases: If no argument is given, the current directory
-    will be used.  If a directory is given, that will be used. For example: >
+    Opens a tree in the current window. The root of the tree depends on the
+    argument given. There are 2 cases: If no argument is given, the current
+    directory will be used.  If a directory is given, that will be used. For
+    example: >
         :LightTree /home/marty/vim7/src
 <
 
+    If a tree already exists for a directory, it is opened. Otherwise a fresh
+    tree is created for that directory.
+
 :LightTreeFind                                                *:LightTreeFind*
-    Find the current file in the tree.
+    Find the current file in a tree.
 
     If no tree exists and the current file is under vim's CWD, then init a
     tree at the CWD and reveal the file. Otherwise init a tree in the current
