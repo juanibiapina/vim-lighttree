@@ -28,7 +28,7 @@ function! lighttree#ui_glue#createDefaultBindings()
     call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapToggleFilters, 'scope': "all", 'callback': s."toggleIgnoreFilter" })
     call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapToggleFiles, 'scope': "all", 'callback': s."toggleShowFiles" })
 
-    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapCloseDir, 'scope': "Node", 'callback': s."closeCurrentDir" })
+    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapCloseDir, 'scope': "Node", 'callback': s."closeParentDir" })
     call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapCloseChildren, 'scope': "DirNode", 'callback': s."closeChildren" })
 
     call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapMenu, 'scope': "Node", 'callback': s."showMenu" })
@@ -87,12 +87,10 @@ function! s:closeChildren(node)
 endfunction
 
 " closes the parent dir of the current node
-function! s:closeCurrentDir(node)
+function! s:closeParentDir(node)
     let parent = a:node.parent
 
-    if parent ==# {} || parent.isRoot()
-        call lighttree#echo("cannot close tree root")
-    else
+    if !(parent ==# {})
         call parent.close()
         call b:NERDTree.render()
         call parent.putCursorHere(0)
