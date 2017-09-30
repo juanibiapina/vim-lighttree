@@ -13,8 +13,9 @@ http://vimcasts.org/blog/2013/01/oil-and-vinegar-split-windows-and-project-drawe
 *WARNING*: Although everything works, this plugin is still in development and
 breaking changes will happen. Since it is a fork of
 [NERDTree](https://github.com/scrooloose/nerdtree), most configuration options
-and global functions have the same name.
+and global functions still have the same name.
 
+Documentation is available on the `doc` folder.
 
 Installation
 ------------
