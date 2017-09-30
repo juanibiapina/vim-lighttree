@@ -34,8 +34,6 @@ function! lighttree#ui_glue#createDefaultBindings()
     call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapMenu, 'scope': "Node", 'callback': s."showMenu" })
 
     call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapJumpParent, 'scope': "Node", 'callback': s."jumpToParent" })
-    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapJumpFirstChild, 'scope': "Node", 'callback': s."jumpToFirstChild" })
-    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapJumpLastChild, 'scope': "Node", 'callback': s."jumpToLastChild" })
     call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapJumpRoot, 'scope': "all", 'callback': s."jumpToRoot" })
     call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapJumpNextSibling, 'scope': "Node", 'callback': s."jumpToNextSibling" })
     call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapJumpPrevSibling, 'scope': "Node", 'callback': s."jumpToPrevSibling" })
@@ -138,46 +136,10 @@ function! s:findAndRevealPath()
     endif
 endfunction
 
-" Args:
-" direction: 0 if going to first child, 1 if going to last
-function! s:jumpToChild(currentNode, direction)
-    if a:currentNode.isRoot()
-        return lighttree#echo("cannot jump to " . (a:direction ? "last" : "first") .  " child")
-    end
-    let dirNode = a:currentNode.parent
-    let childNodes = dirNode.getVisibleChildren()
-
-    let targetNode = childNodes[0]
-    if a:direction
-        let targetNode = childNodes[len(childNodes) - 1]
-    endif
-
-    if targetNode.equals(a:currentNode)
-        let siblingDir = a:currentNode.parent.findOpenDirSiblingWithVisibleChildren(a:direction)
-        if siblingDir != {}
-            let indx = a:direction ? siblingDir.getVisibleChildCount()-1 : 0
-            let targetNode = siblingDir.getChildByIndex(indx, 1)
-        endif
-    endif
-
-    call targetNode.putCursorHere(1)
-endfunction
-
-
 "this is needed since I cant figure out how to invoke dict functions from a
 "key map
 function! lighttree#ui_glue#invokeKeyMap(key)
     call g:NERDTreeKeyMap.Invoke(a:key)
-endfunction
-
-" wrapper for the jump to child method
-function! s:jumpToFirstChild(node)
-    call s:jumpToChild(a:node, 0)
-endfunction
-
-" wrapper for the jump to child method
-function! s:jumpToLastChild(node)
-    call s:jumpToChild(a:node, 1)
 endfunction
 
 " Move the cursor to the parent of the specified node. At the root, do

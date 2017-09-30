@@ -21,8 +21,6 @@ function! s:UI._dumpHelp()
         let help .= "\" Tree navigation mappings~\n"
         let help .= "\" ". g:NERDTreeMapJumpRoot .": go to root\n"
         let help .= "\" ". g:NERDTreeMapJumpParent .": go to parent\n"
-        let help .= "\" ". g:NERDTreeMapJumpFirstChild  .": go to first child\n"
-        let help .= "\" ". g:NERDTreeMapJumpLastChild   .": go to last child\n"
         let help .= "\" ". g:NERDTreeMapJumpNextSibling .": go to next sibling\n"
         let help .= "\" ". g:NERDTreeMapJumpPrevSibling .": go to prev sibling\n"
 

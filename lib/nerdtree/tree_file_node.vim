@@ -72,32 +72,6 @@ function! s:TreeFileNode.findNode(path)
     return {}
 endfunction
 
-"
-"Finds the next sibling for this node in the indicated direction. This sibling
-"must be a directory and may/may not have children as specified.
-"
-"Args:
-"direction: 0 if you want to find the previous sibling, 1 for the next sibling
-"
-"Return:
-"a treenode object or {} if no appropriate sibling could be found
-function! s:TreeFileNode.findOpenDirSiblingWithVisibleChildren(direction)
-    "if we have no parent then we can have no siblings
-    if self.parent != {}
-        let nextSibling = self.findSibling(a:direction)
-
-        while nextSibling != {}
-            if nextSibling.path.isDirectory && nextSibling.hasVisibleChildren() && nextSibling.isOpen
-                return nextSibling
-            endif
-            let nextSibling = nextSibling.findSibling(a:direction)
-        endwhile
-    endif
-
-    return {}
-endfunction
-
-"
 "Finds the next sibling for this node in the indicated direction
 "
 "Args:
