@@ -1,5 +1,5 @@
-syn match NERDTreeIgnore #\~#
-exec 'syn match NERDTreeIgnore #\['.g:NERDTreeGlyphReadOnly.'\]#'
+syn match LightTreeIgnore #\~#
+exec 'syn match LightTreeIgnore #\['.g:NERDTreeGlyphReadOnly.'\]#'
 
 "quickhelp syntax elements
 syn match NERDTreeHelpKey #" \{1,2\}[^ ]*:#ms=s+2,me=e-1
@@ -8,7 +8,7 @@ syn match NERDTreeHelpTitle #" .*\~$#ms=s+2,me=e-1
 syn match NERDTreeToggleOn #(on)#ms=s+1,he=e-1
 syn match NERDTreeToggleOff #(off)#ms=e-3,me=e-1
 syn match NERDTreeHelpCommand #" :.\{-}\>#hs=s+3
-syn match NERDTreeHelp  #^".*# contains=NERDTreeHelpKey,NERDTreeHelpTitle,NERDTreeIgnore,NERDTreeToggleOff,NERDTreeToggleOn,NERDTreeHelpCommand
+syn match NERDTreeHelp  #^".*# contains=NERDTreeHelpKey,NERDTreeHelpTitle,LightTreeIgnore,NERDTreeToggleOff,NERDTreeToggleOn,NERDTreeHelpCommand
 
 "highlighting for sym links
 syn match NERDTreeLinkTarget #->.*# containedin=NERDTreeDir,NERDTreeFile
@@ -27,7 +27,7 @@ syn match NERDTreeExecFile  #^ .*\*\($\| \)# contains=NERDTreeRO
 exec 'syn match NERDTreeFile  #^[^"\.'.s:dirArrows.'] *[^'.s:dirArrows.']*# contains=NERDTreeLink,NERDTreeRO,NERDTreeExecFile'
 
 "highlighting for readonly files
-exec 'syn match NERDTreeRO # *\zs.*\ze \['.g:NERDTreeGlyphReadOnly.'\]# contains=NERDTreeIgnore,NERDTreeFile'
+exec 'syn match NERDTreeRO # *\zs.*\ze \['.g:NERDTreeGlyphReadOnly.'\]# contains=LightTreeIgnore,NERDTreeFile'
 
 syn match NERDTreeFlags #^ *\zs\[.\]# containedin=NERDTreeFile,NERDTreeExecFile
 syn match NERDTreeFlags #\[.\]# containedin=NERDTreeDir
@@ -55,7 +55,7 @@ hi def link NERDTreeFile Normal
 hi def link NERDTreeCWD Statement
 hi def link NERDTreeOpenable Directory
 hi def link NERDTreeClosable Directory
-hi def link NERDTreeIgnore ignore
+hi def link LightTreeIgnore ignore
 hi def link NERDTreeRO WarningMsg
 hi def link NERDTreeFlags Number
 

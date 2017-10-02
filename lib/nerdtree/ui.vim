@@ -317,7 +317,7 @@ function! s:UI.toggleHelp()
     let self._showHelp = !self._showHelp
 endfunction
 
-" toggles the use of the NERDTreeIgnore option
+" toggles the use of the LightTreeIgnore option
 function! s:UI.toggleIgnoreFilter()
     let self._ignoreEnabled = !self._ignoreEnabled
     call self.renderViewSavingPosition()

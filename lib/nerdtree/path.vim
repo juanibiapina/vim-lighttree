@@ -356,7 +356,7 @@ endfunction
 function! s:Path.ignore(nerdtree)
     "filter out the user specified paths to ignore
     if a:nerdtree.ui.isIgnoreFilterEnabled()
-        for i in g:NERDTreeIgnore
+        for i in g:LightTreeIgnore
             if self._ignorePatternMatches(i)
                 return 1
             endif

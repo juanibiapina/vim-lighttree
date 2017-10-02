@@ -31,8 +31,8 @@ endfunction
 "SECTION: Init variable calls and other random constants {{{2
 call s:initVariable("g:LightTreeCaseSensitiveSort", 0)
 call s:initVariable("g:LightTreeNaturalSort", 0)
-if !exists("g:NERDTreeIgnore")
-    let g:NERDTreeIgnore = ['\~$']
+if !exists("g:LightTreeIgnore")
+    let g:LightTreeIgnore = ['\~$']
 endif
 call s:initVariable("g:LightTreeHighlightCursorline", 1)
 call s:initVariable("g:LightTreeHijackNetrw", 1)
