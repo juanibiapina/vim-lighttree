@@ -1,11 +1,11 @@
-if exists("loaded_nerd_tree")
+if exists("loaded_light_tree")
     finish
 endif
 if v:version < 700
     echoerr "NERDTree: this plugin requires vim >= 7."
     finish
 endif
-let loaded_nerd_tree = 1
+let loaded_light_tree = 1
 
 "for line continuation - i.e dont want C in &cpo
 let s:old_cpo = &cpo
@@ -29,8 +29,8 @@ function! s:initVariable(var, value)
 endfunction
 
 "SECTION: Init variable calls and other random constants {{{2
-call s:initVariable("g:NERDTreeCaseSensitiveSort", 0)
-call s:initVariable("g:NERDTreeNaturalSort", 0)
+call s:initVariable("g:LightTreeCaseSensitiveSort", 0)
+call s:initVariable("g:LightTreeNaturalSort", 0)
 call s:initVariable("g:NERDTreeSortHiddenFirst", 1)
 if !exists("g:NERDTreeIgnore")
     let g:NERDTreeIgnore = ['\~$']

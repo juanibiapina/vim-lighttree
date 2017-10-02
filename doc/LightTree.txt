@@ -324,16 +324,14 @@ Related tags: |LightTree-m| |NERDTreeApi|
 ------------------------------------------------------------------------------
 3.1. Customisation summary                             *NERDTreeOptionSummary*
 
-The script provides the following options that can customise the behaviour the
-NERD tree. These options should be set in your vimrc.
+The script provides the following options that can customise the behaviour of
+LightTree. These options should be set in your vimrc.
 
-|'loaded_nerd_tree'|            Turns off the script.
+|'loaded_light_tree'|           Turns off the script.
 
-|'NERDTreeCaseSensitiveSort'|   Tells the NERD tree whether to be case
-                                sensitive or not when sorting nodes.
+|'LightTreeCaseSensitiveSort'|  Toggles case node sorting.
 
-|'NERDTreeNaturalSort'|         Tells the NERD tree whether to use
-                                natural sort order or not when sorting nodes.
+|'LightTreeNaturalSort'|        Toggles natural sort order when sorting nodes.
 
 |'NERDTreeSortHiddenFirst'|     Tells the NERD tree whether to take the dot
                                 at the beginning of the hidden file names
@@ -377,19 +375,18 @@ NERD tree. These options should be set in your vimrc.
 To enable any of the below options you should put the given line in your
 ~/.vimrc
 
-                                                          *'loaded_nerd_tree'*
-If this plugin is making you feel homicidal, it may be a good idea to turn it
-off with this line in your vimrc: >
-    let loaded_nerd_tree=1
+                                                         *'loaded_light_tree'*
+Disable loading of the plugin: >
+    let loaded_light_tree=1
 <
 
 ------------------------------------------------------------------------------
-                                                 *'NERDTreeCaseSensitiveSort'*
+                                                *'LightTreeCaseSensitiveSort'*
 Values: 0 or 1.
 Default: 0.
 
-By default the NERD tree does not sort nodes case sensitively, i.e. nodes
-could appear like this: >
+By default nodes are not sorted case sensitively, i.e. nodes could appear like
+this: >
     bar.c
     Baz.c
     blarg.c
@@ -405,11 +402,11 @@ account. The above nodes would then be sorted like this: >
     boner.c
 <
 ------------------------------------------------------------------------------
-                                                       *'NERDTreeNaturalSort'*
+                                                      *'LightTreeNaturalSort'*
 Values: 0 or 1.
 Default: 0.
 
-By default the NERD tree does not sort nodes in natural sort order, i.e. nodes
+By default LightTree does not sort nodes in natural sort order, i.e. nodes
 could appear like this: >
     z1.txt
     z10.txt
