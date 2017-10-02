@@ -135,7 +135,7 @@ F......Toggle whether files are displayed.......................|LightTree-F|
 ------------------------------------------------------------------------------
                                                                  *LightTree-o*
 Default key: o
-Map option: NERDTreeMapActivateNode
+Map option: LightTreeMapActivateNode
 Applies to: files and directories.
 
 If a file node is selected, it is opened in the current window.
@@ -146,7 +146,7 @@ state.
 ------------------------------------------------------------------------------
                                                                  *LightTree-O*
 Default key: O
-Map option: NERDTreeMapOpenRecursively
+Map option: LightTreeMapOpenRecursively
 Applies to: directories.
 
 Recursively opens the selected directory.
@@ -159,7 +159,7 @@ cached. This is handy, especially if you have .svn directories.
 ------------------------------------------------------------------------------
                                                                  *LightTree-x*
 Default key: x
-Map option: NERDTreeMapCloseDir
+Map option: LightTreeMapCloseDir
 Applies to: files and directories.
 
 Closes the parent of the selected node.
@@ -167,7 +167,7 @@ Closes the parent of the selected node.
 ------------------------------------------------------------------------------
                                                                  *LightTree-X*
 Default key: X
-Map option: NERDTreeMapCloseChildren
+Map option: LightTreeMapCloseChildren
 Applies to: directories.
 
 Recursively closes all children of the selected directory.
@@ -177,7 +177,7 @@ Tip: To quickly "reset" the tree, use |LightTree-P| with this mapping.
 ------------------------------------------------------------------------------
                                                                  *LightTree-P*
 Default key: P
-Map option: NERDTreeMapJumpRoot
+Map option: LightTreeMapJumpRoot
 Applies to: no restrictions.
 
 Jump to the tree root.
@@ -185,7 +185,7 @@ Jump to the tree root.
 ------------------------------------------------------------------------------
                                                                  *LightTree-p*
 Default key: p
-Map option: NERDTreeMapJumpParent
+Map option: LightTreeMapJumpParent
 Applies to: files and directories.
 
 Jump to the parent node of the selected node.
@@ -193,7 +193,7 @@ Jump to the parent node of the selected node.
 ------------------------------------------------------------------------------
                                                                  *LightTree-J*
 Default key: J
-Map option: NERDTreeMapJumpNextSibling
+Map option: LightTreeMapJumpNextSibling
 Applies to: files and directories.
 
 Jump to the next sibling of the selected node.
@@ -201,7 +201,7 @@ Jump to the next sibling of the selected node.
 ------------------------------------------------------------------------------
                                                                  *LightTree-K*
 Default key: K
-Map option: NERDTreeMapJumpPrevSibling
+Map option: LightTreeMapJumpPrevSibling
 Applies to: files and directories.
 
 Jump to the previous sibling of the selected node.
@@ -209,7 +209,7 @@ Jump to the previous sibling of the selected node.
 ------------------------------------------------------------------------------
                                                                  *LightTree-C*
 Default key: C
-Map option: NERDTreeMapChangeRoot
+Map option: LightTreeMapChangeRoot
 Applies to: files and directories.
 
 Make the selected directory node the new tree root. If a file is selected, its
@@ -218,7 +218,7 @@ parent is used.
 ------------------------------------------------------------------------------
                                                                  *LightTree-u*
 Default key: u
-Map option: NERDTreeMapUpdir
+Map option: LightTreeMapUpdir
 Applies to: no restrictions.
 
 Move the tree root up a dir (like doing a "cd ..").
@@ -226,7 +226,7 @@ Move the tree root up a dir (like doing a "cd ..").
 ------------------------------------------------------------------------------
                                                                  *LightTree-U*
 Default key: U
-Map option: NERDTreeMapUpdirKeepOpen
+Map option: LightTreeMapUpdirKeepOpen
 Applies to: no restrictions.
 
 Like |LightTree-u| except that the old tree root is kept open.
@@ -234,7 +234,7 @@ Like |LightTree-u| except that the old tree root is kept open.
 ------------------------------------------------------------------------------
                                                                  *LightTree-r*
 Default key: r
-Map option: NERDTreeMapRefresh
+Map option: LightTreeMapRefresh
 Applies to: files and directories.
 
 If a dir is selected, recursively refresh that dir, i.e. scan the filesystem
@@ -245,7 +245,7 @@ If a file node is selected then the above is done on it's parent.
 ------------------------------------------------------------------------------
                                                                  *LightTree-R*
 Default key: R
-Map option: NERDTreeMapRefreshRoot
+Map option: LightTreeMapRefreshRoot
 Applies to: no restrictions.
 
 Recursively refresh the tree root.
@@ -253,7 +253,7 @@ Recursively refresh the tree root.
 ------------------------------------------------------------------------------
                                                                  *LightTree-m*
 Default key: m
-Map option: NERDTreeMapMenu
+Map option: LightTreeMapMenu
 Applies to: files and directories.
 
 Display the NERD tree menu. See |NERDTreeMenu| for details.
@@ -261,7 +261,7 @@ Display the NERD tree menu. See |NERDTreeMenu| for details.
 ------------------------------------------------------------------------------
                                                                 *LightTree-cd*
 Default key: cd
-Map option: NERDTreeMapChdir
+Map option: LightTreeMapChdir
 Applies to: files and directories.
 
 Change vims current working directory to that of the selected node.
@@ -269,7 +269,7 @@ Change vims current working directory to that of the selected node.
 ------------------------------------------------------------------------------
                                                                 *LightTree-CD*
 Default key: CD
-Map option: NERDTreeMapCWD
+Map option: LightTreeMapCWD
 Applies to: no restrictions.
 
 Change tree root to vims current working directory.
@@ -277,7 +277,7 @@ Change tree root to vims current working directory.
 ------------------------------------------------------------------------------
                                                                  *LightTree-I*
 Default key: I
-Map option: NERDTreeMapToggleHidden
+Map option: LightTreeMapToggleHidden
 Applies to: no restrictions.
 
 Toggles whether hidden files (i.e. "dot files") are displayed.
@@ -285,7 +285,7 @@ Toggles whether hidden files (i.e. "dot files") are displayed.
 ------------------------------------------------------------------------------
                                                                  *LightTree-f*
 Default key: f
-Map option: NERDTreeMapToggleFilters
+Map option: LightTreeMapToggleFilters
 Applies to: no restrictions.
 
 Toggles whether file filters are used. See |'NERDTreeIgnore'| for details.
@@ -293,7 +293,7 @@ Toggles whether file filters are used. See |'NERDTreeIgnore'| for details.
 ------------------------------------------------------------------------------
                                                                  *LightTree-F*
 Default key: F
-Map option: NERDTreeMapToggleFiles
+Map option: LightTreeMapToggleFiles
 Applies to: no restrictions.
 
 Toggles whether file nodes are displayed.
@@ -301,7 +301,7 @@ Toggles whether file nodes are displayed.
 ------------------------------------------------------------------------------
                                                                  *LightTree-?*
 Default key: ?
-Map option: NERDTreeMapHelp
+Map option: LightTreeMapHelp
 Applies to: no restrictions.
 
 Toggles whether the quickhelp is displayed.

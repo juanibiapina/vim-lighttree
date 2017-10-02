@@ -5,7 +5,7 @@ let g:NERDTreeCreator = s:Creator
 
 function! s:Creator._bindMappings()
     "make <cr> do the same as the activate node mapping
-    nnoremap <silent> <buffer> <cr> :call lighttree#ui_glue#invokeKeyMap(g:NERDTreeMapActivateNode)<cr>
+    nnoremap <silent> <buffer> <cr> :call lighttree#ui_glue#invokeKeyMap(g:LightTreeMapActivateNode)<cr>
 
     call g:NERDTreeKeyMap.BindAll()
 endfunction
