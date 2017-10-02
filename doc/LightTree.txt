@@ -153,7 +153,7 @@ Recursively opens the selected directory.
 
 All files and directories are cached, but if a directory would not be
 displayed due to file filters (see |'LightTreeIgnore'| |LightTree-f|) or the
-hidden file filter (see |'NERDTreeShowHidden'|) then its contents are not
+hidden file filter (see |'LightTreeShowHidden'|) then its contents are not
 cached. This is handy, especially if you have .svn directories.
 
 ------------------------------------------------------------------------------
@@ -344,8 +344,8 @@ LightTree. These options should be set in your vimrc.
 
 |'LightTreeRespectWildIgnore'|  Toggles respecting of |'wildignore'|.
 
-|'NERDTreeShowHidden'|          Tells the NERD tree whether to display hidden
-                                files on startup.
+|'LightTreeShowHidden'|         Toggles displaying of hidden files files on
+                                startup.
 
 |'NERDTreeShowLineNumbers'|     Tells the NERD tree whether to display line
                                 numbers in the tree window.
@@ -478,15 +478,15 @@ Default: 0.
 If set to 1, the |'wildignore'| setting is respected.
 
 ------------------------------------------------------------------------------
-                                                        *'NERDTreeShowHidden'*
+                                                       *'LightTreeShowHidden'*
 Values: 0 or 1.
 Default: 0.
 
-This option tells vim whether to display hidden files by default. This option
+This option configures whether to display hidden files by default. This option
 can be dynamically toggled, per tree, with the |LightTree-I| mapping.  Use one
 of the follow lines to set this option: >
-    let NERDTreeShowHidden=0
-    let NERDTreeShowHidden=1
+    let LightTreeShowHidden=0
+    let LightTreeShowHidden=1
 <
 
 ------------------------------------------------------------------------------

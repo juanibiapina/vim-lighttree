@@ -110,8 +110,8 @@ function! s:findAndRevealPath()
     endtry
 
     if p.isUnixHiddenPath()
-        let showhidden=g:NERDTreeShowHidden
-        let g:NERDTreeShowHidden = 1
+        let showhidden=g:LightTreeShowHidden
+        let g:LightTreeShowHidden = 1
     endif
 
     try
@@ -132,7 +132,7 @@ function! s:findAndRevealPath()
     call node.putCursorHere(1)
 
     if p.isUnixHiddenFile()
-        let g:NERDTreeShowHidden = showhidden
+        let g:LightTreeShowHidden = showhidden
     endif
 endfunction
 

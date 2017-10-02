@@ -67,7 +67,7 @@ function! s:UI.New(nerdtree)
     let newObj._showHelp = 0
     let newObj._ignoreEnabled = 1
     let newObj._showFiles = 1
-    let newObj._showHidden = g:NERDTreeShowHidden
+    let newObj._showHidden = g:LightTreeShowHidden
 
     return newObj
 endfunction
