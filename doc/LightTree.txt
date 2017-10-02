@@ -312,10 +312,8 @@ Toggles whether the quickhelp is displayed.
 The NERD tree has a menu that can be programmed via the an API (see
 |NERDTreeMenuAPI|).
 
-The script comes with two default menu plugins: exec_menuitem.vim and
-fs_menu.vim. fs_menu.vim adds some basic filesystem operations to the menu for
-creating/deleting/moving/copying files and dirs. exec_menuitem.vim provides a
-menu item to execute executable files.
+The script comes with a default menu plugin that adds some basic filesystem
+operations to the menu for creating/deleting/moving/copying files and dirs.
 
 Related tags: |LightTree-m| |NERDTreeApi|
 
