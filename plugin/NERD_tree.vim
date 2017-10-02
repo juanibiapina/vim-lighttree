@@ -34,7 +34,7 @@ call s:initVariable("g:LightTreeNaturalSort", 0)
 if !exists("g:NERDTreeIgnore")
     let g:NERDTreeIgnore = ['\~$']
 endif
-call s:initVariable("g:NERDTreeHighlightCursorline", 1)
+call s:initVariable("g:LightTreeHighlightCursorline", 1)
 call s:initVariable("g:NERDTreeHijackNetrw", 1)
 call s:initVariable("g:NERDTreeNotificationThreshold", 100)
 call s:initVariable("g:NERDTreeRespectWildIgnore", 0)

@@ -122,7 +122,7 @@ function! s:Creator._setCommonBufOptions()
 
     iabc <buffer>
 
-    if g:NERDTreeHighlightCursorline
+    if g:LightTreeHighlightCursorline
         setlocal cursorline
     endif
 

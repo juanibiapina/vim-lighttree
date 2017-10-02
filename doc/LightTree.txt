@@ -333,8 +333,9 @@ LightTree. These options should be set in your vimrc.
 
 |'LightTreeNaturalSort'|        Toggles natural sort order when sorting nodes.
 
-|'NERDTreeHighlightCursorline'| Tell the NERD tree whether to highlight the
-                                current cursor line.
+|'LightTreeHighlightCursorline'|
+                                Highlights the current line on the LightTree
+                                buffer.
 
 |'NERDTreeHijackNetrw'|         Tell the NERD tree whether to replace the netrw
                                 autocommands for exploring local directories.
@@ -425,11 +426,11 @@ above nodes would then be sorted like this: >
     z110.txt
 <
 ------------------------------------------------------------------------------
-                                               *'NERDTreeHighlightCursorline'*
+                                              *'LightTreeHighlightCursorline'*
 Values: 0 or 1.
 Default: 1.
 
-If set to 1, the current cursor line in the NERD tree buffer will be
+If set to 1, the current cursor line in the LightTree buffer will be
 highlighted. This is done using the |'cursorline'| option.
 
 ------------------------------------------------------------------------------
