@@ -490,7 +490,7 @@ function! s:TreeDirNode.toggleOpen()
     if self.isOpen ==# 1
         call self.close()
     else
-        if g:NERDTreeCascadeOpenSingleChildDir == 0
+        if g:LightTreeCascadeOpenSingleChildDir == 0
             call self.open()
         else
             call self.openAlong()
