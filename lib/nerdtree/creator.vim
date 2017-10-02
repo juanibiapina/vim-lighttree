@@ -111,7 +111,7 @@ function! s:Creator._setCommonBufOptions()
     setlocal nofoldenable
     setlocal nobuflisted
     setlocal nospell
-    if g:NERDTreeShowLineNumbers
+    if g:LightTreeShowLineNumbers
         setlocal nu
     else
         setlocal nonu

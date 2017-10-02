@@ -39,7 +39,7 @@ call s:initVariable("g:LightTreeHijackNetrw", 1)
 call s:initVariable("g:LightTreeNotificationThreshold", 100)
 call s:initVariable("g:LightTreeRespectWildIgnore", 0)
 call s:initVariable("g:LightTreeShowHidden", 0)
-call s:initVariable("g:NERDTreeShowLineNumbers", 0)
+call s:initVariable("g:LightTreeShowLineNumbers", 0)
 call s:initVariable("g:NERDTreeSortDirs", 1)
 
 if !lighttree#os#is_windows()
