@@ -20,9 +20,9 @@ CONTENTS                                                  *LightTree-contents*
         2.1.Global commands...................|LightTreeGlobalCommands|
         2.2.Mappings..........................|LightTreeMappings|
         2.3.The NERD tree menu................|NERDTreeMenu|
-    3.Options.................................|NERDTreeOptions|
-        3.1.Option summary....................|NERDTreeOptionSummary|
-        3.2.Option details....................|NERDTreeOptionDetails|
+    3.Options.................................|LightTreeOptions|
+        3.1.Option summary....................|LightTreeOptionSummary|
+        3.2.Option details....................|LightTreeOptionDetails|
     4.The NERD tree API.......................|NERDTreeAPI|
         4.1.Key map API.......................|NERDTreeKeymapAPI|
         4.2.Menu API..........................|NERDTreeMenuAPI|
@@ -318,11 +318,11 @@ operations to the menu for creating/deleting/moving/copying files and dirs.
 Related tags: |LightTree-m| |NERDTreeApi|
 
 ==============================================================================
-3. Customisation                                             *NERDTreeOptions*
+3. Customisation                                            *LightTreeOptions*
 
 
 ------------------------------------------------------------------------------
-3.1. Customisation summary                             *NERDTreeOptionSummary*
+3.1. Customisation summary                            *LightTreeOptionSummary*
 
 The script provides the following options that can customise the behaviour of
 LightTree. These options should be set in your vimrc.
@@ -359,7 +359,7 @@ LightTree. These options should be set in your vimrc.
                                 one child that also is a directory.
 
 ------------------------------------------------------------------------------
-3.2. Customisation details                             *NERDTreeOptionDetails*
+3.2. Customisation details                            *LightTreeOptionDetails*
 
 To enable any of the below options you should put the given line in your
 ~/.vimrc
