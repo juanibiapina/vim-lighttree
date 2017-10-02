@@ -19,7 +19,7 @@ CONTENTS                                                  *LightTree-contents*
     2.Functionality provided..................|LightTreeFunctionality|
         2.1.Global commands...................|LightTreeGlobalCommands|
         2.2.Mappings..........................|LightTreeMappings|
-        2.3.The NERD tree menu................|NERDTreeMenu|
+        2.3.LightTree menu....................|LightTreeMenu|
     3.Options.................................|LightTreeOptions|
         3.1.Option summary....................|LightTreeOptionSummary|
         3.2.Option details....................|LightTreeOptionDetails|
@@ -256,7 +256,7 @@ Default key: m
 Map option: LightTreeMapMenu
 Applies to: files and directories.
 
-Display the NERD tree menu. See |NERDTreeMenu| for details.
+Display the NERD tree menu. See |LightTreeMenu| for details.
 
 ------------------------------------------------------------------------------
                                                                 *LightTree-cd*
@@ -307,9 +307,9 @@ Applies to: no restrictions.
 Toggles whether the quickhelp is displayed.
 
 ------------------------------------------------------------------------------
-2.3. The NERD tree menu                                         *NERDTreeMenu*
+2.3. LightTree menu                                        *LightTreeMenu*
 
-The NERD tree has a menu that can be programmed via the an API (see
+LightTree has a menu that can be programmed via the an API (see
 |NERDTreeMenuAPI|).
 
 The script comes with a default menu plugin that adds some basic filesystem
@@ -621,7 +621,7 @@ NERDTreeAddKeyMap({options})                             *NERDTreeAddKeyMap()*
 4.2. Menu API                                                *NERDTreeMenuAPI*
 
 NERDTreeAddMenuItem({options})                         *NERDTreeAddMenuItem()*
-    Adds a new menu item to the NERD tree menu (see |NERDTreeMenu|).
+    Adds a new menu item to the NERD tree menu (see |LightTreeMenu|).
 
     {options} must be a dictionary and must contain the
     following keys:
