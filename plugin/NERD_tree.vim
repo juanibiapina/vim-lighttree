@@ -36,7 +36,7 @@ if !exists("g:LightTreeIgnore")
 endif
 call s:initVariable("g:LightTreeHighlightCursorline", 1)
 call s:initVariable("g:LightTreeHijackNetrw", 1)
-call s:initVariable("g:NERDTreeNotificationThreshold", 100)
+call s:initVariable("g:LightTreeNotificationThreshold", 100)
 call s:initVariable("g:LightTreeRespectWildIgnore", 0)
 call s:initVariable("g:NERDTreeShowFiles", 1)
 call s:initVariable("g:NERDTreeShowHidden", 0)

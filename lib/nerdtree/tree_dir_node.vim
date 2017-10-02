@@ -291,7 +291,7 @@ function! s:TreeDirNode._initChildren(silent)
 
     let files = self._glob('*', 1) + self._glob('.*', 0)
 
-    if !a:silent && len(files) > g:NERDTreeNotificationThreshold
+    if !a:silent && len(files) > g:LightTreeNotificationThreshold
         call lighttree#echo("Please wait, caching a large dir ...")
     endif
 
@@ -308,7 +308,7 @@ function! s:TreeDirNode._initChildren(silent)
 
     call self.sortChildren()
 
-    if !a:silent && len(files) > g:NERDTreeNotificationThreshold
+    if !a:silent && len(files) > g:LightTreeNotificationThreshold
         call lighttree#echo("Please wait, caching a large dir ... DONE (". self.getChildCount() ." nodes cached).")
     endif
 
