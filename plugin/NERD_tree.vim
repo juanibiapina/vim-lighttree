@@ -51,12 +51,12 @@ else
 endif
 call s:initVariable("g:NERDTreeCascadeOpenSingleChildDir", 1)
 
-if !exists("g:NERDTreeSortOrder")
-    let g:NERDTreeSortOrder = ['\/$', '*', '\.swp$',  '\.bak$', '\~$']
+if !exists("g:LightTreeSortOrder")
+    let g:LightTreeSortOrder = ['\/$', '*', '\.swp$',  '\.bak$', '\~$']
 else
     "if there isnt a * in the sort sequence then add one
-    if count(g:NERDTreeSortOrder, '*') < 1
-        call add(g:NERDTreeSortOrder, '*')
+    if count(g:LightTreeSortOrder, '*') < 1
+        call add(g:LightTreeSortOrder, '*')
     endif
 endif
 

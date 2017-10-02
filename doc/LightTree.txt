@@ -350,8 +350,7 @@ LightTree. These options should be set in your vimrc.
 |'LightTreeShowLineNumbers'|    Toggles displaying line numbers in the tree
                                 window.
 
-|'NERDTreeSortOrder'|           Tell the NERD tree how to sort the nodes in
-                                the tree.
+|'LightTreeSortOrder'|          Configures how to sort nodes
 
 |'NERDTreeStatusline'|          Set a statusline for NERD tree windows.
 
@@ -501,7 +500,7 @@ window.  Use one of the follow lines to set this option: >
 <
 
 ------------------------------------------------------------------------------
-                                                         *'NERDTreeSortOrder'*
+                                                        *'LightTreeSortOrder'*
 Values: a list of regular expressions.
 Default: ['\/$', '*', '\.swp$',  '\.bak$', '\~$']
 
@@ -516,7 +515,7 @@ all .h files. All files containing the string 'foobar' will be placed at the
 end.  The star is a special flag: it tells the script that every node that
 doesnt match any of the other regexps should be placed here.
 
-If no star is present in 'NERDTreeSortOrder' then one is automatically
+If no star is present in 'LightTreeSortOrder' then one is automatically
 appended to the array.
 
 The regex '\/$' should be used to match directory nodes.

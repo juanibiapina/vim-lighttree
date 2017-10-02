@@ -1,4 +1,4 @@
-let s:NERDTreeSortStarIndex = index(g:NERDTreeSortOrder, '*')
+let s:NERDTreeSortStarIndex = index(g:LightTreeSortOrder, '*')
 lockvar s:NERDTreeSortStarIndex
 
 let s:Path = {}
@@ -289,11 +289,11 @@ function! s:Path.getLastPathComponent(dirSlash)
     return toReturn
 endfunction
 
-" returns the index of the pattern in g:NERDTreeSortOrder that this path matches
+" returns the index of the pattern in g:LightTreeSortOrder that this path matches
 function! s:Path.getSortOrderIndex()
     let i = 0
-    while i < len(g:NERDTreeSortOrder)
-        if  self.getLastPathComponent(1) =~# g:NERDTreeSortOrder[i]
+    while i < len(g:LightTreeSortOrder)
+        if  self.getLastPathComponent(1) =~# g:LightTreeSortOrder[i]
             return i
         endif
         let i = i + 1
