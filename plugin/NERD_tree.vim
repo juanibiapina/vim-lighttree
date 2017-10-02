@@ -37,7 +37,7 @@ endif
 call s:initVariable("g:LightTreeHighlightCursorline", 1)
 call s:initVariable("g:LightTreeHijackNetrw", 1)
 call s:initVariable("g:NERDTreeNotificationThreshold", 100)
-call s:initVariable("g:NERDTreeRespectWildIgnore", 0)
+call s:initVariable("g:LightTreeRespectWildIgnore", 0)
 call s:initVariable("g:NERDTreeShowFiles", 1)
 call s:initVariable("g:NERDTreeShowHidden", 0)
 call s:initVariable("g:NERDTreeShowLineNumbers", 0)

@@ -342,7 +342,7 @@ LightTree. These options should be set in your vimrc.
 
 |'LightTreeIgnore'|             Configures which files to ignore.
 
-|'NERDTreeRespectWildIgnore'|   Tells the NERD tree to respect |'wildignore'|.
+|'LightTreeRespectWildIgnore'|  Toggles respecting of |'wildignore'|.
 
 |'NERDTreeShowFiles'|           Tells the NERD tree whether to display files
                                 in the tree on startup.
@@ -474,7 +474,7 @@ The file filters can be turned on and off dynamically with the |LightTree-f|
 mapping.
 
 ------------------------------------------------------------------------------
-                                                *'NERDTreeRespectWildIgnore'*
+                                               *'LightTreeRespectWildIgnore'*
 Values: 0 or 1.
 Default: 0.
 
