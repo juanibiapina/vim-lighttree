@@ -31,7 +31,6 @@ endfunction
 "SECTION: Init variable calls and other random constants {{{2
 call s:initVariable("g:LightTreeCaseSensitiveSort", 0)
 call s:initVariable("g:LightTreeNaturalSort", 0)
-call s:initVariable("g:NERDTreeSortHiddenFirst", 1)
 if !exists("g:NERDTreeIgnore")
     let g:NERDTreeIgnore = ['\~$']
 endif

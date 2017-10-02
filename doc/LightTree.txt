@@ -333,10 +333,6 @@ LightTree. These options should be set in your vimrc.
 
 |'LightTreeNaturalSort'|        Toggles natural sort order when sorting nodes.
 
-|'NERDTreeSortHiddenFirst'|     Tells the NERD tree whether to take the dot
-                                at the beginning of the hidden file names
-                                into account when sorting nodes.
-
 |'NERDTreeHighlightCursorline'| Tell the NERD tree whether to highlight the
                                 current cursor line.
 

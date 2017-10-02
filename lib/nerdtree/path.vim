@@ -78,10 +78,6 @@ function! s:Path.compareTo(path)
     elseif thisSS > thatSS
         return 1
     else
-        if !g:NERDTreeSortHiddenFirst
-            let thisPath = substitute(thisPath, '^[._]', '', '')
-            let thatPath = substitute(thatPath, '^[._]', '', '')
-        endif
         "if the sort sequences are the same then compare the paths
         "alphabetically
         let pathCompare = g:LightTreeCaseSensitiveSort ? thisPath <# thatPath : thisPath <? thatPath
@@ -323,9 +319,6 @@ endfunction
 function! s:Path.getSortKey()
     if !exists("self._sortKey")
         let path = self.getLastPathComponent(1)
-        if !g:NERDTreeSortHiddenFirst
-            let path = substitute(path, '^[._]', '', '')
-        endif
         if !g:LightTreeCaseSensitiveSort
             let path = tolower(path)
         endif
