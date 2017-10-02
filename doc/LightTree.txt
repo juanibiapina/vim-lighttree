@@ -352,7 +352,7 @@ LightTree. These options should be set in your vimrc.
 
 |'LightTreeSortOrder'|          Configures how to sort nodes
 
-|'NERDTreeStatusline'|          Set a statusline for NERD tree windows.
+|'LightTreeStatusline'|         Set a statusline for LightTree window
 
 |'NERDTreeCascadeOpenSingleChildDir'|
                                 Cascade open while selected directory has only
@@ -533,11 +533,11 @@ Other examples: >
    backup files will appear last with everything else preceding them.
 
 ------------------------------------------------------------------------------
-                                                        *'NERDTreeStatusline'*
+                                                       *'LightTreeStatusline'*
 Values: Any valid statusline setting.
 Default: %{b:NERDTree.root.path.strForOS(0)}
 
-Tells the script what to use as the |'statusline'| setting for NERD tree
+Tells the script what to use as the |'statusline'| setting for LightTree
 windows.
 
 Note that the statusline is set using |:let-&| not |:set| so escaping spaces

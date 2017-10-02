@@ -62,12 +62,12 @@ endif
 
 call s:initVariable("g:NERDTreeGlyphReadOnly", "RO")
 
-if !exists('g:NERDTreeStatusline')
+if !exists('g:LightTreeStatusline')
 
     "the exists() crap here is a hack to stop vim spazzing out when
     "loading a session that was created with an open nerd tree. It spazzes
     "because it doesnt store b:NERDTree(its a b: var, and its a hash)
-    let g:NERDTreeStatusline = "%{exists('b:NERDTree')?b:NERDTree.root.path.str():''}"
+    let g:LightTreeStatusline = "%{exists('b:NERDTree')?b:NERDTree.root.path.str():''}"
 
 endif
 

@@ -132,8 +132,8 @@ function! s:Creator._setCommonBufOptions()
 endfunction
 
 function! s:Creator._setupStatusline()
-    if g:NERDTreeStatusline != -1
-        let &l:statusline = g:NERDTreeStatusline
+    if g:LightTreeStatusline != -1
+        let &l:statusline = g:LightTreeStatusline
     endif
 endfunction
 
