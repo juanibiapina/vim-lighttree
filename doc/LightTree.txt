@@ -337,8 +337,8 @@ LightTree. These options should be set in your vimrc.
                                 Highlights the current line on the LightTree
                                 buffer.
 
-|'NERDTreeHijackNetrw'|         Tell the NERD tree whether to replace the netrw
-                                autocommands for exploring local directories.
+|'LightTreeHijackNetrw'|        Toggles replacing netrw for exploring local
+                                directories.
 
 |'NERDTreeIgnore'|              Tells the NERD tree which files to ignore.
 
@@ -434,14 +434,14 @@ If set to 1, the current cursor line in the LightTree buffer will be
 highlighted. This is done using the |'cursorline'| option.
 
 ------------------------------------------------------------------------------
-                                                       *'NERDTreeHijackNetrw'*
+                                                      *'LightTreeHijackNetrw'*
 Values: 0 or 1.
 Default: 1.
 
 If set to 1, doing a >
     :edit <some directory>
 <
-will open up a LightTree instead of a netrw in the target window.
+will open up LightTree instead of a netrw in the target window.
 
 ------------------------------------------------------------------------------
                                                             *'NERDTreeIgnore'*

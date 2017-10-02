@@ -35,7 +35,7 @@ if !exists("g:NERDTreeIgnore")
     let g:NERDTreeIgnore = ['\~$']
 endif
 call s:initVariable("g:LightTreeHighlightCursorline", 1)
-call s:initVariable("g:NERDTreeHijackNetrw", 1)
+call s:initVariable("g:LightTreeHijackNetrw", 1)
 call s:initVariable("g:NERDTreeNotificationThreshold", 100)
 call s:initVariable("g:NERDTreeRespectWildIgnore", 0)
 call s:initVariable("g:NERDTreeShowFiles", 1)
@@ -127,7 +127,7 @@ augroup NERDTree
     exec "autocmd BufEnter ". g:NERDTreeCreator.BufNamePrefix() ."* stopinsert"
 augroup END
 
-if g:NERDTreeHijackNetrw
+if g:LightTreeHijackNetrw
     function! s:checkForBrowse(dir)
         if !isdirectory(a:dir)
             return
@@ -139,7 +139,7 @@ if g:NERDTreeHijackNetrw
         call g:NERDTreeCreator.RestoreOrCreateBuffer(a:dir)
     endfunction
 
-    augroup NERDTreeHijackNetrw
+    augroup LightTreeHijackNetrw
         autocmd VimEnter * silent! autocmd! FileExplorer
         au BufEnter,VimEnter * call s:checkForBrowse(expand("<amatch>"))
     augroup END
