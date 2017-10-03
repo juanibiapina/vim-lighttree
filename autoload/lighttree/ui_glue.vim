@@ -6,37 +6,37 @@ let g:loaded_nerdtree_ui_glue_autoload = 1
 function! lighttree#ui_glue#createDefaultBindings()
     let s = '<SNR>' . s:SID() . '_'
 
-    call lighttree#keymap#create({ 'key': g:LightTreeMapActivateNode, 'scope': "DirNode", 'callback': s."activateDirNode" })
-    call lighttree#keymap#create({ 'key': g:LightTreeMapActivateNode, 'scope': "FileNode", 'callback': s."activateFileNode" })
-    call lighttree#keymap#create({ 'key': g:LightTreeMapActivateNode, 'scope': "all", 'callback': s."activateAll" })
+    call lighttree#keymap#create(g:LightTreeMapActivateNode, "DirNode", s."activateDirNode")
+    call lighttree#keymap#create(g:LightTreeMapActivateNode, "FileNode", s."activateFileNode")
+    call lighttree#keymap#create(g:LightTreeMapActivateNode, "all", s."activateAll")
 
-    call lighttree#keymap#create({ 'key': g:LightTreeMapOpenRecursively, 'scope': "DirNode", 'callback': s."openNodeRecursively" })
+    call lighttree#keymap#create(g:LightTreeMapOpenRecursively, "DirNode", s."openNodeRecursively")
 
-    call lighttree#keymap#create({ 'key': g:LightTreeMapUpdir, 'scope': "all", 'callback': s."upDirCurrentRootClosed" })
-    call lighttree#keymap#create({ 'key': g:LightTreeMapUpdirKeepOpen, 'scope': "all", 'callback': s."upDirCurrentRootOpen" })
-    call lighttree#keymap#create({ 'key': g:LightTreeMapChangeRoot, 'scope': "Node", 'callback': s."chRoot" })
+    call lighttree#keymap#create(g:LightTreeMapUpdir, "all", s."upDirCurrentRootClosed")
+    call lighttree#keymap#create(g:LightTreeMapUpdirKeepOpen, "all", s."upDirCurrentRootOpen")
+    call lighttree#keymap#create(g:LightTreeMapChangeRoot, "Node", s."chRoot")
 
-    call lighttree#keymap#create({ 'key': g:LightTreeMapChdir, 'scope': "Node", 'callback': s."chCwd" })
+    call lighttree#keymap#create(g:LightTreeMapChdir, "Node", s."chCwd")
 
-    call lighttree#keymap#create({ 'key': g:LightTreeMapCWD, 'scope': "all", 'callback': "lighttree#ui_glue#chRootCwd" })
+    call lighttree#keymap#create(g:LightTreeMapCWD, "all", "lighttree#ui_glue#chRootCwd")
 
-    call lighttree#keymap#create({ 'key': g:LightTreeMapRefreshRoot, 'scope': "all", 'callback': s."refreshRoot" })
-    call lighttree#keymap#create({ 'key': g:LightTreeMapRefresh, 'scope': "Node", 'callback': s."refreshCurrent" })
+    call lighttree#keymap#create(g:LightTreeMapRefreshRoot, "all", s."refreshRoot")
+    call lighttree#keymap#create(g:LightTreeMapRefresh, "Node", s."refreshCurrent")
 
-    call lighttree#keymap#create({ 'key': g:LightTreeMapHelp, 'scope': "all", 'callback': s."displayHelp" })
-    call lighttree#keymap#create({ 'key': g:LightTreeMapToggleHidden, 'scope': "all", 'callback': s."toggleShowHidden" })
-    call lighttree#keymap#create({ 'key': g:LightTreeMapToggleFilters, 'scope': "all", 'callback': s."toggleIgnoreFilter" })
-    call lighttree#keymap#create({ 'key': g:LightTreeMapToggleFiles, 'scope': "all", 'callback': s."toggleShowFiles" })
+    call lighttree#keymap#create(g:LightTreeMapHelp, "all", s."displayHelp")
+    call lighttree#keymap#create(g:LightTreeMapToggleHidden, "all", s."toggleShowHidden")
+    call lighttree#keymap#create(g:LightTreeMapToggleFilters, "all", s."toggleIgnoreFilter")
+    call lighttree#keymap#create(g:LightTreeMapToggleFiles, "all", s."toggleShowFiles")
 
-    call lighttree#keymap#create({ 'key': g:LightTreeMapCloseDir, 'scope': "Node", 'callback': s."closeParentDir" })
-    call lighttree#keymap#create({ 'key': g:LightTreeMapCloseChildren, 'scope': "DirNode", 'callback': s."closeChildren" })
+    call lighttree#keymap#create(g:LightTreeMapCloseDir, "Node", s."closeParentDir")
+    call lighttree#keymap#create(g:LightTreeMapCloseChildren, "DirNode", s."closeChildren")
 
-    call lighttree#keymap#create({ 'key': g:LightTreeMapMenu, 'scope': "Node", 'callback': s."showMenu" })
+    call lighttree#keymap#create(g:LightTreeMapMenu, "Node", s."showMenu")
 
-    call lighttree#keymap#create({ 'key': g:LightTreeMapJumpParent, 'scope': "Node", 'callback': s."jumpToParent" })
-    call lighttree#keymap#create({ 'key': g:LightTreeMapJumpRoot, 'scope': "all", 'callback': s."jumpToRoot" })
-    call lighttree#keymap#create({ 'key': g:LightTreeMapJumpNextSibling, 'scope': "Node", 'callback': s."jumpToNextSibling" })
-    call lighttree#keymap#create({ 'key': g:LightTreeMapJumpPrevSibling, 'scope': "Node", 'callback': s."jumpToPrevSibling" })
+    call lighttree#keymap#create(g:LightTreeMapJumpParent, "Node", s."jumpToParent")
+    call lighttree#keymap#create(g:LightTreeMapJumpRoot, "all", s."jumpToRoot")
+    call lighttree#keymap#create(g:LightTreeMapJumpNextSibling, "Node", s."jumpToNextSibling")
+    call lighttree#keymap#create(g:LightTreeMapJumpPrevSibling, "Node", s."jumpToPrevSibling")
 endfunction
 
 

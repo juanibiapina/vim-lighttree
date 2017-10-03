@@ -1,12 +1,7 @@
-function! lighttree#keymap#create(options)
-    let opts = extend({'scope': 'all'}, copy(a:options))
+function! lighttree#keymap#create(key, scope, callback)
+    call s:remove(a:key, a:scope)
 
-    let newKeyMap = {}
-    let newKeyMap.key = opts['key']
-    let newKeyMap.callback = opts['callback']
-    let newKeyMap.scope = opts['scope']
-
-    call s:add(newKeyMap)
+    call add(s:keymaps(), { 'key': a:key, 'scope': a:scope, 'callback': a:callback })
 endfunction
 
 function! lighttree#keymap#invoke(key)
@@ -58,16 +53,11 @@ function! s:keymaps()
     return s:keyMaps
 endfunction
 
-function! s:add(keymap)
-    call s:remove(a:keymap.key, a:keymap.scope)
-    call add(s:keymaps(), a:keymap)
-endfunction
-
 function! s:remove(key, scope)
     let maps = s:keymaps()
     for i in range(len(maps))
          if maps[i].key ==# a:key && maps[i].scope ==# a:scope
-            return remove(maps, i)
+            call remove(maps, i)
         endif
     endfor
 endfunction
