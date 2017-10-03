@@ -447,7 +447,6 @@ function! s:Path.New(path)
     call newPath.readInfoFromDisk(s:Path.AbsolutePathFor(a:path))
 
     let newPath.cachedDisplayString = ""
-    let newPath.flagSet = g:NERDTreeFlagSet.New()
 
     return newPath
 endfunction
