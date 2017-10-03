@@ -1,11 +1,6 @@
 function! lighttree#keymap#create(options)
     let opts = extend({'scope': 'all', 'quickhelpText': ''}, copy(a:options))
 
-    "dont override other mappings unless the 'override' option is given
-    if get(opts, 'override', 0) == 0 && !empty(s:find_for(opts['key'], opts['scope']))
-        return
-    end
-
     let newKeyMap = {}
     let newKeyMap.key = opts['key']
     let newKeyMap.quickhelpText = opts['quickhelpText']
