@@ -28,6 +28,3 @@ function! s:Notifier.GetListenersForEvent(name)
     let listenersMap = s:Notifier.GetListenersMap()
     return get(listenersMap, a:name, [])
 endfunction
-
-let g:NERDTreePathNotifier = deepcopy(s:Notifier)
-
