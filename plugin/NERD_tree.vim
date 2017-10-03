@@ -117,7 +117,6 @@ runtime lib/nerdtree/flag_set.vim
 runtime lib/nerdtree/nerdtree.vim
 runtime lib/nerdtree/ui.vim
 runtime lib/nerdtree/event.vim
-runtime lib/nerdtree/notifier.vim
 
 call lighttree#ui_glue#setupCommands()
 
