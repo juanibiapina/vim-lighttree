@@ -44,15 +44,6 @@ function! s:UI._dumpHelp()
         let help .= "\" ". g:LightTreeMapToggleFilters .": file filters (" . (self.isIgnoreFilterEnabled() ? "on" : "off") . ")\n"
         let help .= "\" ". g:LightTreeMapToggleFiles .": files (" . (self.getShowFiles() ? "on" : "off") . ")\n"
 
-        "add quickhelp entries for each custom key map
-        let help .= "\"\n\" ----------------------------\n"
-        let help .= "\" Custom mappings~\n"
-        for i in lighttree#keymap#all()
-            if !empty(i.quickhelpText)
-                let help .= "\" ". i.key .": ". i.quickhelpText ."\n"
-            endif
-        endfor
-
         let help .= "\"\n\" ----------------------------\n"
         let help .= "\" Other mappings~\n"
         let help .= "\" ". g:LightTreeMapHelp .": toggle help\n"

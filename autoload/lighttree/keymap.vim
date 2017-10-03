@@ -45,7 +45,13 @@ function! lighttree#keymap#invoke(key)
     endif
 endfunction
 
-function! lighttree#keymap#all()
+function! lighttree#keymap#bind_all()
+    for keymap in s:keymaps()
+        call s:bind(keymap)
+    endfor
+endfunction
+
+function! s:keymaps()
     if !exists("s:keyMaps")
         let s:keyMaps = []
     endif
@@ -53,19 +59,13 @@ function! lighttree#keymap#all()
     return s:keyMaps
 endfunction
 
-function! lighttree#keymap#bind_all()
-    for keymap in lighttree#keymap#all()
-        call s:bind(keymap)
-    endfor
-endfunction
-
 function! s:add(keymap)
     call s:remove(a:keymap.key, a:keymap.scope)
-    call add(lighttree#keymap#all(), a:keymap)
+    call add(s:keymaps(), a:keymap)
 endfunction
 
 function! s:remove(key, scope)
-    let maps = lighttree#keymap#all()
+    let maps = s:keymaps()
     for i in range(len(maps))
          if maps[i].key ==# a:key && maps[i].scope ==# a:scope
             return remove(maps, i)
@@ -74,7 +74,7 @@ function! s:remove(key, scope)
 endfunction
 
 function! s:find_for(key, scope)
-    for i in lighttree#keymap#all()
+    for i in s:keymaps()
          if i.key ==# a:key && i.scope ==# a:scope
             return i
         endif
