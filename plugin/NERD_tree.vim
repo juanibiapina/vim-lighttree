@@ -150,10 +150,6 @@ function! NERDTreeAddMenuItem(options)
     return g:NERDTreeMenuItem.Create(a:options)
 endfunction
 
-function! NERDTreeAddKeyMap(options)
-    call g:NERDTreeKeyMap.Create(a:options)
-endfunction
-
 function! NERDTreeAddPathFilter(callback)
     call g:NERDTree.AddPathFilter(a:callback)
 endfunction

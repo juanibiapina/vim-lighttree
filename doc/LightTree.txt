@@ -24,10 +24,9 @@ CONTENTS                                                  *LightTree-contents*
         3.1.Option summary....................|LightTreeOptionSummary|
         3.2.Option details....................|LightTreeOptionDetails|
     4.The NERD tree API.......................|NERDTreeAPI|
-        4.1.Key map API.......................|NERDTreeKeymapAPI|
-        4.2.Menu API..........................|NERDTreeMenuAPI|
-        4.3.Menu API..........................|NERDTreeAddPathFilter()|
-        4.4.Path Listener API.................|NERDTreePathListenerAPI|
+        4.1.Menu API..........................|NERDTreeMenuAPI|
+        4.2.Path Filter API...................|NERDTreeAddPathFilter|
+        4.3.Path Listener API.................|NERDTreePathListenerAPI|
     5.License.................................|LightTreeLicense|
 
 ==============================================================================
@@ -578,47 +577,7 @@ See this blog post for more details:
  http://got-ravings.blogspot.com/2008/09/vim-pr0n-prototype-based-objects.html
 
 ------------------------------------------------------------------------------
-4.1. Key map API                                           *NERDTreeKeymapAPI*
-
-NERDTreeAddKeyMap({options})                             *NERDTreeAddKeyMap()*
-    Adds a new keymapping for all NERD tree buffers.
-    {options} must be a dictionary, and must contain the following keys:
-    "key" - the trigger key for the new mapping
-    "callback" - the function the new mapping will be bound to
-    "quickhelpText" - the text that will appear in the quickhelp (see
-    |LightTree-?|)
-    "override" - if 1 then this new mapping will override whatever previous
-    mapping was defined for the key/scope combo. Useful for overriding the
-    default mappings.
-
-    Additionally, a "scope" argument may be supplied. This constrains the
-    mapping so that it is only activated if the cursor is on a certain object.
-    That object is then passed into the handling method. Possible values are:
-        "FileNode" - a file node
-        "DirNode" - a directory node
-        "Node" - a file or directory node
-        "all" - the keymap is not constrained to any scope (default). When
-        thei is used, the handling function is not passed any arguments.
-
-
-    Example: >
-        call NERDTreeAddKeyMap({
-               \ 'key': 'foo',
-               \ 'callback': 'NERDTreeCDHandler',
-               \ 'quickhelpText': 'echo full path of current node',
-               \ 'scope': 'DirNode' })
-
-        function! NERDTreeCDHandler(dirnode)
-            call a:dirnode.changeToDir()
-        endfunction
-<
-    This code should sit in a file like ~/.vim/nerdtree_plugin/mymapping.vim.
-    It adds a (redundant) mapping on 'foo' which changes vim's CWD to that of
-    the current dir node. Note this mapping will only fire when the cursor is
-    on a directory node.
-
-------------------------------------------------------------------------------
-4.2. Menu API                                                *NERDTreeMenuAPI*
+4.1. Menu API                                                *NERDTreeMenuAPI*
 
 NERDTreeAddMenuItem({options})                         *NERDTreeAddMenuItem()*
     Adds a new menu item to the NERD tree menu (see |LightTreeMenu|).
@@ -656,11 +615,11 @@ When any of the 2 menu items are selected the function "SomeFunction"
 will be called.
 
 ------------------------------------------------------------------------------
-4.3 NERDTreeAddPathFilter(callback)                   *NERDTreeAddPathFilter()*
+4.2. Path Filter API                                    *NERDTreeAddPathFilter*
 
 Path filters are essentially a more powerful version of |LightTreeIgnore|.
 If the simple regex matching in |LightTreeIgnore| is not enough then use
-|NERDTreeAddPathFilter()| to add a callback function that paths will be
+|NERDTreeAddPathFilter| to add a callback function that paths will be
 checked against when the decision to ignore them is made. Example >
 
     call NERDTreeAddPathFilter('MyFilter')
@@ -673,7 +632,7 @@ checked against when the decision to ignore them is made. Example >
     endfunction
 <
 ------------------------------------------------------------------------------
-4.4 Path Listener API                              *NERDTreePathListenerAPI*
+4.3. Path Listener API                              *NERDTreePathListenerAPI*
 
 Use this API if you want to run a callback for events on Path objects. E.G >
 
