@@ -530,12 +530,10 @@ endfunction
 
 function! s:Path.refresh(nerdtree)
     call self.readInfoFromDisk(self.str())
-    call g:NERDTreePathNotifier.NotifyListeners('refresh', self, a:nerdtree, {})
     call self.cacheDisplayString()
 endfunction
 
 function! s:Path.refreshFlags(nerdtree)
-    call g:NERDTreePathNotifier.NotifyListeners('refreshFlags', self, a:nerdtree, {})
     call self.cacheDisplayString()
 endfunction
 
