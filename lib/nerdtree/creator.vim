@@ -7,7 +7,7 @@ function! s:Creator._bindMappings()
     "make <cr> do the same as the activate node mapping
     nnoremap <silent> <buffer> <cr> :call lighttree#keymap#invoke(g:LightTreeMapActivateNode)<cr>
 
-    call g:NERDTreeKeyMap.BindAll()
+    call lighttree#keymap#bind_all()
 endfunction
 
 function! s:Creator._broadcastInitEvent()

@@ -17,12 +17,6 @@ function! s:KeyMap.FindFor(key, scope)
     return {}
 endfunction
 
-function! s:KeyMap.BindAll()
-    for i in s:KeyMap.All()
-        call i.bind()
-    endfor
-endfunction
-
 function! s:KeyMap.bind()
     " If the key sequence we're trying to map contains any '<>' notation, we
     " must replace each of the '<' characters with '<lt>' to ensure the string

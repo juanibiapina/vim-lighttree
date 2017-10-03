@@ -47,7 +47,7 @@ function! s:UI._dumpHelp()
         "add quickhelp entries for each custom key map
         let help .= "\"\n\" ----------------------------\n"
         let help .= "\" Custom mappings~\n"
-        for i in g:NERDTreeKeyMap.All()
+        for i in lighttree#keymap#all()
             if !empty(i.quickhelpText)
                 let help .= "\" ". i.key .": ". i.quickhelpText ."\n"
             endif
