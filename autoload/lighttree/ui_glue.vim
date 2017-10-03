@@ -136,12 +136,6 @@ function! s:findAndRevealPath()
     endif
 endfunction
 
-"this is needed since I cant figure out how to invoke dict functions from a
-"key map
-function! lighttree#ui_glue#invokeKeyMap(key)
-    call g:NERDTreeKeyMap.Invoke(a:key)
-endfunction
-
 " Move the cursor to the parent of the specified node. At the root, do
 " nothing.
 function! s:jumpToParent(node)
