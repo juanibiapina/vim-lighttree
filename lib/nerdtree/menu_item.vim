@@ -42,14 +42,6 @@ function! s:MenuItem.Create(options)
     return newMenuItem
 endfunction
 
-"make a new submenu and add it to global list
-function! s:MenuItem.CreateSubmenu(options)
-    let standard_options = { 'callback': -1 }
-    let options = extend(a:options, standard_options, "force")
-
-    return s:MenuItem.Create(options)
-endfunction
-
 "return 1 if this menu item should be displayed
 "
 "delegates off to the isActiveCallback, and defaults to 1 if no callback was
