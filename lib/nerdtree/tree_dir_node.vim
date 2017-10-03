@@ -71,9 +71,7 @@ function! s:TreeDirNode.displayString()
 
     let l:label = self.path.displayString()
 
-    let l:flags = self.path.flagSet.renderToString()
-
-    return l:symbol . ' ' . l:flags . l:label
+    return l:symbol . ' ' . l:label
 endfunction
 
 " Will find one of the children (recursively) that has the given path

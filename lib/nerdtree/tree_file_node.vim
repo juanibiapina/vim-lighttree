@@ -37,17 +37,10 @@ function! s:TreeFileNode.delete()
     call self.parent.removeChild(self)
 endfunction
 
-"
-"Returns a string that specifies how the node should be represented as a
-"string
-"
-"Return:
-"a string that can be used in the view to represent this node
 function! s:TreeFileNode.displayString()
-    return self.path.flagSet.renderToString() . self.path.displayString()
+    return self.path.displayString()
 endfunction
 
-"
 "Compares this treenode to the input treenode and returns 1 if they are the
 "same node.
 "

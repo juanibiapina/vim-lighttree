@@ -112,7 +112,6 @@ runtime lib/nerdtree/menu_item.vim
 runtime lib/nerdtree/tree_file_node.vim
 runtime lib/nerdtree/tree_dir_node.vim
 runtime lib/nerdtree/creator.vim
-runtime lib/nerdtree/flag_set.vim
 runtime lib/nerdtree/nerdtree.vim
 runtime lib/nerdtree/ui.vim
 runtime lib/nerdtree/event.vim
