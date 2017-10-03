@@ -1,9 +1,8 @@
 function! lighttree#keymap#create(options)
-    let opts = extend({'scope': 'all', 'quickhelpText': ''}, copy(a:options))
+    let opts = extend({'scope': 'all'}, copy(a:options))
 
     let newKeyMap = {}
     let newKeyMap.key = opts['key']
-    let newKeyMap.quickhelpText = opts['quickhelpText']
     let newKeyMap.callback = opts['callback']
     let newKeyMap.scope = opts['scope']
 
