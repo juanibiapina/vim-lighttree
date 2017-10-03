@@ -1,8 +1,3 @@
-if exists("g:loaded_nerdtree_autoload")
-    finish
-endif
-let g:loaded_nerdtree_autoload = 1
-
 function! lighttree#compareNodes(n1, n2)
     return a:n1.path.compareTo(a:n2.path)
 endfunction

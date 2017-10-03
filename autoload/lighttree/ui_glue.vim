@@ -1,8 +1,3 @@
-if exists("g:loaded_nerdtree_ui_glue_autoload")
-    finish
-endif
-let g:loaded_nerdtree_ui_glue_autoload = 1
-
 function! lighttree#ui_glue#createDefaultBindings()
     let s = '<SNR>' . s:SID() . '_'
 
