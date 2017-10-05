@@ -1,15 +1,7 @@
-if exists("loaded_light_tree")
-    finish
-endif
-if v:version < 700
-    echoerr "NERDTree: this plugin requires vim >= 7."
+if exists("loaded_light_tree") || &cp
     finish
 endif
 let loaded_light_tree = 1
-
-"for line continuation - i.e dont want C in &cpo
-let s:old_cpo = &cpo
-set cpo&vim
 
 function! s:initVariable(var, value)
     if !exists(a:var)
@@ -125,8 +117,5 @@ function! NERDTreeAddPathFilter(callback)
 endfunction
 
 call lighttree#ui_glue#createDefaultBindings()
-
-"reset &cpo back to users setting
-let &cpo = s:old_cpo
 
 " vim: set sw=4 sts=4 et fdm=marker:
