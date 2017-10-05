@@ -86,7 +86,8 @@ runtime lib/nerdtree/nerdtree.vim
 runtime lib/nerdtree/ui.vim
 runtime lib/nerdtree/fs_menu.vim
 
-call lighttree#ui_glue#setupCommands()
+command! -n=? -complete=dir -bar LightTree :call g:NERDTreeCreator.RestoreOrCreateBuffer('<args>')
+command! -n=0 -bar LightTreeFind call lighttree#find_and_reveal_path()
 
 augroup NERDTree
     exec "autocmd BufEnter ". g:NERDTreeCreator.BufNamePrefix() ."* stopinsert"

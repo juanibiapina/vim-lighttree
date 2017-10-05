@@ -166,11 +166,6 @@ function! s:refreshCurrent(node)
     call lighttree#echo("Refreshing node. This could take a while... DONE")
 endfunction
 
-function! lighttree#ui_glue#setupCommands()
-    command! -n=? -complete=dir -bar LightTree :call g:NERDTreeCreator.RestoreOrCreateBuffer('<args>')
-    command! -n=0 -bar LightTreeFind call lighttree#find_and_reveal_path()
-endfunction
-
 " Function: s:SID()   {{{1
 function s:SID()
     if !exists("s:sid")
