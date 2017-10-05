@@ -215,7 +215,7 @@ function s:SID()
 endfun
 
 function! s:showMenu(node)
-    let mc = g:NERDTreeMenuController.New(g:NERDTreeMenuItem.AllEnabled())
+    let mc = g:NERDTreeMenuController.New(g:NERDTreeMenuItem.All())
     call mc.showMenu()
 endfunction
 
