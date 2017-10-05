@@ -11,6 +11,7 @@ function! s:initVariable(var, value)
     return 0
 endfunction
 
+call s:initVariable("g:LightTreeBufferNamePrefix", "light_tree_")
 call s:initVariable("g:LightTreeCaseSensitiveSort", 0)
 call s:initVariable("g:LightTreeNaturalSort", 0)
 if !exists("g:LightTreeIgnore")
@@ -89,7 +90,7 @@ command! -n=? -complete=dir -bar LightTree :call g:NERDTreeCreator.RestoreOrCrea
 command! -n=0 -bar LightTreeFind call lighttree#find_and_reveal_path()
 
 augroup NERDTree
-    exec "autocmd BufEnter ". g:NERDTreeCreator.BufNamePrefix() ."* stopinsert"
+    exec "autocmd BufEnter ". g:LightTreeBufferNamePrefix ."* stopinsert"
 augroup END
 
 if g:LightTreeHijackNetrw

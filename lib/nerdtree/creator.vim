@@ -5,10 +5,6 @@ function! s:Creator._broadcastInitEvent()
     silent doautocmd User LightTreeInit
 endfunction
 
-function! s:Creator.BufNamePrefix()
-    return 'NERD_tree_'
-endfunction
-
 function! s:Creator.createWindowTree(dir)
     let path = self._pathForString(a:dir)
 
@@ -45,7 +41,7 @@ endfunction
 
 " returns the buffer name for the next nerd tree
 function! s:Creator._nextBufferName()
-    let name = s:Creator.BufNamePrefix() . self._nextBufferNumber()
+    let name = g:LightTreeBufferNamePrefix . self._nextBufferNumber()
     return name
 endfunction
 
