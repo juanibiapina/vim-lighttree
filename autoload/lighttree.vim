@@ -1,7 +1,3 @@
-function! lighttree#compareNodes(n1, n2)
-    return a:n1.path.compareTo(a:n2.path)
-endfunction
-
 " Same as :exec cmd but with eventignore set for the duration
 " to disable the autocommands used by NERDTree (BufEnter,
 " BufLeave and VimEnter)
