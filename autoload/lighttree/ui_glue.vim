@@ -96,41 +96,6 @@ function! s:displayHelp()
     call b:NERDTree.render()
 endfunction
 
-function! s:findAndRevealPath()
-    try
-        let p = g:NERDTreePath.New(expand("%:p"))
-    catch /^NERDTree.InvalidArgumentsError/
-        call lighttree#echo("no file for the current buffer")
-        return
-    endtry
-
-    if p.isUnixHiddenPath()
-        let showhidden=g:LightTreeShowHidden
-        let g:LightTreeShowHidden = 1
-    endif
-
-    try
-        let rootDir = g:NERDTreePath.New(getcwd())
-    catch /^NERDTree.InvalidArgumentsError/
-        call lighttree#echo("current directory does not exist.")
-        let rootDir = p.getParent()
-    endtry
-
-    if p.isUnder(rootDir)
-        call g:NERDTreeCreator.RestoreOrCreateBuffer(rootDir.str())
-    else
-        call g:NERDTreeCreator.RestoreOrCreateBuffer(p.getParent().str())
-    endif
-
-    let node = b:NERDTree.root.reveal(p)
-    call b:NERDTree.render()
-    call node.putCursorHere(1)
-
-    if p.isUnixHiddenFile()
-        let g:LightTreeShowHidden = showhidden
-    endif
-endfunction
-
 " Move the cursor to the parent of the specified node. At the root, do
 " nothing.
 function! s:jumpToParent(node)
@@ -203,7 +168,7 @@ endfunction
 
 function! lighttree#ui_glue#setupCommands()
     command! -n=? -complete=dir -bar LightTree :call g:NERDTreeCreator.RestoreOrCreateBuffer('<args>')
-    command! -n=0 -bar LightTreeFind call s:findAndRevealPath()
+    command! -n=0 -bar LightTreeFind call lighttree#find_and_reveal_path()
 endfunction
 
 " Function: s:SID()   {{{1
