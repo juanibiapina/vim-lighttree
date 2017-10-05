@@ -239,19 +239,6 @@ function! s:TreeDirNode._glob(pattern, all)
     return l:globList
 endfunction
 
-" Returns the current node if it is a dir node, or else returns the current
-" nodes parent
-unlet s:TreeDirNode.GetSelected
-function! s:TreeDirNode.GetSelected()
-    let currentDir = g:NERDTreeFileNode.GetSelected()
-    if currentDir != {} && !currentDir.isRoot()
-        if currentDir.path.isDirectory ==# 0
-            let currentDir = currentDir.parent
-        endif
-    endif
-    return currentDir
-endfunction
-
 " Returns the number of visible children this node has
 function! s:TreeDirNode.getVisibleChildCount()
     return len(self.getVisibleChildren())
