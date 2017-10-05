@@ -37,18 +37,18 @@ function! s:all_items()
     if !exists("s:menu_items")
         let s:menu_items = []
 
-        call s:add_item('a', '(a)dd a childnode', 'NERDTreeAddNode')
-        call s:add_item('m', '(m)ove the current node', 'NERDTreeMoveNode')
-        call s:add_item('d', '(d)elete the current node', 'NERDTreeDeleteNode')
+        call s:add_item('a', '(a)dd a childnode', 'lighttree#fs_menu#add_node')
+        call s:add_item('m', '(m)ove the current node', 'lighttree#fs_menu#move_node')
+        call s:add_item('d', '(d)elete the current node', 'lighttree#fs_menu#remove_node')
 
         if has("gui_mac") || has("gui_macvim") || has("mac")
-            call s:add_item('r', '(r)eveal in Finder the current node', 'NERDTreeRevealInFinder')
-            call s:add_item('o', '(o)pen the current node with system editor', 'NERDTreeExecuteFile')
-            call s:add_item('q', '(q)uicklook the current node', 'NERDTreeQuickLook')
+            call s:add_item('r', '(r)eveal in Finder the current node', 'lighttree#fs_menu#reveal_in_finder')
+            call s:add_item('o', '(o)pen the current node with system editor', 'lighttree#fs_menu#exec_file')
+            call s:add_item('q', '(q)uicklook the current node', 'lighttree#fs_menu#quick_look')
         endif
 
         if g:NERDTreePath.CopyingSupported()
-            call s:add_item('c', '(c)opy the current node', 'NERDTreeCopyNode')
+            call s:add_item('c', '(c)opy the current node', 'lighttree#fs_menu#copy_node')
         endif
 
     endif

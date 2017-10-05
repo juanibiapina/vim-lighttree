@@ -29,7 +29,7 @@ function! s:replaceBuffer(bufnum, newFileName)
     exec "bwipeout! " . a:bufnum
 endfunction
 
-function! NERDTreeAddNode()
+function! lighttree#fs_menu#add_node()
     let curDirNode = g:NERDTreeDirNode.GetSelected()
 
     let newNodeName = input("Add a childnode\n".
@@ -60,7 +60,7 @@ function! NERDTreeAddNode()
     endtry
 endfunction
 
-function! NERDTreeMoveNode()
+function! lighttree#fs_menu#move_node()
     let curNode = g:NERDTreeFileNode.GetSelected()
     let newNodePath = input("Rename the current node\n" .
                           \ "==========================================================\n" .
@@ -92,7 +92,7 @@ function! NERDTreeMoveNode()
     endtry
 endfunction
 
-function! NERDTreeDeleteNode()
+function! lighttree#fs_menu#remove_node()
     let currentNode = g:NERDTreeFileNode.GetSelected()
     let confirmed = 0
 
@@ -134,7 +134,7 @@ function! NERDTreeDeleteNode()
 
 endfunction
 
-function! NERDTreeCopyNode()
+function! lighttree#fs_menu#copy_node()
     let currentNode = g:NERDTreeFileNode.GetSelected()
     let newNodePath = input("Copy the current node\n" .
                           \ "==========================================================\n" .
@@ -172,21 +172,21 @@ function! NERDTreeCopyNode()
     redraw
 endfunction
 
-function! NERDTreeQuickLook()
+function! lighttree#fs_menu#quick_look()
     let treenode = g:NERDTreeFileNode.GetSelected()
     if treenode != {}
         call system("qlmanage -p 2>/dev/null '" . treenode.path.str() . "'")
     endif
 endfunction
 
-function! NERDTreeRevealInFinder()
+function! lighttree#fs_menu#reveal_in_finder()
     let treenode = g:NERDTreeFileNode.GetSelected()
     if treenode != {}
         call system("open -R '" . treenode.path.str() . "'")
     endif
 endfunction
 
-function! NERDTreeExecuteFile()
+function! lighttree#fs_menu#exec_file()
     let treenode = g:NERDTreeFileNode.GetSelected()
     if treenode != {}
         call system("open '" . treenode.path.str() . "'")
