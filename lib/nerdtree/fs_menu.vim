@@ -1,23 +1,3 @@
-call lighttree#menu#add_item('a', '(a)dd a childnode', 'NERDTreeAddNode')
-call lighttree#menu#add_item('m', '(m)ove the current node', 'NERDTreeMoveNode')
-call lighttree#menu#add_item('d', '(d)elete the current node', 'NERDTreeDeleteNode')
-
-if has("gui_mac") || has("gui_macvim") || has("mac")
-    call lighttree#menu#add_item('r', '(r)eveal in Finder the current node', 'NERDTreeRevealInFinder')
-    call lighttree#menu#add_item('o', '(o)pen the current node with system editor', 'NERDTreeExecuteFile')
-    call lighttree#menu#add_item('q', '(q)uicklook the current node', 'NERDTreeQuickLook')
-endif
-
-if g:NERDTreePath.CopyingSupported()
-    call lighttree#menu#add_item('c', '(c)opy the current node', 'NERDTreeCopyNode')
-endif
-
-if has("unix") || has("osx")
-    call lighttree#menu#add_item('l', '(l)ist the current node', 'NERDTreeListNode')
-else
-    call lighttree#menu#add_item('l', '(l)ist the current node', 'NERDTreeListNodeWin32')
-endif
-
 "deletes the buffer with given bufnum
 function! s:deleteBuffer(bufnum)
     " 1. ensure that all windows which display the just deleted filename
