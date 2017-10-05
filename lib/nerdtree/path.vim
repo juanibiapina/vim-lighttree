@@ -668,21 +668,6 @@ function! s:Path.strTrunk()
     return self.drive . '/' . join(self.pathSegments[0:-2], '/')
 endfunction
 
-" return the number of the first tab that is displaying this file
-"
-" return 0 if no tab was found
-function! s:Path.tabnr()
-    let str = self.str()
-    for t in range(tabpagenr('$'))
-        for b in tabpagebuflist(t+1)
-            if str == expand('#' . b . ':p')
-                return t+1
-            endif
-        endfor
-    endfor
-    return 0
-endfunction
-
 " Takes in a windows path and returns the unix equiv
 "
 " A class level method
