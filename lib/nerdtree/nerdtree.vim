@@ -17,10 +17,6 @@ function! s:NERDTree.changeRoot(node)
     silent doautocmd User LightTreeNewRoot
 endfunction
 
-function! s:NERDTree.getRoot()
-    return self.root
-endfunction
-
 function! s:NERDTree.New(path)
     let newObj = copy(self)
     let newObj.ui = g:NERDTreeUI.New(newObj)
