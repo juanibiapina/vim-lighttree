@@ -35,10 +35,6 @@ function! lighttree#ui_glue#createDefaultBindings()
 endfunction
 
 
-"SECTION: Interface bindings {{{1
-"============================================================
-
-"handle the user activating a tree node
 function! s:activateDirNode(node)
     call a:node.activate()
 endfunction
@@ -108,7 +104,6 @@ function! s:jumpToParent(node)
     endif
 endfunction
 
-" moves the cursor to the root node
 function! s:jumpToRoot()
     call b:NERDTree.root.putCursorHere(1)
 endfunction
@@ -166,7 +161,6 @@ function! s:refreshCurrent(node)
     call lighttree#echo("Refreshing node. This could take a while... DONE")
 endfunction
 
-" Function: s:SID()   {{{1
 function s:SID()
     if !exists("s:sid")
         let s:sid = matchstr(expand('<sfile>'), '<SNR>\zs\d\+\ze_SID$')
