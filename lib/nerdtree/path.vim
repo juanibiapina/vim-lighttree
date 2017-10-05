@@ -579,7 +579,7 @@ function! s:Path.str(...)
         let toReturn = self._str()
     endif
 
-    if lighttree#has_opt(options, 'escape')
+    if has_key(options, 'escape') && options['escape'] == 1
         let toReturn = shellescape(toReturn)
     endif
 

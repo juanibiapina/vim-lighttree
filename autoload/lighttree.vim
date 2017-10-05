@@ -12,10 +12,6 @@ function! lighttree#exec(cmd)
     let &ei = old_ei
 endfunction
 
-function! lighttree#has_opt(options, name)
-    return has_key(a:options, a:name) && a:options[a:name] == 1
-endfunction
-
 function! lighttree#echo(msg)
     redraw
     echomsg "LightTree: " . a:msg
