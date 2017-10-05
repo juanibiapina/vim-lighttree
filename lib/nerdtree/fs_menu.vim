@@ -1,8 +1,3 @@
-if exists("g:loaded_nerdtree_fs_menu")
-    finish
-endif
-let g:loaded_nerdtree_fs_menu = 1
-
 call lighttree#menu#add_item('a', '(a)dd a childnode', 'NERDTreeAddNode')
 call lighttree#menu#add_item('m', '(m)ove the current node', 'NERDTreeMoveNode')
 call lighttree#menu#add_item('d', '(d)elete the current node', 'NERDTreeDeleteNode')

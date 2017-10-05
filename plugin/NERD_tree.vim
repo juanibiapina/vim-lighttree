@@ -112,6 +112,7 @@ runtime lib/nerdtree/tree_dir_node.vim
 runtime lib/nerdtree/creator.vim
 runtime lib/nerdtree/nerdtree.vim
 runtime lib/nerdtree/ui.vim
+runtime lib/nerdtree/fs_menu.vim
 
 call lighttree#ui_glue#setupCommands()
 
@@ -145,9 +146,6 @@ function! NERDTreeAddPathFilter(callback)
 endfunction
 
 call lighttree#ui_glue#createDefaultBindings()
-
-"load all nerdtree plugins
-runtime! nerdtree_plugin/**/*.vim
 
 "reset &cpo back to users setting
 let &cpo = s:old_cpo
