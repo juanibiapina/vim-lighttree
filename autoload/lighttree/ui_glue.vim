@@ -1,6 +1,5 @@
 function! lighttree#ui_glue#createDefaultBindings()
-    call lighttree#keymap#create(g:LightTreeMapActivateNode, "DirNode", "lighttree#ui_glue#activateDirNode")
-    call lighttree#keymap#create(g:LightTreeMapActivateNode, "FileNode", "lighttree#ui_glue#activateFileNode")
+    call lighttree#keymap#create(g:LightTreeMapActivateNode, "Node", "lighttree#ui_glue#activate_node")
 
     call lighttree#keymap#create(g:LightTreeMapOpenRecursively, "DirNode", "lighttree#ui_glue#openNodeRecursively")
 
@@ -32,12 +31,7 @@ function! lighttree#ui_glue#createDefaultBindings()
 endfunction
 
 
-function! lighttree#ui_glue#activateDirNode(node)
-    call a:node.activate()
-endfunction
-
-"handle the user activating a tree node
-function! lighttree#ui_glue#activateFileNode(node)
+function! lighttree#ui_glue#activate_node(node)
     call a:node.activate()
 endfunction
 
