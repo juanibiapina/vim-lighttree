@@ -1,7 +1,7 @@
 function! lighttree#ui_glue#createDefaultBindings()
     call lighttree#keymap#create(g:LightTreeMapActivateNode, "Node", "lighttree#ui_glue#activate_node")
 
-    call lighttree#keymap#create(g:LightTreeMapOpenRecursively, "DirNode", "lighttree#ui_glue#openNodeRecursively")
+    call lighttree#keymap#create(g:LightTreeMapOpenRecursively, "Node", "lighttree#ui_glue#openNodeRecursively")
 
     call lighttree#keymap#create(g:LightTreeMapUpdir, "all", "lighttree#ui_glue#upDirCurrentRootClosed")
     call lighttree#keymap#create(g:LightTreeMapUpdirKeepOpen, "all", "lighttree#ui_glue#upDirCurrentRootOpen")
@@ -20,7 +20,7 @@ function! lighttree#ui_glue#createDefaultBindings()
     call lighttree#keymap#create(g:LightTreeMapToggleFiles, "all", "lighttree#ui_glue#toggleShowFiles")
 
     call lighttree#keymap#create(g:LightTreeMapCloseDir, "Node", "lighttree#ui_glue#closeParentDir")
-    call lighttree#keymap#create(g:LightTreeMapCloseChildren, "DirNode", "lighttree#ui_glue#closeChildren")
+    call lighttree#keymap#create(g:LightTreeMapCloseChildren, "Node", "lighttree#ui_glue#closeChildren")
 
     call lighttree#keymap#create(g:LightTreeMapMenu, "Node", "lighttree#menu#show")
 
@@ -61,9 +61,11 @@ endfunction
 
 " closes all childnodes of the current node
 function! lighttree#ui_glue#closeChildren(node)
-    call a:node.closeChildren()
-    call b:NERDTree.render()
-    call a:node.putCursorHere(0)
+    if a:node.path.isDirectory
+        call a:node.closeChildren()
+        call b:NERDTree.render()
+        call a:node.putCursorHere(0)
+    endif
 endfunction
 
 " closes the parent dir of the current node
@@ -121,11 +123,13 @@ function! lighttree#ui_glue#jumpToSibling(currentNode, forward)
 endfunction
 
 function! lighttree#ui_glue#openNodeRecursively(node)
-    call lighttree#echo("Recursively opening node. Please wait...")
-    call a:node.openRecursively()
-    call b:NERDTree.render()
-    redraw
-    call lighttree#echo("Recursively opening node. Please wait... DONE")
+    if a:node.path.isDirectory
+        call lighttree#echo("Recursively opening node. Please wait...")
+        call a:node.openRecursively()
+        call b:NERDTree.render()
+        redraw
+        call lighttree#echo("Recursively opening node. Please wait... DONE")
+    endif
 endfunction
 
 " Reloads the current root. All nodes below this will be lost and the root dir

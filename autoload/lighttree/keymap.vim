@@ -7,29 +7,10 @@ endfunction
 function! lighttree#keymap#invoke(key)
     let node = g:NERDTreeFileNode.GetSelected()
     if !empty(node)
-
-        "try file node
-        if !node.path.isDirectory
-            let km = s:find_for(a:key, "FileNode")
-            if !empty(km)
-                return s:invoke(km, node)
-            endif
-        endif
-
-        "try dir node
-        if node.path.isDirectory
-            let km = s:find_for(a:key, "DirNode")
-            if !empty(km)
-                return s:invoke(km, node)
-            endif
-        endif
-
-        "try generic node
         let km = s:find_for(a:key, "Node")
         if !empty(km)
             return s:invoke(km, node)
         endif
-
     endif
 
     "try all
