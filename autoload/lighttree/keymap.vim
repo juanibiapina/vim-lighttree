@@ -1,7 +1,35 @@
-function! lighttree#keymap#create(key, scope, callback)
-    call s:remove(a:key, a:scope)
+function! lighttree#keymap#bind_all()
+    call s:bind("<CR>", "Node", "lighttree#ui_glue#activate_node")
 
-    call add(s:keymaps(), { 'key': a:key, 'scope': a:scope, 'callback': a:callback })
+    call s:bind(g:LightTreeMapActivateNode, "Node", "lighttree#ui_glue#activate_node")
+
+    call s:bind(g:LightTreeMapOpenRecursively, "Node", "lighttree#ui_glue#openNodeRecursively")
+
+    call s:bind(g:LightTreeMapUpdir, "all", "lighttree#ui_glue#upDirCurrentRootClosed")
+    call s:bind(g:LightTreeMapUpdirKeepOpen, "all", "lighttree#ui_glue#upDirCurrentRootOpen")
+    call s:bind(g:LightTreeMapChangeRoot, "Node", "lighttree#ui_glue#chRoot")
+
+    call s:bind(g:LightTreeMapChdir, "Node", "lighttree#ui_glue#chCwd")
+
+    call s:bind(g:LightTreeMapCWD, "all", "lighttree#ui_glue#chRootCwd")
+
+    call s:bind(g:LightTreeMapRefreshRoot, "all", "lighttree#ui_glue#refreshRoot")
+    call s:bind(g:LightTreeMapRefresh, "Node", "lighttree#ui_glue#refreshCurrent")
+
+    call s:bind(g:LightTreeMapHelp, "all", "lighttree#ui_glue#displayHelp")
+    call s:bind(g:LightTreeMapToggleHidden, "all", "lighttree#ui_glue#toggleShowHidden")
+    call s:bind(g:LightTreeMapToggleFilters, "all", "lighttree#ui_glue#toggleIgnoreFilter")
+    call s:bind(g:LightTreeMapToggleFiles, "all", "lighttree#ui_glue#toggleShowFiles")
+
+    call s:bind(g:LightTreeMapCloseDir, "Node", "lighttree#ui_glue#closeParentDir")
+    call s:bind(g:LightTreeMapCloseChildren, "Node", "lighttree#ui_glue#closeChildren")
+
+    call s:bind(g:LightTreeMapMenu, "Node", "lighttree#menu#show")
+
+    call s:bind(g:LightTreeMapJumpParent, "Node", "lighttree#ui_glue#jumpToParent")
+    call s:bind(g:LightTreeMapJumpRoot, "all", "lighttree#ui_glue#jumpToRoot")
+    call s:bind(g:LightTreeMapJumpNextSibling, "Node", "lighttree#ui_glue#jumpToNextSibling")
+    call s:bind(g:LightTreeMapJumpPrevSibling, "Node", "lighttree#ui_glue#jumpToPrevSibling")
 endfunction
 
 function! lighttree#keymap#invoke(callback, scope)
@@ -18,31 +46,8 @@ function! lighttree#keymap#invoke(callback, scope)
     endif
 endfunction
 
-function! lighttree#keymap#bind_all()
-    for keymap in s:keymaps()
-        call s:bind(keymap)
-    endfor
-endfunction
-
-function! s:keymaps()
-    if !exists("s:keyMaps")
-        let s:keyMaps = []
-    endif
-
-    return s:keyMaps
-endfunction
-
-function! s:remove(key, scope)
-    let maps = s:keymaps()
-    for i in range(len(maps))
-         if maps[i].key ==# a:key && maps[i].scope ==# a:scope
-            call remove(maps, i)
-        endif
-    endfor
-endfunction
-
-function! s:bind(keymap)
-    exec 'nnoremap <buffer> <silent> '. a:keymap.key . ' :call lighttree#keymap#invoke("' . a:keymap.callback . '", "' . a:keymap.scope . '")<cr>'
+function! s:bind(key, scope, callback)
+    exec 'nnoremap <buffer> <silent> '. a:key . ' :call lighttree#keymap#invoke("' . a:callback . '", "' . a:scope . '")<cr>'
 endfunction
 
 " vim: set sw=4 sts=4 et fdm=marker:

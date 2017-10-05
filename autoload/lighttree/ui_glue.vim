@@ -1,38 +1,3 @@
-function! lighttree#ui_glue#createDefaultBindings()
-    call lighttree#keymap#create("<CR>", "Node", "lighttree#ui_glue#activate_node")
-
-    call lighttree#keymap#create(g:LightTreeMapActivateNode, "Node", "lighttree#ui_glue#activate_node")
-
-    call lighttree#keymap#create(g:LightTreeMapOpenRecursively, "Node", "lighttree#ui_glue#openNodeRecursively")
-
-    call lighttree#keymap#create(g:LightTreeMapUpdir, "all", "lighttree#ui_glue#upDirCurrentRootClosed")
-    call lighttree#keymap#create(g:LightTreeMapUpdirKeepOpen, "all", "lighttree#ui_glue#upDirCurrentRootOpen")
-    call lighttree#keymap#create(g:LightTreeMapChangeRoot, "Node", "lighttree#ui_glue#chRoot")
-
-    call lighttree#keymap#create(g:LightTreeMapChdir, "Node", "lighttree#ui_glue#chCwd")
-
-    call lighttree#keymap#create(g:LightTreeMapCWD, "all", "lighttree#ui_glue#chRootCwd")
-
-    call lighttree#keymap#create(g:LightTreeMapRefreshRoot, "all", "lighttree#ui_glue#refreshRoot")
-    call lighttree#keymap#create(g:LightTreeMapRefresh, "Node", "lighttree#ui_glue#refreshCurrent")
-
-    call lighttree#keymap#create(g:LightTreeMapHelp, "all", "lighttree#ui_glue#displayHelp")
-    call lighttree#keymap#create(g:LightTreeMapToggleHidden, "all", "lighttree#ui_glue#toggleShowHidden")
-    call lighttree#keymap#create(g:LightTreeMapToggleFilters, "all", "lighttree#ui_glue#toggleIgnoreFilter")
-    call lighttree#keymap#create(g:LightTreeMapToggleFiles, "all", "lighttree#ui_glue#toggleShowFiles")
-
-    call lighttree#keymap#create(g:LightTreeMapCloseDir, "Node", "lighttree#ui_glue#closeParentDir")
-    call lighttree#keymap#create(g:LightTreeMapCloseChildren, "Node", "lighttree#ui_glue#closeChildren")
-
-    call lighttree#keymap#create(g:LightTreeMapMenu, "Node", "lighttree#menu#show")
-
-    call lighttree#keymap#create(g:LightTreeMapJumpParent, "Node", "lighttree#ui_glue#jumpToParent")
-    call lighttree#keymap#create(g:LightTreeMapJumpRoot, "all", "lighttree#ui_glue#jumpToRoot")
-    call lighttree#keymap#create(g:LightTreeMapJumpNextSibling, "Node", "lighttree#ui_glue#jumpToNextSibling")
-    call lighttree#keymap#create(g:LightTreeMapJumpPrevSibling, "Node", "lighttree#ui_glue#jumpToPrevSibling")
-endfunction
-
-
 function! lighttree#ui_glue#activate_node(node)
     call a:node.activate()
 endfunction

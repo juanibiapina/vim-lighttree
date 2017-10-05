@@ -111,6 +111,4 @@ if g:LightTreeHijackNetrw
     augroup END
 endif
 
-call lighttree#ui_glue#createDefaultBindings()
-
 " vim: set sw=4 sts=4 et fdm=marker:
