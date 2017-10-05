@@ -1,11 +1,6 @@
-let s:Creator = {}
-let g:NERDTreeCreator = s:Creator
+let g:NERDTreeCreator = {}
 
-function! s:Creator._broadcastInitEvent()
-    silent doautocmd User LightTreeInit
-endfunction
-
-function! s:Creator.createWindowTree(dir)
+function! g:NERDTreeCreator.createWindowTree(dir)
     let path = self._pathForString(a:dir)
 
     if empty(path)
@@ -16,48 +11,33 @@ function! s:Creator.createWindowTree(dir)
         return
     endif
 
-    "we need a unique name for each window tree buffer to ensure they are
-    "all independent
     exec "silent edit " . self._nextBufferName()
 
-    call self._createNERDTree(path)
-    call self._setCommonBufOptions()
+    let b:NERDTree = g:NERDTree.New(path)
+    call b:NERDTree.root.open()
+
+    call self._configureBuffer()
 
     call b:NERDTree.render()
-
-    call self._broadcastInitEvent()
 endfunction
 
-function! s:Creator._createNERDTree(path)
-    let b:NERDTree = g:NERDTree.New(a:path)
-
-    call b:NERDTree.root.open()
-endfunction
-
-function! s:Creator.New()
-    let newCreator = copy(self)
-    return newCreator
-endfunction
-
-" returns the buffer name for the next nerd tree
-function! s:Creator._nextBufferName()
+function! g:NERDTreeCreator._nextBufferName()
     let name = g:LightTreeBufferNamePrefix . self._nextBufferNumber()
     return name
 endfunction
 
-" the number to add to the nerd tree buffer name to make the buf name unique
-function! s:Creator._nextBufferNumber()
-    if !exists("s:Creator._NextBufNum")
-        let s:Creator._NextBufNum = 1
+function! g:NERDTreeCreator._nextBufferNumber()
+    if !exists("g:NERDTreeCreator._NextBufNum")
+        let g:NERDTreeCreator._NextBufNum = 1
     else
-        let s:Creator._NextBufNum += 1
+        let g:NERDTreeCreator._NextBufNum += 1
     endif
 
-    return s:Creator._NextBufNum
+    return g:NERDTreeCreator._NextBufNum
 endfunction
 
 "find a directory for the given string
-function! s:Creator._pathForString(str)
+function! g:NERDTreeCreator._pathForString(str)
     let path = {}
 
     let dir = a:str ==# '' ? getcwd() : a:str
@@ -82,7 +62,7 @@ function! s:Creator._pathForString(str)
     return path
 endfunction
 
-function! s:Creator._setCommonBufOptions()
+function! g:NERDTreeCreator._configureBuffer()
     "throwaway buffer options
     setlocal noswapfile
     setlocal buftype=nofile
@@ -93,6 +73,7 @@ function! s:Creator._setCommonBufOptions()
     setlocal nofoldenable
     setlocal nobuflisted
     setlocal nospell
+
     if g:LightTreeShowLineNumbers
         setlocal nu
     else
@@ -109,17 +90,19 @@ function! s:Creator._setCommonBufOptions()
     endif
 
     call self._setupStatusline()
+
     call lighttree#keymap#bind_all()
+
     setlocal filetype=lighttree
 endfunction
 
-function! s:Creator._setupStatusline()
+function! g:NERDTreeCreator._setupStatusline()
     if g:LightTreeStatusline != -1
         let &l:statusline = g:LightTreeStatusline
     endif
 endfunction
 
-function! s:Creator.restoreBuffer(dir) abort
+function! g:NERDTreeCreator.restoreBuffer(dir) abort
     let path = g:NERDTreePath.New(fnamemodify(a:dir, ":p"))
 
     for i in range(1, bufnr("$"))
@@ -138,13 +121,11 @@ function! s:Creator.restoreBuffer(dir) abort
     return 0
 endfunction
 
-function! s:Creator.RestoreOrCreateBuffer(dir)
-    let creator = s:Creator.New()
-
-    if creator.restoreBuffer(a:dir)
+function! g:NERDTreeCreator.RestoreOrCreateBuffer(dir)
+    if g:NERDTreeCreator.restoreBuffer(a:dir)
         return
     else
-        return creator.createWindowTree(a:dir)
+        return g:NERDTreeCreator.createWindowTree(a:dir)
     endif
 endfunction
 
