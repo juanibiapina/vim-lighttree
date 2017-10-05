@@ -1,13 +1,6 @@
 let s:Creator = {}
 let g:NERDTreeCreator = s:Creator
 
-function! s:Creator._bindMappings()
-    "make <cr> do the same as the activate node mapping
-    nnoremap <silent> <buffer> <cr> :call lighttree#keymap#invoke(g:LightTreeMapActivateNode)<cr>
-
-    call lighttree#keymap#bind_all()
-endfunction
-
 function! s:Creator._broadcastInitEvent()
     silent doautocmd User LightTreeInit
 endfunction
@@ -120,7 +113,7 @@ function! s:Creator._setCommonBufOptions()
     endif
 
     call self._setupStatusline()
-    call self._bindMappings()
+    call lighttree#keymap#bind_all()
     setlocal filetype=lighttree
 endfunction
 

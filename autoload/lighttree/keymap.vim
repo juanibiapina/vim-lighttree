@@ -21,6 +21,9 @@ function! lighttree#keymap#invoke(key)
 endfunction
 
 function! lighttree#keymap#bind_all()
+    "make <cr> do the same as the activate node mapping
+    nnoremap <silent> <buffer> <cr> :call lighttree#keymap#invoke(g:LightTreeMapActivateNode)<cr>
+
     for keymap in s:keymaps()
         call s:bind(keymap)
     endfor
