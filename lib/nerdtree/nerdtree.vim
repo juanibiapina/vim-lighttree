@@ -1,10 +1,6 @@
 let s:NERDTree = {}
 let g:NERDTree = s:NERDTree
 
-function! s:NERDTree.AddPathFilter(callback)
-    call add(s:NERDTree.PathFilters(), a:callback)
-endfunction
-
 function! s:NERDTree.changeRoot(node)
     if a:node.path.isDirectory
         let self.root = a:node
@@ -30,13 +26,6 @@ function! s:NERDTree.New(path)
     let newObj.ui = g:NERDTreeUI.New(newObj)
     let newObj.root = g:NERDTreeDirNode.New(a:path, newObj)
     return newObj
-endfunction
-
-function! s:NERDTree.PathFilters()
-    if !exists('s:NERDTree._PathFilters')
-        let s:NERDTree._PathFilters = []
-    endif
-    return s:NERDTree._PathFilters
 endfunction
 
 "A convenience function - since this is called often

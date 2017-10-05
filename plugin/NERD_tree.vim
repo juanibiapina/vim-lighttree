@@ -112,10 +112,6 @@ if g:LightTreeHijackNetrw
     augroup END
 endif
 
-function! NERDTreeAddPathFilter(callback)
-    call g:NERDTree.AddPathFilter(a:callback)
-endfunction
-
 call lighttree#ui_glue#createDefaultBindings()
 
 " vim: set sw=4 sts=4 et fdm=marker:
