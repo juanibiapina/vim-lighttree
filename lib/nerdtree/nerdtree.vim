@@ -13,8 +13,6 @@ function! s:NERDTree.changeRoot(node)
 
     call self.render()
     call self.root.putCursorHere(0)
-
-    silent doautocmd User LightTreeNewRoot
 endfunction
 
 function! s:NERDTree.New(path)
