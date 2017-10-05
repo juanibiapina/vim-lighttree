@@ -73,14 +73,14 @@ endfunction
 "If the 'up a dir' line was selected then the path to the parent of the
 "current root is returned
 function! s:UI.getPath(ln)
-    let line = getline(a:ln)
-
     let rootLine = self.getRootLineNum()
 
     "check to see if we have the root node
     if a:ln == rootLine
         return self.nerdtree.root.path
     endif
+
+    let line = getline(a:ln)
 
     let indent = self._indentLevelFor(line)
 
@@ -105,6 +105,7 @@ function! s:UI.getPath(ln)
             let dir = self.nerdtree.root.path.str({'format': 'UI'}) . dir
             break
         endif
+
         if curLineStripped =~# '/$'
             let lpindent = self._indentLevelFor(curLine)
             if lpindent < indent
@@ -115,9 +116,9 @@ function! s:UI.getPath(ln)
             endif
         endif
     endwhile
+
     let curFile = self.nerdtree.root.path.drive . dir . curFile
-    let toReturn = g:NERDTreePath.New(curFile)
-    return toReturn
+    return g:NERDTreePath.New(curFile)
 endfunction
 
 "returns the line number this node is rendered on, or -1 if it isnt rendered
