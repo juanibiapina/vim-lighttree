@@ -26,7 +26,7 @@ function! lighttree#ui_glue#createDefaultBindings()
     call lighttree#keymap#create(g:LightTreeMapCloseDir, "Node", s."closeParentDir")
     call lighttree#keymap#create(g:LightTreeMapCloseChildren, "DirNode", s."closeChildren")
 
-    call lighttree#keymap#create(g:LightTreeMapMenu, "Node", s."showMenu")
+    call lighttree#keymap#create(g:LightTreeMapMenu, "Node", "lighttree#menu#show")
 
     call lighttree#keymap#create(g:LightTreeMapJumpParent, "Node", s."jumpToParent")
     call lighttree#keymap#create(g:LightTreeMapJumpRoot, "all", s."jumpToRoot")
@@ -213,11 +213,6 @@ function s:SID()
     endif
     return s:sid
 endfun
-
-function! s:showMenu(node)
-    let mc = g:NERDTreeMenuController.New(g:NERDTreeMenuItem.All())
-    call mc.showMenu()
-endfunction
 
 function! s:toggleIgnoreFilter()
     call b:NERDTree.ui.toggleIgnoreFilter()
