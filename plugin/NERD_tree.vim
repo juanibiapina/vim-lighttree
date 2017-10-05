@@ -11,15 +11,6 @@ let loaded_light_tree = 1
 let s:old_cpo = &cpo
 set cpo&vim
 
-"This function is used to initialise a given variable to a given value. The
-"variable is only initialised if it does not exist prior
-"
-"Args:
-"var: the name of the var to be initialised
-"value: the value to initialise var to
-"
-"Returns:
-"1 if the var is set, 0 otherwise
 function! s:initVariable(var, value)
     if !exists(a:var)
         exec 'let ' . a:var . ' = ' . "'" . substitute(a:value, "'", "''", "g") . "'"
@@ -28,7 +19,6 @@ function! s:initVariable(var, value)
     return 0
 endfunction
 
-"SECTION: Init variable calls and other random constants {{{2
 call s:initVariable("g:LightTreeCaseSensitiveSort", 0)
 call s:initVariable("g:LightTreeNaturalSort", 0)
 if !exists("g:LightTreeIgnore")
@@ -54,7 +44,6 @@ call s:initVariable("g:LightTreeCascadeOpenSingleChildDir", 1)
 if !exists("g:LightTreeSortOrder")
     let g:LightTreeSortOrder = ['\/$', '*', '\.swp$',  '\.bak$', '\~$']
 else
-    "if there isnt a * in the sort sequence then add one
     if count(g:LightTreeSortOrder, '*') < 1
         call add(g:LightTreeSortOrder, '*')
     endif
@@ -63,17 +52,12 @@ endif
 call s:initVariable("g:NERDTreeGlyphReadOnly", "RO")
 
 if !exists('g:LightTreeStatusline')
-
     "the exists() crap here is a hack to stop vim spazzing out when
     "loading a session that was created with an open nerd tree. It spazzes
     "because it doesnt store b:NERDTree(its a b: var, and its a hash)
     let g:LightTreeStatusline = "%{exists('b:NERDTree')?b:NERDTree.root.path.str():''}"
-
 endif
 
-"init the shell commands that will be used to copy nodes, and remove dir trees
-"
-"Note: the space after the command is important
 if lighttree#os#is_windows()
     call s:initVariable("g:NERDTreeRemoveDirCmd", 'rmdir /s /q ')
     call s:initVariable("g:NERDTreeCopyDirCmd", 'xcopy /s /e /i /y /q ')
@@ -83,8 +67,6 @@ else
     call s:initVariable("g:NERDTreeCopyCmd", 'cp -r ')
 endif
 
-
-"SECTION: Init variable calls for key mappings {{{2
 call s:initVariable("g:LightTreeMapActivateNode", "o")
 call s:initVariable("g:LightTreeMapChangeRoot", "C")
 call s:initVariable("g:LightTreeMapChdir", "cd")
@@ -117,7 +99,6 @@ runtime lib/nerdtree/fs_menu.vim
 call lighttree#ui_glue#setupCommands()
 
 augroup NERDTree
-    "disallow insert mode in the NERDTree
     exec "autocmd BufEnter ". g:NERDTreeCreator.BufNamePrefix() ."* stopinsert"
 augroup END
 
@@ -139,8 +120,6 @@ if g:LightTreeHijackNetrw
     augroup END
 endif
 
-" SECTION: Public API {{{1
-"============================================================
 function! NERDTreeAddPathFilter(callback)
     call g:NERDTree.AddPathFilter(a:callback)
 endfunction
