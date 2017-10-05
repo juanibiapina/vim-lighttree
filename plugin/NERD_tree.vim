@@ -26,9 +26,16 @@ call s:initVariable("g:LightTreeShowLineNumbers", 0)
 if lighttree#os#is_windows()
     call s:initVariable("g:NERDTreeDirArrowExpandable", "+")
     call s:initVariable("g:NERDTreeDirArrowCollapsible", "~")
+
+    call s:initVariable("g:NERDTreeRemoveDirCmd", 'rmdir /s /q ')
+    call s:initVariable("g:NERDTreeCopyDirCmd", 'xcopy /s /e /i /y /q ')
+    call s:initVariable("g:NERDTreeCopyFileCmd", 'copy /y ')
 else
     call s:initVariable("g:NERDTreeDirArrowExpandable", "▸")
     call s:initVariable("g:NERDTreeDirArrowCollapsible", "▾")
+
+    call s:initVariable("g:NERDTreeRemoveDirCmd", 'rm -rf ')
+    call s:initVariable("g:NERDTreeCopyCmd", 'cp -r ')
 endif
 
 call s:initVariable("g:LightTreeCascadeOpenSingleChildDir", 1)
@@ -48,15 +55,6 @@ if !exists('g:LightTreeStatusline')
     "loading a session that was created with an open nerd tree. It spazzes
     "because it doesnt store b:NERDTree(its a b: var, and its a hash)
     let g:LightTreeStatusline = "%{exists('b:NERDTree')?b:NERDTree.root.path.str():''}"
-endif
-
-if lighttree#os#is_windows()
-    call s:initVariable("g:NERDTreeRemoveDirCmd", 'rmdir /s /q ')
-    call s:initVariable("g:NERDTreeCopyDirCmd", 'xcopy /s /e /i /y /q ')
-    call s:initVariable("g:NERDTreeCopyFileCmd", 'copy /y ')
-else
-    call s:initVariable("g:NERDTreeRemoveDirCmd", 'rm -rf ')
-    call s:initVariable("g:NERDTreeCopyCmd", 'cp -r ')
 endif
 
 call s:initVariable("g:LightTreeMapActivateNode", "o")
