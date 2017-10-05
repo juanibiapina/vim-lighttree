@@ -19,13 +19,11 @@ CONTENTS                                                  *LightTree-contents*
     2.Functionality provided..................|LightTreeFunctionality|
         2.1.Global commands...................|LightTreeGlobalCommands|
         2.2.Mappings..........................|LightTreeMappings|
-        2.3.LightTree menu....................|LightTreeMenu|
     3.Options.................................|LightTreeOptions|
         3.1.Option summary....................|LightTreeOptionSummary|
         3.2.Option details....................|LightTreeOptionDetails|
     4.The NERD tree API.......................|NERDTreeAPI|
-        4.1.Menu API..........................|NERDTreeMenuAPI|
-        4.2.Path Filter API...................|NERDTreeAddPathFilter|
+        4.1.Path Filter API...................|NERDTreeAddPathFilter|
     5.License.................................|LightTreeLicense|
 
 ==============================================================================
@@ -254,7 +252,7 @@ Default key: m
 Map option: LightTreeMapMenu
 Applies to: files and directories.
 
-Display the NERD tree menu. See |LightTreeMenu| for details.
+Display a menu with filesystem operations.
 
 ------------------------------------------------------------------------------
                                                                 *LightTree-cd*
@@ -303,17 +301,6 @@ Map option: LightTreeMapHelp
 Applies to: no restrictions.
 
 Toggles whether the quickhelp is displayed.
-
-------------------------------------------------------------------------------
-2.3. LightTree menu                                        *LightTreeMenu*
-
-LightTree has a menu that can be programmed via the an API (see
-|NERDTreeMenuAPI|).
-
-The script comes with a default menu plugin that adds some basic filesystem
-operations to the menu for creating/deleting/moving/copying files and dirs.
-
-Related tags: |LightTree-m| |NERDTreeApi|
 
 ==============================================================================
 3. Customisation                                            *LightTreeOptions*
@@ -576,40 +563,7 @@ See this blog post for more details:
  http://got-ravings.blogspot.com/2008/09/vim-pr0n-prototype-based-objects.html
 
 ------------------------------------------------------------------------------
-4.1. Menu API                                                *NERDTreeMenuAPI*
-
-NERDTreeAddMenuItem({options})                         *NERDTreeAddMenuItem()*
-    Adds a new menu item to the NERD tree menu (see |LightTreeMenu|).
-
-    {options} must be a dictionary and must contain the
-    following keys:
-    "text" - the text of the menu item which the user will see
-    "shortcut" - a shortcut key for the menu item (need not be unique)
-    "callback" - the function that will be called when the user activates the
-    menu item.
-
-    See below for an example.
-
-Below is an example of the menu API in action. >
-    call NERDTreeAddMenuItem({
-                \ 'text': '(i)tem 1',
-                \ 'shortcut': 'i',
-                \ 'callback': 'SomeFunction' })
-
-    call NERDTreeAddMenuItem({
-                \ 'text': 'i(t)em 2',
-                \ 'shortcut': 't',
-                \ 'callback': 'SomeFunction' })
-<
-This will create the following menu: >
-  (i)tem 1
-  i(t)em 2
-<
-When any of the 2 menu items are selected the function "SomeFunction"
-will be called.
-
-------------------------------------------------------------------------------
-4.2. Path Filter API                                    *NERDTreeAddPathFilter*
+4.1. Path Filter API                                    *NERDTreeAddPathFilter*
 
 Path filters are essentially a more powerful version of |LightTreeIgnore|.
 If the simple regex matching in |LightTreeIgnore| is not enough then use

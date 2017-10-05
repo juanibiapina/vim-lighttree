@@ -107,8 +107,6 @@ call s:initVariable("g:LightTreeMapUpdirKeepOpen", "U")
 call s:initVariable("g:LightTreeMapCWD", "CD")
 
 runtime lib/nerdtree/path.vim
-runtime lib/nerdtree/menu_controller.vim
-runtime lib/nerdtree/menu_item.vim
 runtime lib/nerdtree/tree_file_node.vim
 runtime lib/nerdtree/tree_dir_node.vim
 runtime lib/nerdtree/creator.vim
@@ -143,10 +141,6 @@ endif
 
 " SECTION: Public API {{{1
 "============================================================
-function! NERDTreeAddMenuItem(options)
-    return g:NERDTreeMenuItem.Create(a:options)
-endfunction
-
 function! NERDTreeAddPathFilter(callback)
     call g:NERDTree.AddPathFilter(a:callback)
 endfunction

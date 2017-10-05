@@ -3,24 +3,24 @@ if exists("g:loaded_nerdtree_fs_menu")
 endif
 let g:loaded_nerdtree_fs_menu = 1
 
-call NERDTreeAddMenuItem({'text': '(a)dd a childnode', 'shortcut': 'a', 'callback': 'NERDTreeAddNode'})
-call NERDTreeAddMenuItem({'text': '(m)ove the current node', 'shortcut': 'm', 'callback': 'NERDTreeMoveNode'})
-call NERDTreeAddMenuItem({'text': '(d)elete the current node', 'shortcut': 'd', 'callback': 'NERDTreeDeleteNode'})
+call lighttree#menu#add_item('a', '(a)dd a childnode', 'NERDTreeAddNode')
+call lighttree#menu#add_item('m', '(m)ove the current node', 'NERDTreeMoveNode')
+call lighttree#menu#add_item('d', '(d)elete the current node', 'NERDTreeDeleteNode')
 
 if has("gui_mac") || has("gui_macvim") || has("mac")
-    call NERDTreeAddMenuItem({'text': '(r)eveal in Finder the current node', 'shortcut': 'r', 'callback': 'NERDTreeRevealInFinder'})
-    call NERDTreeAddMenuItem({'text': '(o)pen the current node with system editor', 'shortcut': 'o', 'callback': 'NERDTreeExecuteFile'})
-    call NERDTreeAddMenuItem({'text': '(q)uicklook the current node', 'shortcut': 'q', 'callback': 'NERDTreeQuickLook'})
+    call lighttree#menu#add_item('r', '(r)eveal in Finder the current node', 'NERDTreeRevealInFinder')
+    call lighttree#menu#add_item('o', '(o)pen the current node with system editor', 'NERDTreeExecuteFile')
+    call lighttree#menu#add_item('q', '(q)uicklook the current node', 'NERDTreeQuickLook')
 endif
 
 if g:NERDTreePath.CopyingSupported()
-    call NERDTreeAddMenuItem({'text': '(c)opy the current node', 'shortcut': 'c', 'callback': 'NERDTreeCopyNode'})
+    call lighttree#menu#add_item('c', '(c)opy the current node', 'NERDTreeCopyNode')
 endif
 
 if has("unix") || has("osx")
-    call NERDTreeAddMenuItem({'text': '(l)ist the current node', 'shortcut': 'l', 'callback': 'NERDTreeListNode'})
+    call lighttree#menu#add_item('l', '(l)ist the current node', 'NERDTreeListNode')
 else
-    call NERDTreeAddMenuItem({'text': '(l)ist the current node', 'shortcut': 'l', 'callback': 'NERDTreeListNodeWin32'})
+    call lighttree#menu#add_item('l', '(l)ist the current node', 'NERDTreeListNodeWin32')
 endif
 
 "deletes the buffer with given bufnum
