@@ -1,5 +1,3 @@
-"Creates window nerdtree windows. Sets up all the window and
-"buffer options and key mappings etc.
 let s:Creator = {}
 let g:NERDTreeCreator = s:Creator
 
@@ -16,11 +14,6 @@ endfunction
 
 function! s:Creator.BufNamePrefix()
     return 'NERD_tree_'
-endfunction
-
-function! s:Creator.CreateWindowTree(dir)
-    let creator = s:Creator.New()
-    call creator.createWindowTree(a:dir)
 endfunction
 
 function! s:Creator.createWindowTree(dir)
