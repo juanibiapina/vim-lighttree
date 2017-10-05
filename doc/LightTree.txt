@@ -22,9 +22,7 @@ CONTENTS                                                  *LightTree-contents*
     3.Options.................................|LightTreeOptions|
         3.1.Option summary....................|LightTreeOptionSummary|
         3.2.Option details....................|LightTreeOptionDetails|
-    4.The NERD tree API.......................|NERDTreeAPI|
-        4.1.Path Filter API...................|NERDTreeAddPathFilter|
-    5.License.................................|LightTreeLicense|
+    4.License.................................|LightTreeLicense|
 
 ==============================================================================
 1. Introduction                                               *LightTreeIntro*
@@ -66,7 +64,6 @@ The following features and functionality are provided:
     * A programmable menu system is provided
         * one default menu plugin is provided to perform basic filesystem
           operations (create/delete/move/copy files/directories)
-    * There's an API for adding your own keymappings
 
 
 ==============================================================================
@@ -118,7 +115,7 @@ u......Move the tree root up one directory......................|LightTree-u|
 U......Same as 'u' except the old root node is left open........|LightTree-U|
 r......Recursively refresh the current directory................|LightTree-r|
 R......Recursively refresh the current root.....................|LightTree-R|
-m......Display the NERD tree menu...............................|LightTree-m|
+m......Display the menu.........................................|LightTree-m|
 cd.....Change the CWD to the dir of the selected node...........|LightTree-cd|
 CD.....Change tree root to the CWD..............................|LightTree-CD|
 
@@ -541,47 +538,7 @@ lines to set this option: >
 <
 
 ==============================================================================
-4. The NERD tree API                                             *NERDTreeAPI*
-
-The NERD tree script allows you to add custom key mappings and menu items via
-a set of API calls. Any scripts that use this API should be placed in
-~/.vim/nerdtree_plugin/ (*nix) or ~/vimfiles/nerdtree_plugin (windows).
-
-The script exposes some prototype objects that can be used to manipulate the
-tree and/or get information from it: >
-    g:NERDTreePath
-    g:NERDTreeDirNode
-    g:NERDTreeFileNode
-<
-See the code/comments in NERD_tree.vim to find how to use these objects. The
-following code conventions are used:
-    * class members start with a capital letter
-    * instance members start with a lower case letter
-    * private members start with an underscore
-
-See this blog post for more details:
- http://got-ravings.blogspot.com/2008/09/vim-pr0n-prototype-based-objects.html
-
-------------------------------------------------------------------------------
-4.1. Path Filter API                                    *NERDTreeAddPathFilter*
-
-Path filters are essentially a more powerful version of |LightTreeIgnore|.
-If the simple regex matching in |LightTreeIgnore| is not enough then use
-|NERDTreeAddPathFilter| to add a callback function that paths will be
-checked against when the decision to ignore them is made. Example >
-
-    call NERDTreeAddPathFilter('MyFilter')
-
-    function! MyFilter(params)
-        "params is a dict containing keys: 'nerdtree' and 'path' which are
-        "g:NERDTree and g:NERDTreePath objects
-
-        "return 1 to ignore params['path'] or 0 otherwise
-    endfunction
-<
-
-==============================================================================
-5. License                                                  *LightTreeLicense*
+4. License                                                  *LightTreeLicense*
 
 LightTree is released under the MIT license.
 https://choosealicense.com/licenses/mit/
