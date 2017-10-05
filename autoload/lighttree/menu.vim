@@ -51,12 +51,6 @@ function! s:all_items()
             call s:add_item('c', '(c)opy the current node', 'NERDTreeCopyNode')
         endif
 
-        if has("unix") || has("osx")
-            call s:add_item('l', '(l)ist the current node', 'NERDTreeListNode')
-        else
-            call s:add_item('l', '(l)ist the current node', 'NERDTreeListNodeWin32')
-        endif
-
     endif
 
     return s:menu_items

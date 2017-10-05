@@ -134,53 +134,6 @@ function! NERDTreeDeleteNode()
 
 endfunction
 
-function! NERDTreeListNode()
-    let treenode = g:NERDTreeFileNode.GetSelected()
-    if treenode != {}
-        let metadata = split(system('ls -ld ' . shellescape(treenode.path.str())), '\n')
-        call lighttree#echo(metadata[0])
-    else
-        call lighttree#echo("No information avaialable")
-    endif
-endfunction
-
-function! NERDTreeListNodeWin32()
-    let l:node = g:NERDTreeFileNode.GetSelected()
-
-    if !empty(l:node)
-
-        let l:save_shell = &shell
-        set shell&
-
-        if exists('+shellslash')
-            let l:save_shellslash = &shellslash
-            set noshellslash
-        endif
-
-        let l:command = 'DIR /Q '
-                    \ . shellescape(l:node.path.str())
-                    \ . ' | FINDSTR "^[012][0-9]/[0-3][0-9]/[12][0-9][0-9][0-9]"'
-
-        let l:metadata = split(system(l:command), "\n")
-
-        if v:shell_error == 0
-            call lighttree#echo(l:metadata[0])
-        else
-            call lighttree#echoError('shell command failed')
-        endif
-
-        let &shell = l:save_shell
-
-        if exists('l:save_shellslash')
-            let &shellslash = l:save_shellslash
-        endif
-
-        return
-    endif
-
-    call lighttree#echo('node not recognized')
-endfunction
-
 function! NERDTreeCopyNode()
     let currentNode = g:NERDTreeFileNode.GetSelected()
     let newNodePath = input("Copy the current node\n" .
