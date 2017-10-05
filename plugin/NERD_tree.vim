@@ -23,13 +23,14 @@ call s:initVariable("g:LightTreeRespectWildIgnore", 0)
 call s:initVariable("g:LightTreeShowHidden", 0)
 call s:initVariable("g:LightTreeShowLineNumbers", 0)
 
-if !lighttree#os#is_windows()
-    call s:initVariable("g:NERDTreeDirArrowExpandable", "▸")
-    call s:initVariable("g:NERDTreeDirArrowCollapsible", "▾")
-else
+if lighttree#os#is_windows()
     call s:initVariable("g:NERDTreeDirArrowExpandable", "+")
     call s:initVariable("g:NERDTreeDirArrowCollapsible", "~")
+else
+    call s:initVariable("g:NERDTreeDirArrowExpandable", "▸")
+    call s:initVariable("g:NERDTreeDirArrowCollapsible", "▾")
 endif
+
 call s:initVariable("g:LightTreeCascadeOpenSingleChildDir", 1)
 
 if !exists("g:LightTreeSortOrder")
