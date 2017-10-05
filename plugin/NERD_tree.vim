@@ -112,7 +112,6 @@ runtime lib/nerdtree/tree_dir_node.vim
 runtime lib/nerdtree/creator.vim
 runtime lib/nerdtree/nerdtree.vim
 runtime lib/nerdtree/ui.vim
-runtime lib/nerdtree/event.vim
 
 call lighttree#ui_glue#setupCommands()
 
