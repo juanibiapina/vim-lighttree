@@ -4,26 +4,21 @@ function! lighttree#keymap#create(key, scope, callback)
     call add(s:keymaps(), { 'key': a:key, 'scope': a:scope, 'callback': a:callback })
 endfunction
 
-function! lighttree#keymap#invoke(key)
-    let node = g:NERDTreeFileNode.GetSelected()
-    if !empty(node)
-        let km = s:find_for(a:key, "Node")
-        if !empty(km)
-            return s:invoke(km, node)
-        endif
+function! lighttree#keymap#invoke(callback, scope)
+    if a:scope ==# "all"
+        return function(a:callback)()
     endif
 
-    "try all
-    let km = s:find_for(a:key, "all")
-    if !empty(km)
-        return s:invoke(km)
+    let node = g:NERDTreeFileNode.GetSelected()
+
+    if !empty(node)
+        if a:scope ==# "Node"
+            return function(a:callback)(node)
+        endif
     endif
 endfunction
 
 function! lighttree#keymap#bind_all()
-    "make <cr> do the same as the activate node mapping
-    nnoremap <silent> <buffer> <cr> :call lighttree#keymap#invoke(g:LightTreeMapActivateNode)<cr>
-
     for keymap in s:keymaps()
         call s:bind(keymap)
     endfor
@@ -46,38 +41,8 @@ function! s:remove(key, scope)
     endfor
 endfunction
 
-function! s:find_for(key, scope)
-    for i in s:keymaps()
-         if i.key ==# a:key && i.scope ==# a:scope
-            return i
-        endif
-    endfor
-    return {}
-endfunction
-
-function! s:invoke(keymap, ...)
-    let Callback = function(a:keymap.callback)
-    if a:0
-        call Callback(a:1)
-    else
-        call Callback()
-    endif
-endfunction
-
 function! s:bind(keymap)
-    " If the key sequence we're trying to map contains any '<>' notation, we
-    " must replace each of the '<' characters with '<lt>' to ensure the string
-    " is not translated into its corresponding keycode during the later part
-    " of the map command below
-    " :he <>
-    let specialNotationRegex = '\m<\([[:alnum:]_-]\+>\)'
-    if a:keymap.key =~# specialNotationRegex
-        let keymapInvokeString = substitute(a:keymap.key, specialNotationRegex, '<lt>\1', 'g')
-    else
-        let keymapInvokeString = a:keymap.key
-    endif
-
-    exec 'nnoremap <buffer> <silent> '. a:keymap.key . ' :call lighttree#keymap#invoke("'. keymapInvokeString .'")<cr>'
+    exec 'nnoremap <buffer> <silent> '. a:keymap.key . ' :call lighttree#keymap#invoke("' . a:keymap.callback . '", "' . a:keymap.scope . '")<cr>'
 endfunction
 
 " vim: set sw=4 sts=4 et fdm=marker:

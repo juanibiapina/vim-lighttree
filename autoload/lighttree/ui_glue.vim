@@ -1,4 +1,6 @@
 function! lighttree#ui_glue#createDefaultBindings()
+    call lighttree#keymap#create("<CR>", "Node", "lighttree#ui_glue#activate_node")
+
     call lighttree#keymap#create(g:LightTreeMapActivateNode, "Node", "lighttree#ui_glue#activate_node")
 
     call lighttree#keymap#create(g:LightTreeMapOpenRecursively, "Node", "lighttree#ui_glue#openNodeRecursively")
