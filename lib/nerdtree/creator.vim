@@ -121,7 +121,7 @@ function! s:Creator._setCommonBufOptions()
 
     call self._setupStatusline()
     call self._bindMappings()
-    setlocal filetype=nerdtree
+    setlocal filetype=lighttree
 endfunction
 
 function! s:Creator._setupStatusline()
