@@ -1,13 +1,3 @@
-" Same as :exec cmd but with eventignore set for the duration
-" to disable the autocommands used by NERDTree (BufEnter,
-" BufLeave and VimEnter)
-function! lighttree#exec(cmd)
-    let old_ei = &ei
-    set ei=BufEnter,BufLeave,VimEnter
-    exec a:cmd
-    let &ei = old_ei
-endfunction
-
 function! lighttree#echo(msg)
     redraw
     echomsg "LightTree: " . a:msg
