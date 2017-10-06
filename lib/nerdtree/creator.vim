@@ -27,13 +27,13 @@ function! g:NERDTreeCreator._nextBufferName()
 endfunction
 
 function! g:NERDTreeCreator._nextBufferNumber()
-    if !exists("g:NERDTreeCreator._NextBufNum")
-        let g:NERDTreeCreator._NextBufNum = 1
+    if !exists("s:next_buffer_number")
+        let s:next_buffer_number = 1
     else
-        let g:NERDTreeCreator._NextBufNum += 1
+        let s:next_buffer_number += 1
     endif
 
-    return g:NERDTreeCreator._NextBufNum
+    return s:next_buffer_number
 endfunction
 
 "find a directory for the given string
