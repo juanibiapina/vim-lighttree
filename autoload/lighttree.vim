@@ -36,9 +36,9 @@ function! lighttree#find_and_reveal_path()
     endtry
 
     if p.isUnder(rootDir)
-        call g:NERDTreeCreator.RestoreOrCreateBuffer(rootDir.str())
+        call lighttree#buffer#restore_or_create(rootDir.str())
     else
-        call g:NERDTreeCreator.RestoreOrCreateBuffer(p.getParent().str())
+        call lighttree#buffer#restore_or_create(p.getParent().str())
     endif
 
     let node = b:NERDTree.root.reveal(p)

@@ -82,11 +82,10 @@ call s:initVariable("g:LightTreeMapCWD", "CD")
 runtime lib/nerdtree/path.vim
 runtime lib/nerdtree/tree_file_node.vim
 runtime lib/nerdtree/tree_dir_node.vim
-runtime lib/nerdtree/creator.vim
 runtime lib/nerdtree/nerdtree.vim
 runtime lib/nerdtree/ui.vim
 
-command! -n=? -complete=dir -bar LightTree :call g:NERDTreeCreator.RestoreOrCreateBuffer('<args>')
+command! -n=? -complete=dir -bar LightTree :call lighttree#buffer#restore_or_create('<args>')
 command! -n=0 -bar LightTreeFind call lighttree#find_and_reveal_path()
 
 augroup NERDTree
@@ -102,7 +101,7 @@ if g:LightTreeHijackNetrw
         " make netrw buffer disappear when lighttree buffer is opened
         setlocal bufhidden=wipe
 
-        call g:NERDTreeCreator.RestoreOrCreateBuffer(a:dir)
+        call lighttree#buffer#restore_or_create(a:dir)
     endfunction
 
     augroup LightTreeHijackNetrw
