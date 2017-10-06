@@ -174,5 +174,3 @@ endfunction
 function! lighttree#ui_glue#upDirCurrentRootClosed()
     call lighttree#ui_glue#upDir(0)
 endfunction
-
-" vim: set sw=4 sts=4 et fdm=marker:

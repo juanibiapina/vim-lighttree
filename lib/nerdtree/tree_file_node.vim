@@ -230,5 +230,3 @@ function! s:TreeFileNode._renderToString(depth, drawText)
 
     return output
 endfunction
-
-" vim: set sw=4 sts=4 et fdm=marker:

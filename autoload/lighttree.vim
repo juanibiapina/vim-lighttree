@@ -49,5 +49,3 @@ function! lighttree#find_and_reveal_path()
         let g:LightTreeShowHidden = showhidden
     endif
 endfunction
-
-" vim: set sw=4 sts=4 et fdm=marker:

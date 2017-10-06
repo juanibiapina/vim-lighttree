@@ -109,5 +109,3 @@ if g:LightTreeHijackNetrw
         au BufEnter,VimEnter * call s:checkForBrowse(expand("<amatch>"))
     augroup END
 endif
-
-" vim: set sw=4 sts=4 et fdm=marker:

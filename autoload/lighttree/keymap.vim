@@ -49,5 +49,3 @@ endfunction
 function! s:bind(key, scope, callback)
     exec 'nnoremap <buffer> <silent> '. a:key . ' :call lighttree#keymap#invoke("' . a:callback . '", "' . a:scope . '")<cr>'
 endfunction
-
-" vim: set sw=4 sts=4 et fdm=marker:

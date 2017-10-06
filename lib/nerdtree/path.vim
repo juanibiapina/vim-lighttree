@@ -692,5 +692,3 @@ function! s:Path.WinToUnixPath(pathstr)
 
     return toReturn
 endfunction
-
-" vim: set sw=4 sts=4 et fdm=marker:
