@@ -64,9 +64,9 @@ endfunction
 " Assemble and return a string that can represent this TreeDirNode
 function! s:TreeDirNode.displayString()
     if self.isOpen
-        let l:symbol = g:NERDTreeDirArrowCollapsible
+        let l:symbol = g:LightTreeDirArrowCollapsible
     else
-        let l:symbol = g:NERDTreeDirArrowExpandable
+        let l:symbol = g:LightTreeDirArrowExpandable
     endif
 
     let l:label = self.path.displayString()

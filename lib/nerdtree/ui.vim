@@ -191,7 +191,7 @@ endfunction
 
 function! s:UI._indentLevelFor(line)
     "have to do this work around because match() returns bytes, not chars
-    let numLeadBytes = match(a:line, '\M\[^ '.g:NERDTreeDirArrowExpandable.g:NERDTreeDirArrowCollapsible.']')
+    let numLeadBytes = match(a:line, '\M\[^ '.g:LightTreeDirArrowExpandable.g:LightTreeDirArrowCollapsible.']')
     " The next line is a backward-compatible workaround for strchars(a:line(0:numLeadBytes-1]). strchars() is in 7.3+
     let leadChars = len(split(a:line[0:numLeadBytes-1], '\zs'))
 
@@ -207,7 +207,7 @@ function! s:UI.isIgnoreFilterEnabled()
 endfunction
 
 function! s:UI.MarkupReg()
-    return '^\(['.g:NERDTreeDirArrowExpandable.g:NERDTreeDirArrowCollapsible.'] \| \+['.g:NERDTreeDirArrowExpandable.g:NERDTreeDirArrowCollapsible.'] \| \+\)'
+    return '^\(['.g:LightTreeDirArrowExpandable.g:LightTreeDirArrowCollapsible.'] \| \+['.g:LightTreeDirArrowExpandable.g:LightTreeDirArrowCollapsible.'] \| \+\)'
 endfunction
 
 function! s:UI.setShowHidden(val)

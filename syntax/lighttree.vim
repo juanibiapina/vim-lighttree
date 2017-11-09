@@ -18,10 +18,10 @@ syn match NERDTreeLinkDir #.*/ ->#me=e-3 containedin=NERDTreeDir
 "highlighing for directory nodes and file nodes
 syn match NERDTreeDirSlash #/# containedin=NERDTreeDir
 
-exec 'syn match NERDTreeClosable #' . escape(g:NERDTreeDirArrowCollapsible, '~') . '\ze .*/# containedin=NERDTreeDir,NERDTreeFile'
-exec 'syn match NERDTreeOpenable #' . escape(g:NERDTreeDirArrowExpandable, '~') . '\ze .*/# containedin=NERDTreeDir,NERDTreeFile'
+exec 'syn match NERDTreeClosable #' . escape(g:LightTreeDirArrowCollapsible, '~') . '\ze .*/# containedin=NERDTreeDir,NERDTreeFile'
+exec 'syn match NERDTreeOpenable #' . escape(g:LightTreeDirArrowExpandable, '~') . '\ze .*/# containedin=NERDTreeDir,NERDTreeFile'
 
-let s:dirArrows = escape(g:NERDTreeDirArrowCollapsible, '~]\-').escape(g:NERDTreeDirArrowExpandable, '~]\-')
+let s:dirArrows = escape(g:LightTreeDirArrowCollapsible, '~]\-').escape(g:LightTreeDirArrowExpandable, '~]\-')
 exec 'syn match NERDTreeDir #[^'.s:dirArrows.' ].*/#'
 syn match NERDTreeExecFile  #^ .*\*\($\| \)# contains=NERDTreeRO
 exec 'syn match NERDTreeFile  #^[^"\.'.s:dirArrows.'] *[^'.s:dirArrows.']*# contains=NERDTreeLink,NERDTreeRO,NERDTreeExecFile'
