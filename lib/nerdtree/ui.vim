@@ -226,7 +226,7 @@ function! s:UI._stripMarkup(line, removeLeadingSpaces)
     let line = substitute (line, g:NERDTreeUI.MarkupReg(),"","")
 
     "strip off any read only flag
-    let line = substitute (line, ' \['.g:NERDTreeGlyphReadOnly.'\]', "","")
+    let line = substitute (line, ' \['.g:LightTreeGlyphReadOnly.'\]', "","")
 
     "strip off any executable flags
     let line = substitute (line, '*\ze\($\| \)', "","")

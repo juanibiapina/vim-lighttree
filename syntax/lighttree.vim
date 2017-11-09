@@ -1,5 +1,5 @@
 syn match LightTreeIgnore #\~#
-exec 'syn match LightTreeIgnore #\['.g:NERDTreeGlyphReadOnly.'\]#'
+exec 'syn match LightTreeIgnore #\['.g:LightTreeGlyphReadOnly.'\]#'
 
 "quickhelp syntax elements
 syn match NERDTreeHelpKey #" \{1,2\}[^ ]*:#ms=s+2,me=e-1
@@ -27,7 +27,7 @@ syn match NERDTreeExecFile  #^ .*\*\($\| \)# contains=NERDTreeRO
 exec 'syn match NERDTreeFile  #^[^"\.'.s:dirArrows.'] *[^'.s:dirArrows.']*# contains=NERDTreeLink,NERDTreeRO,NERDTreeExecFile'
 
 "highlighting for readonly files
-exec 'syn match NERDTreeRO # *\zs.*\ze \['.g:NERDTreeGlyphReadOnly.'\]# contains=LightTreeIgnore,NERDTreeFile'
+exec 'syn match NERDTreeRO # *\zs.*\ze \['.g:LightTreeGlyphReadOnly.'\]# contains=LightTreeIgnore,NERDTreeFile'
 
 syn match NERDTreeFlags #^ *\zs\[.\]# containedin=NERDTreeFile,NERDTreeExecFile
 syn match NERDTreeFlags #\[.\]# containedin=NERDTreeDir

@@ -46,7 +46,7 @@ else
     endif
 endif
 
-call s:initVariable("g:NERDTreeGlyphReadOnly", "RO")
+call s:initVariable("g:LightTreeGlyphReadOnly", "RO")
 
 if !exists('g:LightTreeStatusline')
     "the exists() here is a hack to stop vim spazzing out when
