@@ -85,7 +85,7 @@ runtime lib/nerdtree/ui.vim
 command! -n=? -complete=dir -bar LightTree :call lighttree#buffer#restore_or_create('<args>')
 command! -n=0 -bar LightTreeFind call lighttree#find_and_reveal_path()
 
-augroup NERDTree
+augroup LightTree
     exec "autocmd BufEnter ". g:LightTreeBufferNamePrefix ."* stopinsert"
 augroup END
 
