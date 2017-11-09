@@ -13,16 +13,16 @@ endfunction
 " changes the current root to the selected one
 function! lighttree#ui_glue#chRoot(node)
     if a:node.path.isDirectory
-        let b:NERDTree.root = a:node
+        let b:tree.root = a:node
     else
         call a:node.cacheParent()
-        let b:NERDTree.root = a:node.parent
+        let b:tree.root = a:node.parent
     endif
 
-    call b:NERDTree.root.open()
+    call b:tree.root.open()
 
-    call b:NERDTree.render()
-    call b:NERDTree.root.putCursorHere(0)
+    call b:tree.render()
+    call b:tree.root.putCursorHere(0)
 endfunction
 
 " changes the current root to CWD
@@ -33,14 +33,14 @@ function! lighttree#ui_glue#chRootCwd()
         call lighttree#echo("current directory does not exist.")
         return
     endtry
-    call lighttree#ui_glue#chRoot(g:NERDTreeDirNode.New(cwd, b:NERDTree))
+    call lighttree#ui_glue#chRoot(g:NERDTreeDirNode.New(cwd, b:tree))
 endfunction
 
 " closes all childnodes of the current node
 function! lighttree#ui_glue#closeChildren(node)
     if a:node.path.isDirectory
         call a:node.closeChildren()
-        call b:NERDTree.render()
+        call b:tree.render()
         call a:node.putCursorHere(0)
     endif
 endfunction
@@ -51,15 +51,15 @@ function! lighttree#ui_glue#closeParentDir(node)
 
     if !(parent ==# {})
         call parent.close()
-        call b:NERDTree.render()
+        call b:tree.render()
         call parent.putCursorHere(0)
     endif
 endfunction
 
 " toggles the help display
 function! lighttree#ui_glue#displayHelp()
-    call b:NERDTree.ui.toggleHelp()
-    call b:NERDTree.render()
+    call b:tree.ui.toggleHelp()
+    call b:tree.render()
 endfunction
 
 " Move the cursor to the parent of the specified node. At the root, do
@@ -75,7 +75,7 @@ function! lighttree#ui_glue#jumpToParent(node)
 endfunction
 
 function! lighttree#ui_glue#jumpToRoot()
-    call b:NERDTree.root.putCursorHere(1)
+    call b:tree.root.putCursorHere(1)
 endfunction
 
 function! lighttree#ui_glue#jumpToNextSibling(node)
@@ -103,7 +103,7 @@ function! lighttree#ui_glue#openNodeRecursively(node)
     if a:node.path.isDirectory
         call lighttree#echo("Recursively opening node. Please wait...")
         call a:node.openRecursively()
-        call b:NERDTree.render()
+        call b:tree.render()
         redraw
         call lighttree#echo("Recursively opening node. Please wait... DONE")
     endif
@@ -113,8 +113,8 @@ endfunction
 " will be reloaded.
 function! lighttree#ui_glue#refreshRoot()
     call lighttree#echo("Refreshing the root node. This could take a while...")
-    call b:NERDTree.root.refresh()
-    call b:NERDTree.render()
+    call b:tree.root.refresh()
+    call b:tree.render()
     redraw
     call lighttree#echo("Refreshing the root node. This could take a while... DONE")
 endfunction
@@ -128,22 +128,22 @@ function! lighttree#ui_glue#refreshCurrent(node)
 
     call lighttree#echo("Refreshing node. This could take a while...")
     call node.refresh()
-    call b:NERDTree.render()
+    call b:tree.render()
     redraw
     call lighttree#echo("Refreshing node. This could take a while... DONE")
 endfunction
 
 function! lighttree#ui_glue#toggleIgnoreFilter()
-    call b:NERDTree.ui.toggleIgnoreFilter()
+    call b:tree.ui.toggleIgnoreFilter()
 endfunction
 
 function! lighttree#ui_glue#toggleShowFiles()
-    call b:NERDTree.ui.toggleShowFiles()
+    call b:tree.ui.toggleShowFiles()
 endfunction
 
 " toggles the display of hidden files
 function! lighttree#ui_glue#toggleShowHidden()
-    call b:NERDTree.ui.toggleShowHidden()
+    call b:tree.ui.toggleShowHidden()
 endfunction
 
 "moves the tree up a level
@@ -152,27 +152,27 @@ endfunction
 "keepState: 1 if the current root should be left open when the tree is
 "re-rendered
 function! lighttree#ui_glue#upDir(keepState)
-    let cwd = b:NERDTree.root.path.str({'format': 'UI'})
+    let cwd = b:tree.root.path.str({'format': 'UI'})
     if cwd ==# "/" || cwd =~# '^[^/]..$'
         call lighttree#echo("already at top dir")
     else
         if !a:keepState
-            call b:NERDTree.root.close()
+            call b:tree.root.close()
         endif
 
-        let oldRoot = b:NERDTree.root
+        let oldRoot = b:tree.root
 
-        if empty(b:NERDTree.root.parent)
-            let path = b:NERDTree.root.path.getParent()
-            let newRoot = g:NERDTreeDirNode.New(path, b:NERDTree)
+        if empty(b:tree.root.parent)
+            let path = b:tree.root.path.getParent()
+            let newRoot = g:NERDTreeDirNode.New(path, b:tree)
             call newRoot.open()
-            call newRoot.transplantChild(b:NERDTree.root)
-            let b:NERDTree.root = newRoot
+            call newRoot.transplantChild(b:tree.root)
+            let b:tree.root = newRoot
         else
-            let b:NERDTree.root = b:NERDTree.root.parent
+            let b:tree.root = b:tree.root.parent
         endif
 
-        call b:NERDTree.render()
+        call b:tree.render()
         call oldRoot.putCursorHere(0)
     endif
 endfunction

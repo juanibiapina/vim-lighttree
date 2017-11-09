@@ -3,7 +3,7 @@ let g:NERDTreeDirNode = s:TreeDirNode
 
 " Class method that returns the highest cached ancestor of the current root.
 function! s:TreeDirNode.AbsoluteTreeRoot()
-    let currentNode = b:NERDTree.root
+    let currentNode = b:tree.root
     while currentNode.parent != {}
         let currentNode = currentNode.parent
     endwhile

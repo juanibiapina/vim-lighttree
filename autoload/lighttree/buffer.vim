@@ -38,8 +38,8 @@ function! s:create_buffer(dir)
 
     exec "silent edit " . s:next_buffer_name()
 
-    let b:NERDTree = g:NERDTree.New(path)
-    call b:NERDTree.root.open()
+    let b:tree = g:NERDTree.New(path)
+    call b:tree.root.open()
 
     call s:configure_buffer()
 
@@ -47,7 +47,7 @@ function! s:create_buffer(dir)
 
     call lighttree#keymap#bind_all()
 
-    call b:NERDTree.render()
+    call b:tree.render()
 endfunction
 
 function! s:dir_for_string(str)

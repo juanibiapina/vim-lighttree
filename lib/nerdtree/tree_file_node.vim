@@ -109,11 +109,11 @@ endfunction
 "gets the treenode that the cursor is currently over
 function! s:TreeFileNode.GetSelected()
     try
-        let path = b:NERDTree.ui.getPath(line("."))
+        let path = b:tree.ui.getPath(line("."))
         if path ==# {}
             return {}
         endif
-        return b:NERDTree.root.findNode(path)
+        return b:tree.root.findNode(path)
     catch /^NERDTree/
         return {}
     endtry
@@ -126,7 +126,7 @@ function! s:TreeFileNode.isVisible()
 endfunction
 
 function! s:TreeFileNode.isRoot()
-    if !exists("b:NERDTree")
+    if !exists("b:tree")
         throw "NERDTree.NoTreeError: No tree exists for the current buffer"
     endif
 

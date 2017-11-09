@@ -41,8 +41,8 @@ function! lighttree#find_and_reveal_path()
         call lighttree#buffer#restore_or_create(p.getParent().str())
     endif
 
-    let node = b:NERDTree.root.reveal(p)
-    call b:NERDTree.render()
+    let node = b:tree.root.reveal(p)
+    call b:tree.render()
     call node.putCursorHere(1)
 
     if p.isUnixHiddenFile()

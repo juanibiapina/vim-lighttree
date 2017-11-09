@@ -51,8 +51,8 @@ call s:initVariable("g:LightTreeGlyphReadOnly", "RO")
 if !exists('g:LightTreeStatusline')
     "the exists() here is a hack to stop vim spazzing out when
     "loading a session that was created with an open nerd tree. It spazzes
-    "because it doesnt store b:NERDTree(its a b: var, and its a hash)
-    let g:LightTreeStatusline = "%{exists('b:NERDTree')?b:NERDTree.root.path.str():''}"
+    "because it doesnt store b:tree(its a b: var, and its a hash)
+    let g:LightTreeStatusline = "%{exists('b:tree')?b:tree.root.path.str():''}"
 endif
 
 call s:initVariable("g:LightTreeMapActivateNode", "o")
