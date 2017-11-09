@@ -49,10 +49,10 @@ function! lighttree#fs_menu#add_node()
         let newTreeNode = g:NERDTreeFileNode.New(newPath, b:tree)
         if empty(parentNode)
             call b:tree.root.refresh()
-            call b:tree.render()
+            call b:tree.ui.render()
         elseif parentNode.isOpen || !empty(parentNode.children)
             call parentNode.addChild(newTreeNode, 1)
-            call b:tree.render()
+            call b:tree.ui.render()
             call newTreeNode.putCursorHere(1)
         endif
     catch /^NERDTree/
@@ -76,7 +76,7 @@ function! lighttree#fs_menu#move_node()
         let bufnum = bufnr("^".curNode.path.str()."$")
 
         call curNode.rename(newNodePath)
-        call b:tree.render()
+        call b:tree.ui.render()
 
         "if the node is open in a buffer, ask the user if they want to
         "close that buffer
@@ -115,7 +115,7 @@ function! lighttree#fs_menu#remove_node()
     if confirmed
         try
             call currentNode.delete()
-            call b:tree.render()
+            call b:tree.ui.render()
 
             "if the node is open in a buffer, ask the user if they want to
             "close that buffer
@@ -157,9 +157,9 @@ function! lighttree#fs_menu#copy_node()
                 let newNode = currentNode.copy(newNodePath)
                 if empty(newNode)
                     call b:tree.root.refresh()
-                    call b:tree.render()
+                    call b:tree.ui.render()
                 else
-                    call b:tree.render()
+                    call b:tree.ui.render()
                     call newNode.putCursorHere(0)
                 endif
             catch /^NERDTree/

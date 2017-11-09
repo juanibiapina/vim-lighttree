@@ -47,7 +47,7 @@ function! s:create_buffer(dir)
 
     call lighttree#keymap#bind_all()
 
-    call b:tree.render()
+    call b:tree.ui.render()
 endfunction
 
 function! s:dir_for_string(str)

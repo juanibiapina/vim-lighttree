@@ -13,7 +13,7 @@ endfunction
 unlet s:TreeDirNode.activate
 function! s:TreeDirNode.activate()
     call self.toggleOpen()
-    call self.getNerdtree().render()
+    call self.getNerdtree().ui.render()
     call self.putCursorHere(0)
 endfunction
 

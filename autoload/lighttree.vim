@@ -42,7 +42,7 @@ function! lighttree#find_and_reveal_path()
     endif
 
     let node = b:tree.root.reveal(p)
-    call b:tree.render()
+    call b:tree.ui.render()
     call node.putCursorHere(1)
 
     if p.isUnixHiddenFile()

@@ -21,7 +21,7 @@ function! lighttree#ui_glue#chRoot(node)
 
     call b:tree.root.open()
 
-    call b:tree.render()
+    call b:tree.ui.render()
     call b:tree.root.putCursorHere(0)
 endfunction
 
@@ -40,7 +40,7 @@ endfunction
 function! lighttree#ui_glue#closeChildren(node)
     if a:node.path.isDirectory
         call a:node.closeChildren()
-        call b:tree.render()
+        call b:tree.ui.render()
         call a:node.putCursorHere(0)
     endif
 endfunction
@@ -51,7 +51,7 @@ function! lighttree#ui_glue#closeParentDir(node)
 
     if !(parent ==# {})
         call parent.close()
-        call b:tree.render()
+        call b:tree.ui.render()
         call parent.putCursorHere(0)
     endif
 endfunction
@@ -59,7 +59,7 @@ endfunction
 " toggles the help display
 function! lighttree#ui_glue#displayHelp()
     call b:tree.ui.toggleHelp()
-    call b:tree.render()
+    call b:tree.ui.render()
 endfunction
 
 " Move the cursor to the parent of the specified node. At the root, do
@@ -103,7 +103,7 @@ function! lighttree#ui_glue#openNodeRecursively(node)
     if a:node.path.isDirectory
         call lighttree#echo("Recursively opening node. Please wait...")
         call a:node.openRecursively()
-        call b:tree.render()
+        call b:tree.ui.render()
         redraw
         call lighttree#echo("Recursively opening node. Please wait... DONE")
     endif
@@ -114,7 +114,7 @@ endfunction
 function! lighttree#ui_glue#refreshRoot()
     call lighttree#echo("Refreshing the root node. This could take a while...")
     call b:tree.root.refresh()
-    call b:tree.render()
+    call b:tree.ui.render()
     redraw
     call lighttree#echo("Refreshing the root node. This could take a while... DONE")
 endfunction
@@ -128,7 +128,7 @@ function! lighttree#ui_glue#refreshCurrent(node)
 
     call lighttree#echo("Refreshing node. This could take a while...")
     call node.refresh()
-    call b:tree.render()
+    call b:tree.ui.render()
     redraw
     call lighttree#echo("Refreshing node. This could take a while... DONE")
 endfunction
@@ -172,7 +172,7 @@ function! lighttree#ui_glue#upDir(keepState)
             let b:tree.root = b:tree.root.parent
         endif
 
-        call b:tree.render()
+        call b:tree.ui.render()
         call oldRoot.putCursorHere(0)
     endif
 endfunction
