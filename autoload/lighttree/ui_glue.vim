@@ -12,7 +12,17 @@ endfunction
 
 " changes the current root to the selected one
 function! lighttree#ui_glue#chRoot(node)
-    call b:NERDTree.changeRoot(a:node)
+    if a:node.path.isDirectory
+        let b:NERDTree.root = a:node
+    else
+        call a:node.cacheParent()
+        let b:NERDTree.root = a:node.parent
+    endif
+
+    call b:NERDTree.root.open()
+
+    call b:NERDTree.render()
+    call b:NERDTree.root.putCursorHere(0)
 endfunction
 
 " changes the current root to CWD
