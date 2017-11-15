@@ -11,7 +11,7 @@ function! s:restore_buffer(dir) abort
 
     for i in range(1, bufnr("$"))
         unlet! nt
-        let nt = getbufvar(i, "NERDTree")
+        let nt = getbufvar(i, "tree")
         if empty(nt)
             continue
         endif
