@@ -31,8 +31,9 @@ LightTree allows you to explore your filesystem and to open files and
 directories. It presents the filesystem to you in the form of a tree. It also
 allows you to perform simple filesystem operations.
 
-LightTree is a fork of NERDTree. Although everything works, many configuration
-options and functions haven't been renamed yet.
+LightTree is a fork of NERDTree. The final objective is to become a completely
+different plugin, but as of now some internal functions have the same name and
+might cause conflict.
 
 The following features and functionality are provided:
     * Files and directories are displayed in a hierarchical tree structure
