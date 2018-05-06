@@ -42,6 +42,12 @@ function! lighttree#find_and_reveal_path()
     endif
 
     let node = b:tree.root.reveal(p)
+
+    if node == {}
+        call lighttree#ui_glue#refreshRoot()
+        let node = b:tree.root.reveal(p)
+    end
+
     call b:tree.ui.render()
     call node.putCursorHere(1)
 
