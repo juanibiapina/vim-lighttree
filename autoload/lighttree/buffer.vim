@@ -121,7 +121,5 @@ function! s:configure_buffer()
 endfunction
 
 function! s:setup_statusline()
-    if g:LightTreeStatusline != -1
-        let &l:statusline = g:LightTreeStatusline
-    endif
+    let &l:statusline = "%{exists('b:tree')?b:tree.root.path.str():''}"
 endfunction
