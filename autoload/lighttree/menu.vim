@@ -39,10 +39,7 @@ function! s:all_items()
             call s:add_item('q', '(q)uicklook the current node', 'lighttree#fs_menu#quick_look')
         endif
 
-        if g:NERDTreePath.CopyingSupported()
-            call s:add_item('c', '(c)opy the current node', 'lighttree#fs_menu#copy_node')
-        endif
-
+        call s:add_item('c', '(c)opy the current node', 'lighttree#fs_menu#copy_node')
     endif
 
     return s:menu_items

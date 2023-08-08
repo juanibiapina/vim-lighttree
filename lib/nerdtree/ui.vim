@@ -117,7 +117,7 @@ function! s:UI.getPath(ln)
         endif
     endwhile
 
-    let curFile = self.nerdtree.root.path.drive . dir . curFile
+    let curFile = dir . curFile
     return g:NERDTreePath.New(curFile)
 endfunction
 

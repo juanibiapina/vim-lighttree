@@ -6,11 +6,7 @@ let g:NERDTreePath = s:Path
 
 function! s:Path.AbsolutePathFor(str)
     let prependCWD = 0
-    if lighttree#os#is_windows()
-        let prependCWD = a:str !~# '^.:\(\\\|\/\)' && a:str !~# '^\(\\\\\|\/\/\)'
-    else
-        let prependCWD = a:str !~# '^/'
-    endif
+    let prependCWD = a:str !~# '^/'
 
     let toReturn = a:str
     if prependCWD
@@ -129,28 +125,15 @@ endfunction
 " Args:
 " dest: the location to copy this dir/file to
 function! s:Path.copy(dest)
-    if !s:Path.CopyingSupported()
-        throw "NERDTree.CopyingNotSupportedError: Copying is not supported on this OS"
-    endif
-
     call s:Path.createParentDirectories(a:dest)
 
-    if exists('g:NERDTreeCopyCmd')
-        let cmd_prefix = g:NERDTreeCopyCmd
-    else
-        let cmd_prefix = (self.isDirectory ? g:NERDTreeCopyDirCmd : g:NERDTreeCopyFileCmd)
-    endif
+    let cmd_prefix = g:NERDTreeCopyCmd
 
     let cmd = cmd_prefix . " " . escape(self.str(), self._escChars()) . " " . escape(a:dest, self._escChars())
     let success = system(cmd)
     if v:shell_error != 0
         throw "NERDTree.CopyError: Could not copy ''". self.str() ."'' to: '" . a:dest . "'"
     endif
-endfunction
-
-" returns 1 if copying is supported for this OS
-function! s:Path.CopyingSupported()
-    return exists('g:NERDTreeCopyCmd') || (exists('g:NERDTreeCopyDirCmd') && exists('g:NERDTreeCopyFileCmd'))
 endfunction
 
 " returns 1 if copy this path to the given location will cause files to
@@ -217,22 +200,6 @@ function! s:Path.edit()
     exec "edit " . self.str({'format': 'Edit'})
 endfunction
 
-" If running windows, cache the drive letter for this path
-function! s:Path.extractDriveLetter(fullpath)
-    if lighttree#os#is_windows()
-        if a:fullpath =~ '^\(\\\\\|\/\/\)'
-            "For network shares, the 'drive' consists of the first two parts of the path, i.e. \\boxname\share
-            let self.drive = substitute(a:fullpath, '^\(\(\\\\\|\/\/\)[^\\\/]*\(\\\|\/\)[^\\\/]*\).*', '\1', '')
-            let self.drive = substitute(self.drive, '/', '\', "g")
-        else
-            let self.drive = substitute(a:fullpath, '\(^[a-zA-Z]:\).*', '\1', '')
-        endif
-    else
-        let self.drive = ''
-    endif
-
-endfunction
-
 " return 1 if this path points to a location that is readable or is a directory
 function! s:Path.exists()
     let p = self.str()
@@ -240,10 +207,6 @@ function! s:Path.exists()
 endfunction
 
 function! s:Path._escChars()
-    if lighttree#os#is_windows()
-        return " `\|\"#%&,?()\*^<>$"
-    endif
-
     return " \\`\|\"#%&,?()\*^<>[]$"
 endfunction
 
@@ -264,11 +227,7 @@ endfunction
 " Return:
 " a new Path object
 function! s:Path.getParent()
-    if lighttree#os#is_windows()
-        let path = self.drive . '\' . join(self.pathSegments[0:-2], '\')
-    else
-        let path = '/'. join(self.pathSegments[0:-2], '/')
-    endif
+    let path = '/'. join(self.pathSegments[0:-2], '/')
 
     return s:Path.New(path)
 endfunction
@@ -445,19 +404,7 @@ function! s:Path.New(path)
     return newPath
 endfunction
 
-" Return the path separator used by the underlying file system.  Special
-" consideration is taken for the use of the 'shellslash' option on Windows
-" systems.
 function! s:Path.Slash()
-
-    if lighttree#os#is_windows()
-        if exists('+shellslash') && &shellslash
-            return '/'
-        endif
-
-        return '\'
-    endif
-
     return '/'
 endfunction
 
@@ -470,11 +417,8 @@ function! s:Path.Resolve(path)
     return tmp =~# '.\+/$' ? substitute(tmp, '/$', '', '') : tmp
 endfunction
 
-" Throws NERDTree.Path.InvalidArguments exception.
 function! s:Path.readInfoFromDisk(fullpath)
-    call self.extractDriveLetter(a:fullpath)
-
-    let fullpath = s:Path.WinToUnixPath(a:fullpath)
+    let fullpath = a:fullpath
 
     if getftype(fullpath) ==# "fifo"
         throw "NERDTree.InvalidFiletypeError: Cant handle FIFO files: " . a:fullpath
@@ -514,7 +458,6 @@ function! s:Path.readInfoFromDisk(fullpath)
             "we always wanna treat MS windows shortcuts as files for
             "simplicity
             if hardPath !~# '\.lnk$'
-
                 let self.symLinkDest = self.symLinkDest . '/'
             endif
         endif
@@ -619,12 +562,6 @@ function! s:Path._strForEdit()
     " Make the path relative to the current working directory, if possible.
     let l:result = fnamemodify(self.str(), ':.')
 
-    " On Windows, the drive letter may be removed by "fnamemodify()".  Add it
-    " back, if necessary.
-    if lighttree#os#is_windows() && l:result[0] == s:Path.Slash()
-        let l:result = self.drive . l:result
-    endif
-
     let l:result = fnameescape(l:result)
 
     if empty(l:result)
@@ -637,58 +574,21 @@ endfunction
 function! s:Path._strForGlob()
     let lead = s:Path.Slash()
 
-    "if we are running windows then slap a drive letter on the front
-    if lighttree#os#is_windows()
-        let lead = self.drive . '\'
-    endif
-
     let toReturn = lead . join(self.pathSegments, s:Path.Slash())
+    let toReturn = escape(toReturn, self._escChars())
 
-    if !lighttree#os#is_windows()
-        let toReturn = escape(toReturn, self._escChars())
-    endif
     return toReturn
 endfunction
 
-" Return the absolute pathname associated with this Path object.  The pathname
-" returned is appropriate for the underlying file system.
+" Return the absolute pathname associated with this Path object.
 function! s:Path._str()
     let l:separator = s:Path.Slash()
     let l:leader = l:separator
-
-    if lighttree#os#is_windows()
-        let l:leader = self.drive . l:separator
-    endif
 
     return l:leader . join(self.pathSegments, l:separator)
 endfunction
 
 " Gets the path without the last segment on the end.
 function! s:Path.strTrunk()
-    return self.drive . '/' . join(self.pathSegments[0:-2], '/')
-endfunction
-
-" Takes in a windows path and returns the unix equiv
-"
-" A class level method
-"
-" Args:
-" pathstr: the windows path to convert
-function! s:Path.WinToUnixPath(pathstr)
-    if !lighttree#os#is_windows()
-        return a:pathstr
-    endif
-
-    let toReturn = a:pathstr
-
-    "remove the x:\ of the front
-    let toReturn = substitute(toReturn, '^.*:\(\\\|/\)\?', '/', "")
-
-    "remove the \\ network share from the front
-    let toReturn = substitute(toReturn, '^\(\\\\\|\/\/\)[^\\\/]*\(\\\|\/\)[^\\\/]*\(\\\|\/\)\?', '/', "")
-
-    "convert all \ chars to /
-    let toReturn = substitute(toReturn, '\', '/', "g")
-
-    return toReturn
+    return '/' . join(self.pathSegments[0:-2], '/')
 endfunction

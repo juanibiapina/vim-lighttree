@@ -188,11 +188,6 @@ function! s:TreeDirNode._glob(pattern, all)
         let l:pathSpec = ','
     else
         let l:pathSpec = fnamemodify(self.path.str({'format': 'Glob'}), ':.')
-
-        " On Windows, the drive letter may be removed by "fnamemodify()".
-        if lighttree#os#is_windows() && l:pathSpec[0] == g:NERDTreePath.Slash()
-            let l:pathSpec = self.path.drive . l:pathSpec
-        endif
     endif
 
     let l:globList = []

@@ -27,14 +27,8 @@ call s:initVariable("g:LightTreeShowLineNumbers", 0)
 call s:initVariable("g:LightTreeDirArrowExpandable", "▸")
 call s:initVariable("g:LightTreeDirArrowCollapsible", "▾")
 
-if lighttree#os#is_windows()
-    call s:initVariable("g:NERDTreeRemoveDirCmd", 'rmdir /s /q ')
-    call s:initVariable("g:NERDTreeCopyDirCmd", 'xcopy /s /e /i /y /q ')
-    call s:initVariable("g:NERDTreeCopyFileCmd", 'copy /y ')
-else
-    call s:initVariable("g:NERDTreeRemoveDirCmd", 'rm -rf ')
-    call s:initVariable("g:NERDTreeCopyCmd", 'cp -r ')
-endif
+call s:initVariable("g:NERDTreeRemoveDirCmd", 'rm -rf ')
+call s:initVariable("g:NERDTreeCopyCmd", 'cp -r ')
 
 call s:initVariable("g:LightTreeCascadeOpenSingleChildDir", 1)
 
