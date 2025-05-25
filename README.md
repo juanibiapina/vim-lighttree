@@ -1,6 +1,8 @@
 LightTree
 =========
 
+> ⚠️ Retired in favor of [drex.nvim](https://github.com/TheBlob42/drex.nvim).
+
 Introduction
 ------------
 
